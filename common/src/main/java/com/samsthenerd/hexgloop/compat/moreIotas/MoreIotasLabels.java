@@ -6,7 +6,7 @@ import com.samsthenerd.hexgloop.misc.wnboi.LabelMaker;
 import com.samsthenerd.hexgloop.misc.wnboi.LabelMaker.Label;
 import com.samsthenerd.hexgloop.misc.wnboi.LabelTypes.TextLabel;
 
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.text.Text;
 import ram.talia.moreiotas.api.spell.iota.StringIota;
 

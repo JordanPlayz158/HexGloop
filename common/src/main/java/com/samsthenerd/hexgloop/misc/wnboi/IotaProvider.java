@@ -2,7 +2,7 @@ package com.samsthenerd.hexgloop.misc.wnboi;
 
 
 
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.nbt.NbtCompound;
@@ -22,7 +22,7 @@ public interface IotaProvider extends LabelProvider{
 
     public Text getName(int index);
 
-    public default FrozenColorizer getColorizer(){
+    public default FrozenPigment getColorizer(){
         return IXplatAbstractions.INSTANCE.getColorizer(MinecraftClient.getInstance().player);
     }
 }

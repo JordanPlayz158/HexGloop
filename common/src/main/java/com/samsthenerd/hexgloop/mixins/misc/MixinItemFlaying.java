@@ -23,12 +23,12 @@ import com.samsthenerd.hexgloop.items.IFlayableItem;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.api.mod.HexConfig;
-import at.petrak.hexcasting.api.spell.ParticleSpray;
-import at.petrak.hexcasting.api.spell.RenderedSpell;
+import at.petrak.hexcasting.api.casting.ParticleSpray;
+import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.common.casting.operators.spells.great.OpBrainsweep;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.common.casting.actions.spells.great.OpBrainsweep;
 import at.petrak.hexcasting.common.misc.Brainsweeping;
 import kotlin.Triple;
 import net.minecraft.block.BlockState;
@@ -164,7 +164,7 @@ public class MixinItemFlaying {
     }
 
 
-    @Mixin(targets="at.petrak.hexcasting.common.casting.operators.spells.great.OpBrainsweep$Spell")
+    @Mixin(targets="at.petrak.hexcasting.common.casting.actions.spells.great.OpBrainsweep$Spell")
     public static class MixinBrainsweepSpell implements BrainsweepSpellInvoker{
         private ItemEntity sacrificeProvider = null;
 

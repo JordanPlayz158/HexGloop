@@ -15,8 +15,8 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.samsthenerd.hexgloop.screens.PatternStyle;
 import com.samsthenerd.hexgloop.utils.StringsToDirMap;
 
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.client.font.TextVisitFactory;
 import net.minecraft.text.CharacterVisitor;
 import net.minecraft.text.Style;

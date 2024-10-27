@@ -13,8 +13,8 @@ import com.samsthenerd.hexgloop.items.ItemCastersCoin;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.common.casting.operators.rw.OpWrite;
+import at.petrak.hexcasting.api.item.Iota;
+import at.petrak.hexcasting.common.casting.actions.rw.OpWrite;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

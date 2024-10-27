@@ -9,12 +9,12 @@ import java.util.UUID;
 
 import com.samsthenerd.hexgloop.items.HexGloopItems;
 
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.lib.HexItems;
 import net.minecraft.item.Item;
 import net.minecraft.text.Text;
@@ -82,7 +82,7 @@ public class SampleHexes {
         .withRarity(Rarity.RARE)
         .withMediaAmt(MediaConstants.DUST_UNIT * 48)
         .requiredMods("hexal")
-        .withPigments(new FrozenColorizer(HexItems.DYE_COLORIZERS.get(DyeColor.ORANGE).getDefaultStack(), new UUID(0,0)))
+        .withPigments(new FrozenPigment(HexItems.DYE_COLORIZERS.get(DyeColor.ORANGE).getDefaultStack(), new UUID(0,0)))
     );
     public static SampleHex GREATER_SMELT = register(
         new SampleHex(smeltItems, Text.translatable("hexgloop.lootitem.name.greater_smelt"), Text.translatable("hexgloop.lootitem.desc.greater_smelt"))
@@ -90,7 +90,7 @@ public class SampleHexes {
         .withRarity(Rarity.EPIC)
         .withMediaAmt(MediaConstants.DUST_UNIT * 48 * 4)
         .requiredMods("hexal")
-        .withPigments(new FrozenColorizer(HexItems.DYE_COLORIZERS.get(DyeColor.RED).getDefaultStack(), new UUID(0,0)))
+        .withPigments(new FrozenPigment(HexItems.DYE_COLORIZERS.get(DyeColor.RED).getDefaultStack(), new UUID(0,0)))
     );
 
 

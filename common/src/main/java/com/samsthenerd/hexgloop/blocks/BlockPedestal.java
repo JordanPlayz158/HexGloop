@@ -15,8 +15,8 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.IIotaProviderLo
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockRenderType;

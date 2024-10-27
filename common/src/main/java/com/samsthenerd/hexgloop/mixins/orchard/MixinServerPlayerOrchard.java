@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.samsthenerd.hexgloop.casting.orchard.IOrchard;
 import com.samsthenerd.hexgloop.casting.orchard.IOrchardKeybind;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtDouble;
 import net.minecraft.nbt.NbtElement;

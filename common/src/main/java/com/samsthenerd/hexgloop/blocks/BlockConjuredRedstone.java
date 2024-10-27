@@ -10,7 +10,7 @@ import com.samsthenerd.hexgloop.blockentities.BlockEntityConjuredRedstone;
 import com.samsthenerd.hexgloop.blockentities.HexGloopBEs;
 
 import at.petrak.hexcasting.annotations.SoftImplement;
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.common.blocks.BlockConjured;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -99,7 +99,7 @@ public class BlockConjuredRedstone extends BlockConjured{
         return new BlockEntityConjuredRedstone(pPos, pState);
     }
 
-    public static void setColor(World world, BlockPos pPos, FrozenColorizer colorizer) {
+    public static void setColor(World world, BlockPos pPos, FrozenPigment colorizer) {
         BlockEntity blockentity = world.getBlockEntity(pPos);
         if (blockentity instanceof BlockEntityConjuredRedstone tile) {
             tile.setColorizer(colorizer);

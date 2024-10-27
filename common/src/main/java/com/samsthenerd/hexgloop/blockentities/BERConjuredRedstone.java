@@ -6,7 +6,7 @@ import java.util.Map;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.samsthenerd.hexgloop.HexGloop;
 
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
@@ -54,7 +54,7 @@ public class BERConjuredRedstone implements BlockEntityRenderer<BlockEntityConju
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR_TEXTURE_LIGHT_NORMAL);
         int power = be.getPower();
         int transPower = (int)Math.floor((minOpac + ((maxOpac-minOpac)*power/15f)) * 255);
-        FrozenColorizer colorizer = be.getColorizer();
+        FrozenPigment colorizer = be.getColorizer();
         Identifier textureId = new Identifier(HexGloop.MOD_ID, "block/conjured_redstone");
         Sprite sprite = new SpriteIdentifier(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, textureId).getSprite();
         float time = be.getWorld().getTime();

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import com.samsthenerd.hexgloop.items.LabelyItem;
 
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 

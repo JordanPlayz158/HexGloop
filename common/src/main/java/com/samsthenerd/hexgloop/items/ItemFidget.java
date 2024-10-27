@@ -11,10 +11,10 @@ import com.samsthenerd.hexgloop.screens.FidgetWheelScreen;
 import com.samsthenerd.wnboi.interfaces.KeyboundItem;
 import com.samsthenerd.wnboi.screen.AbstractContextWheelScreen;
 
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
 import net.fabricmc.api.EnvType;

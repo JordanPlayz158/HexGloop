@@ -12,7 +12,7 @@ import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.utils.patternmatching.PatternMatching;
 
 import at.petrak.hexcasting.api.PatternRegistry;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import dev.architectury.event.events.client.ClientLifecycleEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

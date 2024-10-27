@@ -7,12 +7,12 @@ import java.util.UUID;
 import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 import com.samsthenerd.hexgloop.misc.worldData.TruenameLockState;
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction;
-import at.petrak.hexcasting.api.spell.OperationResult;
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.spell.casting.CastingContext.CastSource;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import dev.architectury.platform.Platform;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;

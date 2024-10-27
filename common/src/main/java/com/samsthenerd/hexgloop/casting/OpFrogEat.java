@@ -9,16 +9,16 @@ import com.samsthenerd.hexgloop.casting.truenameclassaction.MishapChloeIsGonnaFi
 import com.samsthenerd.hexgloop.items.HexGloopItems;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.OperationResult;
-import at.petrak.hexcasting.api.spell.OperatorUtils;
-import at.petrak.hexcasting.api.spell.ParticleSpray;
-import at.petrak.hexcasting.api.spell.RenderedSpell;
-import at.petrak.hexcasting.api.spell.SpellAction;
-import at.petrak.hexcasting.api.spell.SpellAction.DefaultImpls;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
+import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
+import at.petrak.hexcasting.api.casting.ParticleSpray;
+import at.petrak.hexcasting.api.casting.RenderedSpell;
+import at.petrak.hexcasting.api.casting.castables.SpellAction;
+import at.petrak.hexcasting.api.casting.castables.SpellAction.DefaultImpls;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.mishaps.MishapBadEntity;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity;
 import kotlin.Triple;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

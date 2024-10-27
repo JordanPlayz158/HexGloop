@@ -2,7 +2,7 @@ package com.samsthenerd.hexgloop.items.tooltips;
 
 import java.util.List;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.util.Identifier;
 

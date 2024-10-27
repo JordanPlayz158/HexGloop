@@ -1,6 +1,6 @@
 package com.samsthenerd.hexgloop.casting.orchard;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 
 // this system should mostly be non-persistent, so don't expect it to work across disconnects
 public interface IOrchardKeybind {

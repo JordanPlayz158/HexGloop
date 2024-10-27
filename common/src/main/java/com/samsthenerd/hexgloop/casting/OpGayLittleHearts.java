@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.OperationResult;
-import at.petrak.hexcasting.api.spell.OperatorUtils;
-import at.petrak.hexcasting.api.spell.ParticleSpray;
-import at.petrak.hexcasting.api.spell.RenderedSpell;
-import at.petrak.hexcasting.api.spell.SpellAction;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
+import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
+import at.petrak.hexcasting.api.casting.ParticleSpray;
+import at.petrak.hexcasting.api.casting.RenderedSpell;
+import at.petrak.hexcasting.api.casting.castables.SpellAction;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import kotlin.Triple;
 import net.minecraft.text.Text;
@@ -73,7 +73,7 @@ public class OpGayLittleHearts implements SpellAction{
             if (!context.canEditBlockAt(pos))
                 return;
 
-            FrozenColorizer colorizer = IXplatAbstractions.INSTANCE.getColorizer(context.getCaster());
+            FrozenPigment colorizer = IXplatAbstractions.INSTANCE.getColorizer(context.getCaster());
             // context.getWorld().spawnParticles(ParticleTypes.SNEEZE, 
             //             waterPos.getX() + 0.5 + rand.nextDouble()*0.5, waterPos.getY() + 0.3 + rand.nextDouble()*0.5, waterPos.getZ()+0.5 + rand.nextDouble()*0.5, 1, 0, 0.3, 0, 0.01);
             

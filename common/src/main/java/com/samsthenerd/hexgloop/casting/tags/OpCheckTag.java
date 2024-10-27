@@ -2,12 +2,12 @@ package com.samsthenerd.hexgloop.casting.tags;
 
 import java.util.List;
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction;
-import at.petrak.hexcasting.api.spell.OperationResult;
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.BooleanIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.BooleanIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.text.Text;
 import ram.talia.moreiotas.api.OperatorUtilsKt;
 

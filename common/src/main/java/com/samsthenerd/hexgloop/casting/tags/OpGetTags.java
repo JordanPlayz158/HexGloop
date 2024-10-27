@@ -3,13 +3,13 @@ package com.samsthenerd.hexgloop.casting.tags;
 import java.util.ArrayList;
 import java.util.List;
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction;
-import at.petrak.hexcasting.api.spell.OperationResult;
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.iota.ListIota;
-import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.ListIota;
+import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota;
 import net.minecraft.text.Text;
 import ram.talia.moreiotas.api.spell.iota.StringIota;
 

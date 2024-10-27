@@ -11,8 +11,8 @@ import com.samsthenerd.hexgloop.network.booktweaks.BookScrollHandlersClient;
 
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import at.petrak.hexcasting.api.spell.casting.ResolvedPattern;
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.network.MsgOpenSpellGuiAck;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import dev.architectury.event.events.common.PlayerEvent;

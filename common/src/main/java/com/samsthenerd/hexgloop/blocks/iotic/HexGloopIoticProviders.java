@@ -10,10 +10,10 @@ import javax.annotation.Nullable;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.iota.ListIota;
-import at.petrak.hexcasting.api.spell.iota.NullIota;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.ListIota;
+import at.petrak.hexcasting.api.casting.iota.NullIota;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
 import at.petrak.hexcasting.common.blocks.akashic.AkashicFloodfiller;
 import at.petrak.hexcasting.common.blocks.akashic.BlockEntityAkashicBookshelf;
 import at.petrak.hexcasting.common.blocks.circles.BlockEntitySlate;

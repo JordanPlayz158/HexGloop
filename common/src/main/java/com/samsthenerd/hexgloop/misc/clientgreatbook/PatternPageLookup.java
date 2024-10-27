@@ -13,7 +13,7 @@ import com.samsthenerd.hexgloop.mixins.booktweaks.MixinClientYoinkPPLangKey;
 import com.samsthenerd.hexgloop.utils.patternmatching.PatternMatching;
 
 import at.petrak.hexcasting.api.HexAPI;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resource.language.I18n;

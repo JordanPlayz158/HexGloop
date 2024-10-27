@@ -10,9 +10,9 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.samsthenerd.hexgloop.blocks.ICantBeRaycasted;
 
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.common.casting.operators.OpBlockAxisRaycast;
-import at.petrak.hexcasting.common.casting.operators.OpBlockRaycast;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.common.casting.actions.raycast.OpBlockAxisRaycast;
+import at.petrak.hexcasting.common.casting.actions.raycast.OpBlockRaycast;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.Vec3d;

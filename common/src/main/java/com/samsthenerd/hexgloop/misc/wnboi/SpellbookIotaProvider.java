@@ -1,7 +1,7 @@
 package com.samsthenerd.hexgloop.misc.wnboi;
 
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
 import net.minecraft.item.ItemStack;

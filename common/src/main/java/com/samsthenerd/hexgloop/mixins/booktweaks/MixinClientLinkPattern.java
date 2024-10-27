@@ -11,8 +11,8 @@ import com.mojang.datafixers.util.Pair;
 import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.misc.clientgreatbook.PatternPageLookup;
 
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
 import at.petrak.hexcasting.common.items.ItemScroll;
 import net.minecraft.item.ItemStack;
 import vazkii.patchouli.client.book.BookContents;

@@ -8,7 +8,7 @@ import com.samsthenerd.hexgloop.misc.wnboi.LabelMaker.Label;
 import com.samsthenerd.hexgloop.misc.wnboi.LabelTypes.EntityLabel;
 import com.samsthenerd.hexgloop.misc.wnboi.LabelTypes.ItemLabel;
 
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;

@@ -8,17 +8,17 @@ import com.samsthenerd.hexgloop.blocks.BlockConjuredRedstone;
 import com.samsthenerd.hexgloop.blocks.HexGloopBlocks;
 import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.OperationResult;
-import at.petrak.hexcasting.api.spell.OperatorUtils;
-import at.petrak.hexcasting.api.spell.ParticleSpray;
-import at.petrak.hexcasting.api.spell.RenderedSpell;
-import at.petrak.hexcasting.api.spell.SpellAction;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
+import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
+import at.petrak.hexcasting.api.casting.ParticleSpray;
+import at.petrak.hexcasting.api.casting.RenderedSpell;
+import at.petrak.hexcasting.api.casting.castables.SpellAction;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.mishaps.MishapBadBlock;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.mishaps.MishapBadBlock;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import kotlin.Triple;
 import net.minecraft.block.Block;
@@ -106,7 +106,7 @@ public class OpConjureRedstone implements SpellAction{
             
             Block block = HexGloopBlocks.CONJURED_REDSTONE_BLOCK.get();
 
-            FrozenColorizer colorizer = IXplatAbstractions.INSTANCE.getColorizer(context.getCaster());
+            FrozenPigment colorizer = IXplatAbstractions.INSTANCE.getColorizer(context.getCaster());
 
             ItemStack conjuredRSItemStack = new ItemStack(HexGloopBlocks.CONJURED_REDSTONE_BLOCK.get().asItem());
 

@@ -11,7 +11,7 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.ILociAtHome;
 import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.IRedirectLocus;
 
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemPlacementContext;

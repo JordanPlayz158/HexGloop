@@ -2,7 +2,7 @@ package com.samsthenerd.hexgloop.items;
 
 import java.util.UUID;
 
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.advancement.criterion.Criteria;
@@ -42,11 +42,11 @@ public class ItemCastingPotion extends ItemPackagedHex{
             stacks.add(getDefaultStack());
             // UUID uuid = UUID.randomUUID(); // maybe put mine in ? just for funzies
             // UUID uuid = UUID.fromString("6f07899c-2b26-4221-8033-1f53f7a0e111");
-        //     FrozenColorizer transColor = new FrozenColorizer(HexItems.PRIDE_COLORIZERS.get(ItemPrideColorizer.Type.TRANSGENDER).getDefaultStack(), uuid);
+        //     FrozenPigment transColor = new FrozenPigment(HexItems.PRIDE_COLORIZERS.get(ItemPrideColorizer.Type.TRANSGENDER).getDefaultStack(), uuid);
         //     stacks.add(withColorizer(getDefaultStack(), transColor));
-        //     FrozenColorizer greenColor = new FrozenColorizer(HexItems.DYE_COLORIZERS.get(DyeColor.GREEN).getDefaultStack(), uuid);
+        //     FrozenPigment greenColor = new FrozenPigment(HexItems.DYE_COLORIZERS.get(DyeColor.GREEN).getDefaultStack(), uuid);
         //     stacks.add(withColorizer(getDefaultStack(), greenColor));
-        //     FrozenColorizer pinkColor = new FrozenColorizer(HexItems.DYE_COLORIZERS.get(DyeColor.PINK).getDefaultStack(), uuid);
+        //     FrozenPigment pinkColor = new FrozenPigment(HexItems.DYE_COLORIZERS.get(DyeColor.PINK).getDefaultStack(), uuid);
         //     stacks.add(withColorizer(getDefaultStack(), pinkColor));
         }
     }
@@ -61,14 +61,14 @@ public class ItemCastingPotion extends ItemPackagedHex{
         return false;
     }
 
-    public ItemStack withColorizer(ItemStack existingStack, FrozenColorizer colorizer){
+    public ItemStack withColorizer(ItemStack existingStack, FrozenPigment colorizer){
         ItemStack newStack = existingStack.copy();
         NbtCompound tag = newStack.getOrCreateNbt();
         tag.put(TAG_COLORIZER, colorizer.serializeToNBT());
         return newStack;
     }
 
-    public FrozenColorizer getColorizer(ItemStack stack){
+    public FrozenPigment getColorizer(ItemStack stack){
         NbtCompound tag = stack.getNbt();
         if(tag == null || tag.isEmpty()){
             return null;
@@ -77,7 +77,7 @@ public class ItemCastingPotion extends ItemPackagedHex{
         if(colorizerTag == null || colorizerTag.isEmpty()){
             return null;
         }
-        return FrozenColorizer.fromNBT(colorizerTag);
+        return FrozenPigment.fromNBT(colorizerTag);
     }
 
     // shibva's idea for syncing pigment to player
@@ -87,10 +87,10 @@ public class ItemCastingPotion extends ItemPackagedHex{
         NbtCompound nbt = stack.getNbt();
         if(nbt != null && nbt.contains(TAG_COLORIZER, NbtElement.COMPOUND_TYPE)){
             NbtCompound colorizerNbt = nbt.getCompound(TAG_COLORIZER);
-            if(colorizerNbt.contains(FrozenColorizer.TAG_OWNER, NbtElement.INT_ARRAY_TYPE)){
-                UUID uuid = colorizerNbt.getUuid(FrozenColorizer.TAG_OWNER);
+            if(colorizerNbt.contains(FrozenPigment.TAG_OWNER, NbtElement.INT_ARRAY_TYPE)){
+                UUID uuid = colorizerNbt.getUuid(FrozenPigment.TAG_OWNER);
                 if(uuid.equals(zeroUuid)){
-                    colorizerNbt.putUuid(FrozenColorizer.TAG_OWNER, entity.getUuid());
+                    colorizerNbt.putUuid(FrozenPigment.TAG_OWNER, entity.getUuid());
                     nbt.put(TAG_COLORIZER, colorizerNbt);
                     stack.setNbt(nbt);
                 }
@@ -116,12 +116,12 @@ public class ItemCastingPotion extends ItemPackagedHex{
             Criteria.CONSUME_ITEM.trigger((ServerPlayerEntity)playerEntity, stack);
         }
 
-        FrozenColorizer storedPigment = IXplatAbstractions.INSTANCE.getColorizer(playerEntity);
-        FrozenColorizer potionPigment = getColorizer(stack);
+        FrozenPigment storedPigment = IXplatAbstractions.INSTANCE.getColorizer(playerEntity);
+        FrozenPigment potionPigment = getColorizer(stack);
         if(potionPigment == null) potionPigment = storedPigment;
         IXplatAbstractions.INSTANCE.setColorizer(playerEntity, potionPigment);
         super.use(world, playerEntity, user.getActiveHand());
-        FrozenColorizer currentPigment = IXplatAbstractions.INSTANCE.getColorizer(playerEntity);
+        FrozenPigment currentPigment = IXplatAbstractions.INSTANCE.getColorizer(playerEntity);
         // only set it back if it didn't change from the potion, so we don't break hexbound's recall pigment
         if(currentPigment.equals(potionPigment) || currentPigment == potionPigment) // idk for sure if .equals is implemented properly and idc enough to check
             IXplatAbstractions.INSTANCE.setColorizer(playerEntity, storedPigment);

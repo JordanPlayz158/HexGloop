@@ -15,10 +15,10 @@ import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 import com.samsthenerd.hexgloop.casting.truenameclassaction.MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh;
 
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.DoubleIota;
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota;
+import at.petrak.hexcasting.api.casting.iota.DoubleIota;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;

@@ -5,7 +5,7 @@ import java.util.UUID;
 import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.network.HexGloopNetwork;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.entities.EntityWallScroll;
 import at.petrak.hexcasting.common.items.ItemScroll;

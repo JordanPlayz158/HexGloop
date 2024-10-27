@@ -8,7 +8,7 @@ import com.samsthenerd.hexgloop.blocks.iotic.IIoticProvider;
 import com.samsthenerd.hexgloop.items.ItemMultiFocus;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

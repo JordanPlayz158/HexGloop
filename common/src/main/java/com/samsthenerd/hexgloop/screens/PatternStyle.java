@@ -2,7 +2,7 @@ package com.samsthenerd.hexgloop.screens;
 
 import java.util.List;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.text.Style;
 import net.minecraft.util.math.Vec2f;
 

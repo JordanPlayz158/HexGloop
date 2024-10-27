@@ -7,10 +7,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.samsthenerd.hexgloop.misc.worldData.AgreeTruenameEULAState;
 
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.mishaps.MishapOthersName;
-import at.petrak.hexcasting.common.casting.operators.rw.OpWrite;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.mishaps.MishapOthersName;
+import at.petrak.hexcasting.common.casting.actions.rw.OpWrite;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;

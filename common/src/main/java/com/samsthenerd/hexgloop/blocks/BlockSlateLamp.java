@@ -5,7 +5,7 @@ import java.util.EnumSet;
 import javax.annotation.Nullable;
 
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RedstoneTorchBlock;

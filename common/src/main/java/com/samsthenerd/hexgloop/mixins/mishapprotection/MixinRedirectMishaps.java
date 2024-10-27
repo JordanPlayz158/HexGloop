@@ -13,18 +13,18 @@ import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 import com.samsthenerd.hexgloop.casting.mishapprotection.ICatchyFrameEval;
 import com.samsthenerd.hexgloop.casting.mishapprotection.IMishapStorage;
 
-import at.petrak.hexcasting.api.spell.Action;
+import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import at.petrak.hexcasting.api.spell.casting.CastingHarness.CastResult;
 import at.petrak.hexcasting.api.spell.casting.ResolvedPatternType;
 import at.petrak.hexcasting.api.spell.casting.eval.ContinuationFrame;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.casting.sideeffects.OperatorSideEffect;
-import at.petrak.hexcasting.api.spell.iota.BooleanIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
-import at.petrak.hexcasting.api.spell.mishaps.Mishap;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect;
+import at.petrak.hexcasting.api.casting.iota.BooleanIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
+import at.petrak.hexcasting.api.casting.mishaps.Mishap;
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds;
 import net.minecraft.server.world.ServerWorld;
 

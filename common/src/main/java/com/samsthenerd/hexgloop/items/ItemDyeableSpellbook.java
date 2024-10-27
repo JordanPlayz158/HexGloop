@@ -7,10 +7,10 @@ import com.mojang.datafixers.util.Pair;
 import com.samsthenerd.hexgloop.misc.wnboi.LabelMaker;
 
 import at.petrak.hexcasting.api.PatternRegistry;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.DyeableItem;

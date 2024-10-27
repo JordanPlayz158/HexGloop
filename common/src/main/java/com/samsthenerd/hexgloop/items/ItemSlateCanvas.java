@@ -3,7 +3,7 @@ package com.samsthenerd.hexgloop.items;
 import javax.annotation.Nullable;
 
 import at.petrak.hexcasting.api.item.IotaHolderItem;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.FilledMapItem;
 import net.minecraft.item.ItemStack;

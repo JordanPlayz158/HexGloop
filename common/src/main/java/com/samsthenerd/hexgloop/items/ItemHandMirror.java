@@ -13,10 +13,10 @@ import com.samsthenerd.hexgloop.misc.HexGloopTags;
 
 import at.petrak.hexcasting.api.item.IotaHolderItem;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import at.petrak.hexcasting.common.items.ItemFocus;
+import at.petrak.hexcasting.common.items.storage.ItemFocus;
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.item.TooltipData;

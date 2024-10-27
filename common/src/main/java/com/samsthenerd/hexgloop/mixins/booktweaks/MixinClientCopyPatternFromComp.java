@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.samsthenerd.hexgloop.misc.clientgreatbook.PatternCompGetter;
 
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.client.MinecraftClient;
 import vazkii.patchouli.api.IComponentRenderContext;
 import vazkii.patchouli.api.ICustomComponent;

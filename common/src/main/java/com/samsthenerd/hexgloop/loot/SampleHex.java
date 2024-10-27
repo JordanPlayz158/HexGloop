@@ -6,9 +6,9 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
@@ -26,7 +26,7 @@ public class SampleHex{
     public Set<Identifier> locations = null;
     // air if it can be spawned on any item
     public Set<? extends Item> forItems = Set.of(Items.AIR);
-    public Set<FrozenColorizer> pigments = null;
+    public Set<FrozenPigment> pigments = null;
     public int mediaAmt = MediaConstants.SHARD_UNIT * 8;
 
     public Set<String> mods = new HashSet<>();
@@ -63,12 +63,12 @@ public class SampleHex{
         return this;
     }
 
-    public SampleHex withPigments(Set<FrozenColorizer> pigments){
+    public SampleHex withPigments(Set<FrozenPigment> pigments){
         this.pigments = pigments;
         return this;
     }
 
-    public SampleHex withPigments(FrozenColorizer... pigments){
+    public SampleHex withPigments(FrozenPigment... pigments){
         this.pigments = Set.of(pigments);
         return this;
     }

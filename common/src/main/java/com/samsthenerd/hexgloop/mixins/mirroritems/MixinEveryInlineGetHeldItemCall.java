@@ -11,11 +11,11 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.samsthenerd.hexgloop.casting.mirror.SyncedItemHandling;
 
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.common.casting.operators.spells.OpColorize;
-import at.petrak.hexcasting.common.casting.operators.spells.OpMakeBattery;
-import at.petrak.hexcasting.common.casting.operators.spells.OpMakePackagedSpell;
-import at.petrak.hexcasting.common.casting.operators.spells.OpRecharge;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.common.casting.actions.spells.OpColorize;
+import at.petrak.hexcasting.common.casting.actions.spells.OpMakeBattery;
+import at.petrak.hexcasting.common.casting.actions.spells.OpMakePackagedSpell;
+import at.petrak.hexcasting.common.casting.actions.spells.OpRecharge;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Hand;

@@ -17,9 +17,9 @@ import com.samsthenerd.hexgloop.recipes.ItemFlayingRecipe;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;

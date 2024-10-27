@@ -10,12 +10,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.samsthenerd.hexgloop.items.ItemCastersCoin;
 
-import at.petrak.hexcasting.api.spell.OperatorUtils;
-import at.petrak.hexcasting.api.spell.ParticleSpray;
-import at.petrak.hexcasting.api.spell.RenderedSpell;
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.ParticleSpray;
+import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.common.casting.operators.rw.OpTheCoolerWrite;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.common.casting.actions.rw.OpTheCoolerWrite;
 import kotlin.Triple;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;

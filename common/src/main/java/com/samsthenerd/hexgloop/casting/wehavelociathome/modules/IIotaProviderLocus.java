@@ -1,7 +1,7 @@
 package com.samsthenerd.hexgloop.casting.wehavelociathome.modules;
 
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

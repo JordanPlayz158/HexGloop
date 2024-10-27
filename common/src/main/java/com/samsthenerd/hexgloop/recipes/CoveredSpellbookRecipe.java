@@ -3,7 +3,7 @@ package com.samsthenerd.hexgloop.recipes;
 import com.samsthenerd.hexgloop.items.HexGloopItems;
 import com.samsthenerd.hexgloop.misc.HexGloopTags;
 
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.lib.HexItems;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;

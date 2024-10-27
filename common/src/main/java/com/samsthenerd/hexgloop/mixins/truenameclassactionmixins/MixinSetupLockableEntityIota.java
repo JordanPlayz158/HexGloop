@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.samsthenerd.hexgloop.casting.truenameclassaction.ILockedIota;
 import com.samsthenerd.hexgloop.misc.worldData.TruenameLockState;
 
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;

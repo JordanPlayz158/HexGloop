@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
-import at.petrak.hexcasting.api.spell.iota.Vec3Iota;
+import at.petrak.hexcasting.api.casting.iota.Vec3Iota;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;

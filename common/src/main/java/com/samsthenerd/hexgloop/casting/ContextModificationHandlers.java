@@ -8,7 +8,7 @@ import java.util.function.BiFunction;
 import com.samsthenerd.hexgloop.blocks.BlockSentinelBed;
 import com.samsthenerd.hexgloop.items.ItemCopingSaw;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import net.minecraft.data.client.BlockStateVariantMap.TriFunction;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
@@ -19,9 +19,9 @@ public class ContextModificationHandlers {
         return b.getRight().compareTo(a.getRight());
     };
 
-    public static Queue<Pair<BiFunction<CastingContext, Boolean, Modification>, Integer>> ENLIGHTENMENT_MODIFIERS = new PriorityQueue<>(comparator);
-    public static Queue<Pair<BiFunction<CastingContext, Boolean, Modification>, Integer>> OVERCAST_MODIFIERS = new PriorityQueue<>(comparator);
-    public static Queue<Pair<TriFunction<CastingContext, Vec3d, Boolean, Modification>, Integer>> AMBIT_MODIFIERS = new PriorityQueue<>(comparator);
+    public static Queue<Pair<BiFunction<CastingEnvironment, Boolean, Modification>, Integer>> ENLIGHTENMENT_MODIFIERS = new PriorityQueue<>(comparator);
+    public static Queue<Pair<BiFunction<CastingEnvironment, Boolean, Modification>, Integer>> OVERCAST_MODIFIERS = new PriorityQueue<>(comparator);
+    public static Queue<Pair<TriFunction<CastingEnvironment, Vec3d, Boolean, Modification>, Integer>> AMBIT_MODIFIERS = new PriorityQueue<>(comparator);
 
     public static enum Modification {
         NONE,
@@ -29,15 +29,15 @@ public class ContextModificationHandlers {
         DISABLE
     }
 
-    public static void registerEnlightenmentModifier(BiFunction<CastingContext, Boolean, Modification> modifier, int ordering){
+    public static void registerEnlightenmentModifier(BiFunction<CastingEnvironment, Boolean, Modification> modifier, int ordering){
         ENLIGHTENMENT_MODIFIERS.add(new Pair<>(modifier, ordering));
     }
 
-    public static void registerOvercastModifier(BiFunction<CastingContext, Boolean, Modification> modifier, int ordering){
+    public static void registerOvercastModifier(BiFunction<CastingEnvironment, Boolean, Modification> modifier, int ordering){
         OVERCAST_MODIFIERS.add(new Pair<>(modifier, ordering));
     }
 
-    public static void registerAmbitModifier(TriFunction<CastingContext, Vec3d, Boolean, Modification> modifier, int ordering){
+    public static void registerAmbitModifier(TriFunction<CastingEnvironment, Vec3d, Boolean, Modification> modifier, int ordering){
         AMBIT_MODIFIERS.add(new Pair<>(modifier, ordering));
     }
 

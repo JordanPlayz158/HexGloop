@@ -12,9 +12,9 @@ import com.samsthenerd.wnboi.interfaces.KeyboundItem;
 import com.samsthenerd.wnboi.screen.AbstractContextWheelScreen;
 
 import at.petrak.hexcasting.api.item.IotaHolderItem;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.lib.HexItems;
 import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;

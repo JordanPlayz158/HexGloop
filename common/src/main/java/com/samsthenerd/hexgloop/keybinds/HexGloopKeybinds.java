@@ -11,7 +11,7 @@ import com.samsthenerd.wnboi.utils.KeybindUtils;
 import com.samsthenerd.wnboi.utils.KeybindUtils.KeybindHandler;
 
 import at.petrak.hexcasting.client.gui.GuiSpellcasting;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
 import dev.architectury.event.events.client.ClientTickEvent;

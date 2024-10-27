@@ -9,10 +9,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 
-import at.petrak.hexcasting.api.spell.iota.IotaType;
-import at.petrak.hexcasting.api.spell.iota.ListIota;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.IotaType;
+import at.petrak.hexcasting.api.casting.iota.ListIota;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.api.utils.HexUtils;
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.nbt.NbtCompound;
@@ -23,7 +23,7 @@ import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 
-@Mixin(targets = "at.petrak.hexcasting.api.spell.iota.ListIota$1")
+@Mixin(targets = "at.petrak.hexcasting.api.casting.iota.ListIota$1")
 public class MixinChangeListDisplay {
     @WrapOperation(method = "display(Lnet/minecraft/nbt/NbtElement;)Lnet/minecraft/text/Text;",
     at = @At(value = "INVOKE", target = "net/minecraft/text/MutableText.append (Ljava/lang/String;)Lnet/minecraft/text/MutableText;"))

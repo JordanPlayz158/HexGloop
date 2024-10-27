@@ -10,7 +10,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 
 import net.minecraft.item.ItemStack;
 
-@Mixin(targets="at.petrak.hexcasting.common.casting.operators.spells.OpMakePackagedSpell$Spell")
+@Mixin(targets="at.petrak.hexcasting.common.casting.actions.spells.OpMakePackagedSpell$Spell")
 public class MixinSplitCastingCost {
 
     @Shadow

@@ -6,7 +6,7 @@ import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.misc.GetPatchouliPatterns;
 import com.samsthenerd.hexgloop.network.HexGloopNetwork;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.entities.EntityWallScroll;
 import dev.architectury.networking.NetworkManager;
 import dev.architectury.networking.NetworkManager.PacketContext;

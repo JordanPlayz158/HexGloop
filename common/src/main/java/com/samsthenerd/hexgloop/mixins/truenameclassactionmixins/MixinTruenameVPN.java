@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.samsthenerd.hexgloop.casting.truenameclassaction.ILockedIota;
 import com.samsthenerd.hexgloop.misc.worldData.TruenameLockState;
 
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
 import at.petrak.hexcasting.api.utils.HexUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +18,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.server.world.ServerWorld;
 
-@Mixin(targets = "at.petrak.hexcasting.api.spell.iota.EntityIota$1")
+@Mixin(targets = "at.petrak.hexcasting.api.casting.iota.EntityIota$1")
 public class MixinTruenameVPN {
     // make the entity iota deserialization return null if the lockUUID is not the same as the keyUUID
     @Inject(method="deserialize(Lnet/minecraft/nbt/NbtElement;Lnet/minecraft/server/world/ServerWorld;)Lat/petrak/hexcasting/api/spell/iota/EntityIota;"

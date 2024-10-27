@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import com.mojang.datafixers.util.Either;
 
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import ram.talia.hexal.api.spell.iota.ItemTypeIota;

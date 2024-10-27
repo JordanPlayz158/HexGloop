@@ -3,7 +3,7 @@ package com.samsthenerd.hexgloop.blockentities;
 import java.util.Random;
 
 import at.petrak.hexcasting.api.block.HexBlockEntity;
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.common.blocks.BlockConjured;
 import at.petrak.hexcasting.common.blocks.BlockConjuredLight;
 import at.petrak.hexcasting.common.particles.ConjureParticleOptions;
@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
 
 public class BlockEntityConjuredRedstone extends HexBlockEntity{
     private static final Random RANDOM = new Random();
-    private FrozenColorizer colorizer = FrozenColorizer.DEFAULT.get();
+    private FrozenPigment colorizer = FrozenPigment.DEFAULT.get();
     private int power = 0;
 
     public static final String TAG_COLORIZER = "tag_colorizer";
@@ -95,15 +95,15 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
 
     @Override
     protected void loadModData(NbtCompound tag) {
-        this.colorizer = FrozenColorizer.fromNBT(tag.getCompound(TAG_COLORIZER));
+        this.colorizer = FrozenPigment.fromNBT(tag.getCompound(TAG_COLORIZER));
         this.power = tag.getInt(TAG_POWER);
     }
 
-    public FrozenColorizer getColorizer() {
+    public FrozenPigment getColorizer() {
         return this.colorizer;
     }
 
-    public void setColorizer(FrozenColorizer colorizer) {
+    public void setColorizer(FrozenPigment colorizer) {
         this.colorizer = colorizer;
         this.sync();
     }

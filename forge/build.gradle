@@ -58,10 +58,10 @@ dependencies {
 
     // // Hex Casting Dependencies
     modCompileOnly "at.petra-k.paucal:paucal-forge-${minecraft_version}:${paucalVersion}"
-    modCompileOnly "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouliVersion}"
+    modCompileOnly "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouliVersion}-FORGE-SNAPSHOT"
 
     modRuntimeOnly "at.petra-k.paucal:paucal-forge-${minecraft_version}:${paucalVersion}"
-    modRuntimeOnly "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouliVersion}"
+    modRuntimeOnly "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouliVersion}-FORGE-SNAPSHOT"
 
     //  // Hex Optional interop
 
@@ -83,8 +83,8 @@ dependencies {
 
     // modRuntimeOnly "mezz.jei:jei-$minecraft_version-forge:$jeiVersion"
 
-    modCompileOnly "top.theillusivec4.curios:curios-forge:$minecraft_version-$curiosVersion:api"
-    modRuntimeOnly "top.theillusivec4.curios:curios-forge:$minecraft_version-$curiosVersion"
+    modCompileOnly "top.theillusivec4.curios:curios-forge:$curiosVersion+$minecraft_version:api"
+    modRuntimeOnly "top.theillusivec4.curios:curios-forge:$curiosVersion+$minecraft_version"
     runtimeOnly(include("com.github.llamalad7.mixinextras:mixinextras-forge:${mixinExtrasVersion}"))
 
     // modApi "com.github.Virtuoel:Pehkui:${pehkuiVersion}-${minecraft_version}-forge"

@@ -12,7 +12,7 @@ import com.samsthenerd.hexgloop.casting.truenameclassaction.ISetImpetusKey;
 import com.samsthenerd.hexgloop.items.ItemCastersCoin;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.blocks.circles.impetuses.BlockStoredPlayerImpetus;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.block.BlockState;

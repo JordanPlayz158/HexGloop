@@ -12,9 +12,9 @@ import com.samsthenerd.hexgloop.misc.wnboi.LabelTypes.PatternLabel.PatternOption
 import com.samsthenerd.wnboi.utils.RenderUtils;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
-import at.petrak.hexcasting.common.items.ItemFocus;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
+import at.petrak.hexcasting.common.items.storage.ItemFocus;
 import at.petrak.hexcasting.common.items.ItemStaff;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.architectury.registry.registries.DeferredRegister;

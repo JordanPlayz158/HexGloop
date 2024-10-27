@@ -9,7 +9,7 @@ import com.samsthenerd.hexgloop.compat.moreIotas.MoreIotasMaybeIotas;
 import com.samsthenerd.hexgloop.utils.GloopUtils;
 
 import at.petrak.hexcasting.api.item.IotaHolderItem;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.blocks.akashic.BlockAkashicRecord;
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import dev.architectury.platform.Platform;

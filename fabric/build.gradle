@@ -1,5 +1,5 @@
 plugins {
-	// id 'fabric-loom' version '1.1-SNAPSHOT'
+	id 'fabric-loom' version '1.8-SNAPSHOT'
 	// id 'maven-publish'
     id "com.github.johnrengelman.shadow" version "7.1.2" 
     id "me.modmuss50.mod-publish-plugin" version "0.4.5"
@@ -77,7 +77,7 @@ dependencies {
 
 	// Hex Casting Dependencies
 	modImplementation "at.petra-k.paucal:paucal-fabric-${minecraft_version}:${paucalVersion}"
-	modImplementation "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouliVersion}-FABRIC"
+	modImplementation "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouliVersion}-FABRIC-SNAPSHOT"
 
     modImplementation "dev.emi:trinkets:${trinkets_version}"
 

@@ -1,16 +1,17 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.pigment.ColorProvider;
 import java.util.UUID;
 
 import javax.annotation.Nullable;
 
 import com.samsthenerd.hexgloop.HexGloop;
 
-import at.petrak.hexcasting.api.addldata.ADColorizer;
-import at.petrak.hexcasting.api.item.ColorizerItem;
+import at.petrak.hexcasting.api.addldata.ADPigment;
+import at.petrak.hexcasting.api.item.PigmentItem;
 import at.petrak.hexcasting.api.item.IotaHolderItem;
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.entity.Entity;
@@ -23,7 +24,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
 import net.minecraft.util.math.Vec3d;
 
-public class ItemEssenceStone extends Item implements ColorizerItem, IotaHolderItem{
+public class ItemEssenceStone extends Item implements PigmentItem, IotaHolderItem{
 
     public static Identifier ESSENCE_PREDICATE = new Identifier("hexgloop", "has_essence");
     public static String HAS_ESSENCE = "has_essence";
@@ -38,7 +39,11 @@ public class ItemEssenceStone extends Item implements ColorizerItem, IotaHolderI
     public int color(ItemStack stack, UUID owner, float time, Vec3d position){
         Pair<Integer, Integer> colors = getColors(stack);
         int[] colorsArray = {colors.getLeft(), colors.getRight()};
-        return ADColorizer.morphBetweenColors(colorsArray, new Vec3d(0.1, 0.1, 0.1), time / 20 / 20, position);
+        return ADPigment.morphBetweenColors(colorsArray, new Vec3d(0.1, 0.1, 0.1), time / 20 / 20, position);
+    }
+
+    protected class MyColorProvider extends ColorProvider {
+
     }
 
     public boolean canWrite(ItemStack stack, @Nullable Iota iota){

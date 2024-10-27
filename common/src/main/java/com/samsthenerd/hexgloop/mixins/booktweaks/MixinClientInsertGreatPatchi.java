@@ -16,7 +16,7 @@ import com.samsthenerd.hexgloop.misc.clientgreatbook.PatternCompGetter;
 
 import at.petrak.hexcasting.api.PatternRegistry;
 import at.petrak.hexcasting.api.spell.math.HexCoord;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.client.RenderLib;
 import at.petrak.hexcasting.interop.patchouli.AbstractPatternComponent;
 import at.petrak.hexcasting.interop.utils.PatternDrawingUtil;

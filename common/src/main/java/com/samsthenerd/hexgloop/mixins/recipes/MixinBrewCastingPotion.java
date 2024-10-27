@@ -9,8 +9,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.samsthenerd.hexgloop.items.HexGloopItems;
 
-import at.petrak.hexcasting.api.item.ColorizerItem;
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.item.PigmentItem;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.common.lib.HexItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -25,10 +25,10 @@ public class MixinBrewCastingPotion {
             if(ingredient.getItem() == HexItems.AMETHYST_DUST){
                 cir.setReturnValue(HexGloopItems.CASTING_POTION_ITEM.get().getDefaultStack());
             }
-            if(ingredient.getItem() instanceof ColorizerItem){
+            if(ingredient.getItem() instanceof PigmentItem){
                 // use uuid zero so that it gets synced when player touches it
                 UUID uuid = new UUID(0, 0);
-                FrozenColorizer thisFrozen = new FrozenColorizer(ingredient, uuid);
+                FrozenPigment thisFrozen = new FrozenPigment(ingredient, uuid);
                 ItemStack colorizedPotion = HexGloopItems.CASTING_POTION_ITEM.get().withColorizer(HexGloopItems.CASTING_POTION_ITEM.get().getDefaultStack(), thisFrozen);
                 cir.setReturnValue(colorizedPotion);
             }
@@ -45,7 +45,7 @@ public class MixinBrewCastingPotion {
             if(!tag.contains("Potion") || !tag.getString("Potion").equals("minecraft:thick")){
                 return;
             }
-            if(ingredient.getItem() == HexItems.AMETHYST_DUST || ingredient.getItem() instanceof ColorizerItem){
+            if(ingredient.getItem() == HexItems.AMETHYST_DUST || ingredient.getItem() instanceof PigmentItem){
                 cir.setReturnValue(true);
             }
         }
@@ -53,7 +53,7 @@ public class MixinBrewCastingPotion {
 
     @Inject(method="isPotionRecipeIngredient(Lnet/minecraft/item/ItemStack;)Z", at=@At("HEAD"), cancellable=true)
     private static void isPotionRecipeIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> cir){
-        if(stack.getItem() instanceof ColorizerItem || stack.getItem() == HexItems.AMETHYST_DUST){
+        if(stack.getItem() instanceof PigmentItem || stack.getItem() == HexItems.AMETHYST_DUST){
             cir.setReturnValue(true);
         }
     }

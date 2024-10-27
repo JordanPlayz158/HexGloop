@@ -4,7 +4,7 @@ package com.samsthenerd.hexgloop.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import at.petrak.hexcasting.api.spell.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexDir;
 
 public class StringsToDirMap {
     public static final Map<String, HexDir> dirMap = new HashMap<String, HexDir>();

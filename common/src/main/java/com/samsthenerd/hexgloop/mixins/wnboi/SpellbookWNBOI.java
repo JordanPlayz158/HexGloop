@@ -9,7 +9,7 @@ import com.samsthenerd.hexgloop.screens.IotaWheelScreen;
 import com.samsthenerd.wnboi.interfaces.KeyboundItem;
 import com.samsthenerd.wnboi.screen.AbstractContextWheelScreen;
 
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

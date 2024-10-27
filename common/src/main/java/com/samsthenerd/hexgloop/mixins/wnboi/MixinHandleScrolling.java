@@ -11,7 +11,7 @@ import com.samsthenerd.hexgloop.items.HexGloopItems;
 import com.samsthenerd.hexgloop.items.ItemFidget;
 import com.samsthenerd.hexgloop.items.ItemMultiFocus;
 
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;

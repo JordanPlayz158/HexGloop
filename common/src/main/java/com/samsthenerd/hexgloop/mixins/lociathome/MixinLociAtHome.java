@@ -34,11 +34,11 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.IRedirectLocus;
 import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.ISpeedLocus;
 
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.Pair;

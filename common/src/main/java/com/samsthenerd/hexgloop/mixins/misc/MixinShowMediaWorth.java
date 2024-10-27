@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.samsthenerd.hexgloop.utils.ClientUtils;
 
 import at.petrak.hexcasting.api.addldata.ADMediaHolder;
-import at.petrak.hexcasting.api.item.ColorizerItem;
+import at.petrak.hexcasting.api.item.PigmentItem;
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.common.items.magic.ItemMediaHolder;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
@@ -65,7 +65,7 @@ public class MixinShowMediaWorth {
     at=@At("RETURN"))
     public void addPigmentDisplayTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> cir){
         ItemStack stack = (ItemStack)(Object)this;
-        if(stack.getItem() instanceof ColorizerItem pigment){
+        if(stack.getItem() instanceof PigmentItem pigment){
             // if(pigment instanceof ItemDyeColorizer dyePigment){
             //     dyePigment.getDyeColor();
             // }

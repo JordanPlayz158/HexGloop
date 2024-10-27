@@ -14,8 +14,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.samsthenerd.hexgloop.casting.mishapprotection.ICatchyFrameEval;
 
 import at.petrak.hexcasting.api.spell.casting.eval.FrameFinishEval;
-import at.petrak.hexcasting.api.spell.iota.BooleanIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.BooleanIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import kotlin.Pair;
 
 @Mixin(FrameFinishEval.class)

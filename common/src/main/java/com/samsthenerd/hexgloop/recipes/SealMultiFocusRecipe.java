@@ -4,8 +4,8 @@ import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.items.HexGloopItems;
 import com.samsthenerd.hexgloop.items.ItemMultiFocus;
 
-import at.petrak.hexcasting.common.items.ItemFocus;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemFocus;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.lib.HexItems;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;

@@ -8,13 +8,13 @@ import com.samsthenerd.hexgloop.casting.mirror.MishapICanOnlyCodeSoMuchPlsDontDu
 import com.samsthenerd.hexgloop.items.ItemAbstractPassThrough.PassThroughUseContext;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.ConstMediaAction;
-import at.petrak.hexcasting.api.spell.OperationResult;
-import at.petrak.hexcasting.api.spell.OperatorUtils;
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
+import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.DoubleIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.DoubleIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.UpdateSelectedSlotS2CPacket;

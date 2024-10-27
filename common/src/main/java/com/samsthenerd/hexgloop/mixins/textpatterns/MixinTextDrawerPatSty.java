@@ -15,7 +15,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.samsthenerd.hexgloop.HexGloopClient;
 import com.samsthenerd.hexgloop.screens.PatternStyle;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.client.RenderLib;
 import kotlin.Pair;
 import net.minecraft.client.render.GameRenderer;

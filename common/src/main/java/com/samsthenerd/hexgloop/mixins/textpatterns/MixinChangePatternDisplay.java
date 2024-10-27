@@ -7,15 +7,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.samsthenerd.hexgloop.screens.PatternStyle;
 
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-@Mixin(targets = "at.petrak.hexcasting.api.spell.iota.PatternIota$1")
+@Mixin(targets = "at.petrak.hexcasting.api.casting.iota.PatternIota$1")
 public abstract class MixinChangePatternDisplay {
     @Inject(method = "display(Lnet/minecraft/nbt/NbtElement;)Lnet/minecraft/text/Text;", at = @At("HEAD"), cancellable = true)
     public void makePatternIotaVisual(NbtElement tag, CallbackInfoReturnable<Text> cir) {

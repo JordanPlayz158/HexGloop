@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import com.samsthenerd.hexgloop.casting.orchard.IOrchardKeybind;
 
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.client.network.ClientPlayerEntity;
 
 @Mixin(ClientPlayerEntity.class)

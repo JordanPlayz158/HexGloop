@@ -10,7 +10,7 @@ import com.samsthenerd.hexgloop.casting.IContextHelper;
 
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

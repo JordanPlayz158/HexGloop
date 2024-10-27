@@ -14,11 +14,11 @@ import com.samsthenerd.hexgloop.utils.ClientUtils;
 import com.samsthenerd.hexgloop.utils.GloopyRenderUtils;
 import com.samsthenerd.wnboi.utils.RenderUtils;
 
-import at.petrak.hexcasting.api.spell.iota.DoubleIota;
-import at.petrak.hexcasting.api.spell.iota.EntityIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.DoubleIota;
+import at.petrak.hexcasting.api.casting.iota.EntityIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import dev.architectury.platform.Platform;
 import net.fabricmc.api.EnvType;
 import net.minecraft.client.MinecraftClient;

@@ -12,7 +12,7 @@ import com.samsthenerd.hexgloop.casting.gloopifact.ICADHarnessStorage;
 
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import at.petrak.hexcasting.api.spell.casting.ControllerInfo;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;

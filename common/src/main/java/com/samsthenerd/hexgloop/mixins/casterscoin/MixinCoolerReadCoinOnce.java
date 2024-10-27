@@ -12,10 +12,10 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.samsthenerd.hexgloop.items.ItemCastersCoin;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
-import at.petrak.hexcasting.api.spell.OperatorUtils;
+import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.common.casting.operators.rw.OpTheCoolerRead;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.common.casting.actions.rw.OpTheCoolerRead;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.decoration.ItemFrameEntity;

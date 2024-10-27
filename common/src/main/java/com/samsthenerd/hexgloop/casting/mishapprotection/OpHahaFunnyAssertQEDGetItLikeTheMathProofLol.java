@@ -5,15 +5,15 @@ import java.util.List;
 
 import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 
-import at.petrak.hexcasting.api.spell.Action;
-import at.petrak.hexcasting.api.spell.OperationResult;
+import at.petrak.hexcasting.api.casting.castables.Action;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.casting.sideeffects.OperatorSideEffect;
-import at.petrak.hexcasting.api.spell.iota.BooleanIota;
-import at.petrak.hexcasting.api.spell.iota.Iota;
-import at.petrak.hexcasting.api.spell.mishaps.MishapInvalidIota;
-import at.petrak.hexcasting.api.spell.mishaps.MishapNotEnoughArgs;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect;
+import at.petrak.hexcasting.api.casting.iota.BooleanIota;
+import at.petrak.hexcasting.api.casting.iota.Iota;
+import at.petrak.hexcasting.api.casting.mishaps.MishapInvalidIota;
+import at.petrak.hexcasting.api.casting.mishaps.MishapNotEnoughArgs;
 import net.minecraft.text.Text;
 
 public class OpHahaFunnyAssertQEDGetItLikeTheMathProofLol implements Action {

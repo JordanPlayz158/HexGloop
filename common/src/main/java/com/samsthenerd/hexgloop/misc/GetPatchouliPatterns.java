@@ -11,7 +11,7 @@ import com.samsthenerd.hexgloop.misc.clientgreatbook.GreatBook;
 
 import at.petrak.hexcasting.api.PatternRegistry;
 import at.petrak.hexcasting.api.PatternRegistry.PatternEntry;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

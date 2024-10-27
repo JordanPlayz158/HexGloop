@@ -35,14 +35,14 @@ import com.samsthenerd.hexgloop.utils.GloopUtils;
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
 import at.petrak.hexcasting.api.client.ScryingLensOverlayRegistry;
 import at.petrak.hexcasting.api.item.IotaHolderItem;
-import at.petrak.hexcasting.api.misc.FrozenColorizer;
+import at.petrak.hexcasting.api.pigment.FrozenPigment;
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.iota.PatternIota;
-import at.petrak.hexcasting.api.spell.math.HexDir;
-import at.petrak.hexcasting.api.spell.math.HexPattern;
+import at.petrak.hexcasting.api.casting.iota.PatternIota;
+import at.petrak.hexcasting.api.casting.math.HexDir;
+import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import at.petrak.hexcasting.common.items.ItemFocus;
-import at.petrak.hexcasting.common.items.ItemSpellbook;
+import at.petrak.hexcasting.common.items.storage.ItemFocus;
+import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
 import at.petrak.hexcasting.common.items.magic.ItemCreativeUnlocker;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import at.petrak.hexcasting.common.lib.HexItems;
@@ -145,7 +145,7 @@ public class HexGloopClient {
 		}, HexGloopItems.MULTI_FOCUS_ITEM.get());
 
         ColorHandlerRegistry.registerItemColors((stack, tintIndex) -> {
-            FrozenColorizer colorizer = HexGloopItems.CASTING_POTION_ITEM.get().getColorizer(stack);
+            FrozenPigment colorizer = HexGloopItems.CASTING_POTION_ITEM.get().getColorizer(stack);
             if(tintIndex == 0 || tintIndex >= 5 || colorizer == null){
                 return 0xFFFFFF; //white
             }
@@ -235,7 +235,7 @@ public class HexGloopClient {
         }, HexGloopBlocks.IOTIC_DIAL_BLOCK);
     }
 
-    public static int tintsFromColorizer(FrozenColorizer colorizer, int tintIndex, int sections){
+    public static int tintsFromColorizer(FrozenPigment colorizer, int tintIndex, int sections){
         float time = MinecraftClient.getInstance().world.getTime();
         double section = 5.0 * tintIndex;
         return colorizer.getColor(time, new Vec3d(section, 0, 0));
@@ -258,7 +258,7 @@ public class HexGloopClient {
 
         ItemPropertiesRegistry.register(HexGloopItems.CASTING_POTION_ITEM.get(), new Identifier("colorized"),
             (ItemStack itemStack, ClientWorld clientWorld, LivingEntity livingEntity, int i) -> {
-                FrozenColorizer colorizer = HexGloopItems.CASTING_POTION_ITEM.get().getColorizer(itemStack);
+                FrozenPigment colorizer = HexGloopItems.CASTING_POTION_ITEM.get().getColorizer(itemStack);
                 return (colorizer == null) ? 0.0F : 1.0F;
             }
         );

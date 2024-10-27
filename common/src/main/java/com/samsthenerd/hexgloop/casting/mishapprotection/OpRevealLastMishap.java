@@ -7,11 +7,11 @@ import org.jetbrains.annotations.NotNull;
 
 import com.samsthenerd.hexgloop.compat.moreIotas.MoreIotasMaybeIotas;
 
-import at.petrak.hexcasting.api.spell.ConstMediaAction;
-import at.petrak.hexcasting.api.spell.OperationResult;
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
+import at.petrak.hexcasting.api.casting.eval.OperationResult;
 import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.SpellContinuation;
-import at.petrak.hexcasting.api.spell.iota.Iota;
+import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
+import at.petrak.hexcasting.api.casting.iota.Iota;
 import dev.architectury.platform.Platform;
 import net.minecraft.text.Text;
 
