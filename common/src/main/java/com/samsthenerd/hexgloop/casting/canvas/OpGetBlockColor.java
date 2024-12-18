@@ -63,7 +63,7 @@ public class OpGetBlockColor implements ConstMediaAction{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment CastingEnvironment){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingEnvironment){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, CastingEnvironment);
     }
     

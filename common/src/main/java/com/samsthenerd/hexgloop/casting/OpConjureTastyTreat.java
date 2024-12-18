@@ -1,6 +1,8 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -75,7 +77,7 @@ public class OpConjureTastyTreat implements SpellAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment CastingEnvironment){
-        return DefaultImpls.operate(this, continuation, stack, ravenmind, CastingEnvironment);
+    public OperationResult operate(CastingEnvironment env, CastingImage image, SpellContinuation continuation){
+        return DefaultImpls.operate(this, env, image, continuation);
     }
 }

@@ -3,6 +3,7 @@ package com.samsthenerd.hexgloop.casting.truenameclassaction;
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import at.petrak.hexcasting.api.casting.eval.env.PackagedItemCastEnv;
 import at.petrak.hexcasting.api.casting.eval.env.StaffCastEnv;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -72,7 +73,7 @@ public class OpRefreshTruename implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
-        return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
+    public OperationResult operate(CastingEnvironment env, CastingImage image, SpellContinuation continuation){
+        return ConstMediaAction.DefaultImpls.operate(this, env, image, continuation);
     }
 }

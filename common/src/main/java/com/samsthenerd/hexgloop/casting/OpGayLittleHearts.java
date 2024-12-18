@@ -1,6 +1,8 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -81,8 +83,8 @@ public class OpGayLittleHearts implements SpellAction{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment CastingEnvironment){
-        return SpellAction.DefaultImpls.operate(this, continuation, stack, ravenmind, CastingEnvironment);
+    public OperationResult operate(CastingEnvironment env, CastingImage image, SpellContinuation continuation){
+        return DefaultImpls.operate(this, env, image, continuation);
     }
     
 }

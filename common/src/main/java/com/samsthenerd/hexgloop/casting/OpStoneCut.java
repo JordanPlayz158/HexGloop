@@ -114,7 +114,7 @@ public class OpStoneCut implements SpellAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment CastingEnvironment){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingEnvironment){
         return DefaultImpls.operate(this, continuation, stack, ravenmind, CastingEnvironment);
     }
 }
