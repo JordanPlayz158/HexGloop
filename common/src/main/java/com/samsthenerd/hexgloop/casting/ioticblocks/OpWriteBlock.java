@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting.ioticblocks;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,6 @@ import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -48,7 +48,7 @@ public class OpWriteBlock implements ConstMediaAction {
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
 
         BlockPos blockPos = OperatorUtils.getBlockPos(args, 0, getArgc());
 
@@ -74,7 +74,7 @@ public class OpWriteBlock implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }   
 }

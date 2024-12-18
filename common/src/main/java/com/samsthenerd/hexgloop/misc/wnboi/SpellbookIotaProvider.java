@@ -2,7 +2,7 @@ package com.samsthenerd.hexgloop.misc.wnboi;
 
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
-import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
+import at.petrak.hexcasting.common.msgs.MsgShiftScrollC2S;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -71,7 +71,7 @@ public class SpellbookIotaProvider implements IotaProvider{
         int invert = (dist == (index - current)) ? -1 : 1;
         for(int i = 0; i < dist; i++){
             IClientXplatAbstractions.INSTANCE.sendPacketToServer(
-                    new MsgShiftScrollSyn(mainHand ? invert*dist : 0, !mainHand ? invert*dist : 0, true,
+                    new MsgShiftScrollC2S(mainHand ? invert*dist : 0, !mainHand ? invert*dist : 0, true,
                         false, false));
         }
     }

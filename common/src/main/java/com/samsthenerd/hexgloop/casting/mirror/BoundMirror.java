@@ -9,12 +9,12 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class BoundMirror {
@@ -87,7 +87,7 @@ public class BoundMirror {
         UUID uuid = nbt.containsUuid("uuid") ? nbt.getUuid("uuid") : null;
         BlockPos pos = nbt.contains("pos", NbtElement.LONG_TYPE) ? BlockPos.fromLong(nbt.getLong("pos")) : null;
         Identifier dimID = nbt.contains("dim", NbtElement.STRING_TYPE) ? new Identifier(nbt.getString("dim")) : null;
-        RegistryKey<World> dim = dimID != null ? RegistryKey.of(Registry.WORLD_KEY, dimID) : null;
+        RegistryKey<World> dim = dimID != null ? RegistryKey.of(RegistryKeys.WORLD, dimID) : null;
         if(uuid == null || pos == null || dim == null){
             return null;
         }

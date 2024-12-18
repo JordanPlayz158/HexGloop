@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -9,7 +10,6 @@ import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.items.storage.ItemFocus;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
@@ -53,7 +53,7 @@ public class ItemGloopifact extends ItemPackagedHex implements IotaHolderItem {
             // erase ! although maybe need to handle it so it erases iota before packaged hex
             stack.removeSubNbt(ItemFocus.TAG_DATA);
         } else {
-            NBTHelper.put(stack, ItemFocus.TAG_DATA, HexIotaTypes.serialize(iota));
+            NBTHelper.put(stack, ItemFocus.TAG_DATA, IotaType.serialize(iota));
         }
     }
     

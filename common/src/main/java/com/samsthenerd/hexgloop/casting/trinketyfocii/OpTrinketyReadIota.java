@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting.trinketyfocii;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -10,7 +11,6 @@ import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 import at.petrak.hexcasting.api.item.IotaHolderItem;
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -21,12 +21,12 @@ import net.minecraft.text.Text;
 
 public class OpTrinketyReadIota implements ConstMediaAction {
     private boolean simulate;
-    private Function<CastingContext, List<String>> decideTrinkets;
+    private Function<CastingEnvironment, List<String>> decideTrinkets;
 
     // function so that it can do things like change based on which hand is being used
     // simulate so that we can stuff the auditor/accessor spells into these
     // translation key so we can name them externally
-    public OpTrinketyReadIota(Function<CastingContext, List<String>> decideTrinkets, boolean simulate){
+    public OpTrinketyReadIota(Function<CastingEnvironment, List<String>> decideTrinkets, boolean simulate){
         this.decideTrinkets = decideTrinkets;
         this.simulate = simulate;
     }
@@ -54,7 +54,7 @@ public class OpTrinketyReadIota implements ConstMediaAction {
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
         List<String> trinketsList = decideTrinkets.apply(context);
         if(trinketsList == null || trinketsList.size() == 0){ // shouldn't ever happen
             if(simulate) return List.of(new BooleanIota(false));
@@ -96,7 +96,7 @@ public class OpTrinketyReadIota implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }   
 }

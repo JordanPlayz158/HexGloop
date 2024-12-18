@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting.inventorty;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import com.samsthenerd.hexgloop.casting.inventorty.InventortyUtils.AutoGrabbable;
@@ -7,8 +9,6 @@ import com.samsthenerd.hexgloop.casting.inventorty.InventortyUtils.GrabbableStac
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.DoubleIota;
 import at.petrak.hexcasting.api.casting.iota.EntityIota;
@@ -47,7 +47,7 @@ public class OpStackTransfer implements ConstMediaAction{
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
         InventortyUtils.assertKittyCasting(context);
         GrabbableStack fromGrabbable = InventortyUtils.getStackFromGrabbable(args.get(0), context, 0, getArgc());
         if(fromGrabbable == null || fromGrabbable instanceof AutoGrabbable){
@@ -96,7 +96,7 @@ public class OpStackTransfer implements ConstMediaAction{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
     

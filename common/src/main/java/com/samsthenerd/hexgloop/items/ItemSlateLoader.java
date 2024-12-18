@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.SpellList;
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,6 @@ import javax.annotation.Nullable;
 import com.samsthenerd.hexgloop.HexGloop;
 
 import at.petrak.hexcasting.api.item.IotaHolderItem;
-import at.petrak.hexcasting.api.spell.SpellList;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.ListIota;
 import at.petrak.hexcasting.api.casting.iota.NullIota;
@@ -17,7 +18,6 @@ import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.blocks.circles.BlockEntitySlate;
 import at.petrak.hexcasting.common.lib.HexItems;
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -112,7 +112,7 @@ public class ItemSlateLoader extends ItemAbstractPassThrough implements IotaHold
                     iotaList.add(iElem instanceof PatternIota ? iElem : new NullIota());
                 });
                 if(iotaList.size() > 0){
-                    NBTHelper.putCompound(stack, TAG_PATTERN_LIST, HexIotaTypes.serialize(new ListIota(iotaList)));
+                    NBTHelper.putCompound(stack, TAG_PATTERN_LIST, IotaType.serialize(new ListIota(iotaList)));
                     setCurrentPattern(stack, iotaList.get(0) instanceof PatternIota ? ((PatternIota) iotaList.get(0)).getPattern() : null);
                     return;
                 }
@@ -135,7 +135,7 @@ public class ItemSlateLoader extends ItemAbstractPassThrough implements IotaHold
 
     public void dequeuePattern(ItemStack stack, World world){
         if(world instanceof ServerWorld sWorld && hasPatterns(stack)){
-            Iota storedIota = HexIotaTypes.deserialize(readIotaTag(stack), sWorld);
+            Iota storedIota = IotaType.deserialize(readIotaTag(stack), sWorld);
             if(storedIota instanceof ListIota list){
                 // yay alwinfy magic
                 SpellList newList = list.getList().getCdr();
@@ -254,7 +254,7 @@ public class ItemSlateLoader extends ItemAbstractPassThrough implements IotaHold
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.literal(Integer.toString(getSlateCount(stack))).append("/64"));
         if(hasPatterns(stack)){
-            tooltip.add(HexIotaTypes.getDisplay(readIotaTag(stack)));
+            tooltip.add(IotaType.getDisplay(readIotaTag(stack)));
         }
     }
 
@@ -262,7 +262,7 @@ public class ItemSlateLoader extends ItemAbstractPassThrough implements IotaHold
         if(hasPatterns(stack)){
             NbtCompound tag = HexItems.SLATE.readIotaTag(getCurrentSlate(stack));
             return Text.translatable(this.getTranslationKey(stack) + ".written", 
-                tag != null ? HexIotaTypes.getDisplay(tag) : Text.of(" ")
+                tag != null ? IotaType.getDisplay(tag) : Text.of(" ")
             );
         } else {
             return Text.translatable(this.getTranslationKey(stack));

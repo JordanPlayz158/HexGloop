@@ -1,6 +1,6 @@
 package com.samsthenerd.hexgloop.casting.mishapprotection;
 
-import at.petrak.hexcasting.api.spell.casting.eval.FrameFinishEval;
+import at.petrak.hexcasting.api.casting.eval.vm.FrameFinishEval;
 
 public interface ICatchyFrameEval {
 

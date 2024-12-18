@@ -1,5 +1,8 @@
 package com.samsthenerd.hexgloop.casting.truenameclassaction;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.env.PackagedItemCastEnv;
+import at.petrak.hexcasting.api.casting.eval.env.StaffCastEnv;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -9,8 +12,6 @@ import com.samsthenerd.hexgloop.misc.worldData.TruenameLockState;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingContext.CastSource;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import dev.architectury.platform.Platform;
@@ -47,10 +48,9 @@ public class OpRefreshTruename implements ConstMediaAction {
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
-        CastSource source = context.getSource();
-        if(source != CastSource.STAFF){ // if it's not a staff need to do special handling
-            if(source != CastSource.PACKAGED_HEX){
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
+        if(!(context instanceof StaffCastEnv)){ // if it's not a staff need to do special handling
+            if(!(context instanceof PackagedItemCastEnv)){
                 // throw mishap, it's something else
                 MishapThrowerWrapper.throwMishap(new MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh(expectedSources));
             } else {
@@ -72,7 +72,7 @@ public class OpRefreshTruename implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

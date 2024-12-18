@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting.tags;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -9,7 +10,6 @@ import javax.annotation.Nullable;
 import com.mojang.datafixers.util.Either;
 import com.samsthenerd.hexgloop.compat.hexal.HexalMaybeIotas;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.iota.EntityIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.Vec3Iota;
@@ -23,15 +23,16 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 
 public class TagUtils {
     
-    public static TagChecker getTagChecker(Iota iota, @Nullable CastingContext ctx){
+    public static TagChecker getTagChecker(Iota iota, @Nullable CastingEnvironment ctx){
         if(Platform.isModLoaded("hexal")){
             Either<Item, Block> blockOrItem = HexalMaybeIotas.getBlockOrItemFromIota(iota);
             if(blockOrItem != null){
@@ -95,19 +96,19 @@ public class TagUtils {
         public boolean hasTag(String tag){
             // Optional<RegistryEntry<Block>> blockEntry = Registry.BLOCK.getKey(asBlock()).map(key -> Registry.BLOCK.getEntry(key))
             Block block = asBlock();
-            if(block != Blocks.AIR && block.getRegistryEntry().isIn(TagKey.of(Registry.BLOCK_KEY, new Identifier(tag)))){
+            if(block != Blocks.AIR && block.getRegistryEntry().isIn(TagKey.of(RegistryKeys.BLOCK, new Identifier(tag)))){
                 return true;
             }
             Item item = asItem();
-            if(item != Items.AIR && item.getRegistryEntry().isIn(TagKey.of(Registry.ITEM_KEY, new Identifier(tag)))){
+            if(item != Items.AIR && item.getRegistryEntry().isIn(TagKey.of(RegistryKeys.ITEM, new Identifier(tag)))){
                 return true;
             }
             Identifier id = new Identifier(tag);
             // want to check if the tag is for what mod it's from
             if(id.getNamespace().equals("modid")){
-                Optional<RegistryKey<Block>> blockKey = Registry.BLOCK.getKey(block);
+                Optional<RegistryKey<Block>> blockKey = Registries.BLOCK.getKey(block);
                 if(block != Blocks.AIR && blockKey.isPresent() && blockKey.get().getValue().getNamespace().equals(id.getPath())) return true;
-                Optional<RegistryKey<Item>> itemKey = Registry.ITEM.getKey(item);
+                Optional<RegistryKey<Item>> itemKey = Registries.ITEM.getKey(item);
                 if(item != Items.AIR && itemKey.isPresent() && itemKey.get().getValue().getNamespace().equals(id.getPath())) return true;
             }
             return false;
@@ -117,14 +118,14 @@ public class TagUtils {
             Set<String> tags = new HashSet<>();
             Block block = asBlock();
             if(block != Blocks.AIR){
-                tags.add(new Identifier("modid", Registry.BLOCK.getKey(block).get().getValue().getNamespace()).toString());
+                tags.add(new Identifier("modid", Registries.BLOCK.getKey(block).get().getValue().getNamespace()).toString());
                 block.getRegistryEntry().streamTags().forEach(tag -> {
                     tags.add(tag.id().toTranslationKey());
                 });
             }
             Item item = asItem();
             if(item != Items.AIR){
-                tags.add(new Identifier("modid", Registry.ITEM.getKey(item).get().getValue().getNamespace()).toString());
+                tags.add(new Identifier("modid", Registries.ITEM.getKey(item).get().getValue().getNamespace()).toString());
                 item.getRegistryEntry().streamTags().forEach(tag -> {
                     tags.add(tag.id().toTranslationKey());
                 });
@@ -152,7 +153,7 @@ public class TagUtils {
         }
 
         public boolean hasTag(String tag){
-            if(entity.getType().getRegistryEntry().isIn(TagKey.of(Registry.ENTITY_TYPE_KEY, new Identifier(tag)))){
+            if(entity.getType().getRegistryEntry().isIn(TagKey.of(RegistryKeys.ENTITY_TYPE, new Identifier(tag)))){
                 return true;
             }
             ItemStack stack = getItemStack();

@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -8,11 +9,9 @@ import com.samsthenerd.hexgloop.items.HexGloopItems;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
 import at.petrak.hexcasting.api.casting.ParticleSpray;
 import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.casting.castables.SpellAction;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import kotlin.Triple;
@@ -29,11 +28,11 @@ public class OpConjureTastyTreat implements SpellAction {
     @Override
     public int getArgc(){ return 1;}
 
-    public boolean hasCastingSound(@NotNull CastingContext ctx){
+    public boolean hasCastingSound(@NotNull CastingEnvironment ctx){
         return false;
     }
 
-    public boolean awardsCastingStat(@NotNull CastingContext ctx){
+    public boolean awardsCastingStat(@NotNull CastingEnvironment ctx){
         return true;
     }
 
@@ -52,7 +51,7 @@ public class OpConjureTastyTreat implements SpellAction {
     }
 
     @Override
-    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingContext context){
+    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingEnvironment context){
         // position to summon snacks
         Vec3d pos = OperatorUtils.getVec3(args, 0, getArgc());
         context.assertVecInRange(pos);
@@ -70,13 +69,13 @@ public class OpConjureTastyTreat implements SpellAction {
             this.snack = snack;
         }
 
-        public void cast(CastingContext ctx){
+        public void cast(CastingEnvironment ctx){
             ctx.getWorld().spawnEntity(snack);
         }
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

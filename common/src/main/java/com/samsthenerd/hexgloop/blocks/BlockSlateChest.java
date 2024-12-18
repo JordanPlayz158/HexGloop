@@ -17,7 +17,7 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.IItemProviderLo
 import com.samsthenerd.hexgloop.mixins.lociathome.MixinWeirdChestStatics;
 
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import it.unimi.dsi.fastutil.floats.Float2FloatFunction;
 import net.minecraft.block.Block;

@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop;
 
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Random;
@@ -55,11 +56,12 @@ import dev.architectury.registry.client.rendering.RenderTypeRegistry;
 import dev.architectury.registry.item.ItemPropertiesRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.item.UnclampedModelPredicateProvider;
+import net.minecraft.client.item.ClampedModelPredicateProvider;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.texture.TextureStitcher;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.passive.FrogVariant;
@@ -107,6 +109,10 @@ public class HexGloopClient {
     }
 
     private static void addToTextureAtlas(){
+        // TODO: new >=1.19.3 atlas texture stitching introduced
+        //   https://forums.minecraftforge.net/topic/122736-texture-atlas-stitching/
+        //   https://www.minecraft.net/da-dk/article/minecraft-java-edition-1-19-3
+        //   https://github.com/misode/mcmeta/blob/assets/assets/minecraft/atlases/blocks.json
         ClientTextureStitchEvent.PRE.register((SpriteAtlasTexture atlas, Consumer<Identifier> spriteAdder) -> {
             if(atlas.getId().equals(TexturedRenderLayers.CHEST_ATLAS_TEXTURE)){
                 spriteAdder.accept(new Identifier(HexGloop.MOD_ID, "entity/chest/gloopy_slate_chest"));
@@ -114,7 +120,8 @@ public class HexGloopClient {
             }
             if(atlas.getId().equals(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE)){
                 // load patchi lectern book textures if they exist
-                if(!BookRegistry.INSTANCE.isLoaded()) HexGloop.logPrint("patchi books not loaded");
+                // I guess the if is now redundant - https://github.com/VazkiiMods/Patchouli/commit/2b6bcd8dac9cbd540f9225554250af68256ca8e0
+                //   (and BookRegistry#init does appear to be called by Patchouli mod initialize) so it should be safe?
                 for(Book book : BookRegistry.INSTANCE.books.values()){
                     Identifier textureId = new Identifier(book.id.getNamespace(), "entity/lectern_" + book.id.getPath());
                     spriteAdder.accept(textureId);
@@ -139,7 +146,7 @@ public class HexGloopClient {
                 if(iotaNbt == null){
                     return 0xFFFFFF; //white
                 }
-                return HexIotaTypes.getColor(iotaNbt);
+                return IotaType.getColor(iotaNbt);
             }
             return 0xFFFFFF; //white
 		}, HexGloopItems.MULTI_FOCUS_ITEM.get());
@@ -224,21 +231,21 @@ public class HexGloopClient {
                 if(tag == null){
                     return emptyColor;
                 }
-                return HexIotaTypes.getColor(tag);
+                return IotaType.getColor(tag);
             }
             int selIndex = tintIndex + (tintIndex >= dialBE.getSelection() ? 1 : 0);
             NbtCompound tag = HexGloopItems.MULTI_FOCUS_ITEM.get().readSlotIotaTag(stack, selIndex);
             if(tag == null){
                 return emptyColor;
             }
-            return HexIotaTypes.getColor(tag);
+            return IotaType.getColor(tag);
         }, HexGloopBlocks.IOTIC_DIAL_BLOCK);
     }
 
     public static int tintsFromColorizer(FrozenPigment colorizer, int tintIndex, int sections){
         float time = MinecraftClient.getInstance().world.getTime();
         double section = 5.0 * tintIndex;
-        return colorizer.getColor(time, new Vec3d(section, 0, 0));
+        return colorizer.getColorProvider().getColor(time, new Vec3d(section, 0, 0));
     }
 
     private static void registerModelPredicates(){
@@ -269,7 +276,10 @@ public class HexGloopClient {
             }
         );
 
-        UnclampedModelPredicateProvider focusModelProvider = (stack, level, holder, holderID) -> {
+        // Based on https://vitri-mappings.pyke.io/1.20.1/net/minecraft/client/renderer/item/ClampedItemPropertyFunction.html
+        //   It appears that ClampedModelPredicateProvider is the new name (that coupled with there only being on thing that
+        //   implemented ModelPredicateProvider in 1.19 javadoc (https://maven.fabricmc.net/docs/yarn-1.19.2+build.1/net/minecraft/client/item/ModelPredicateProvider.html)
+        ClampedModelPredicateProvider focusModelProvider = (stack, level, holder, holderID) -> {
             if(!(stack.getItem() instanceof IotaHolderItem iotaHolder)) return 0;
             if (iotaHolder.readIotaTag(stack) == null && !NBTHelper.hasString(stack, IotaHolderItem.TAG_OVERRIDE_VISUALLY)) {
                 return 0;
@@ -356,7 +366,7 @@ public class HexGloopClient {
             return HexGloopItems.LIBRARY_CARD_ITEM.get().getPredicateValue(HexGloopItems.LIBRARY_CARD_ITEM.get().getDimension(stack));
         });
 
-        UnclampedModelPredicateProvider HEX_TOOL_PROVIDER = (stack, level, holder, holderID) -> {
+        ClampedModelPredicateProvider HEX_TOOL_PROVIDER = (stack, level, holder, holderID) -> {
             if(!(stack.getItem() instanceof ItemHexTool hexTool)) return 0;
             if(!hexTool.hasHex(stack)){
                 return 0;
@@ -368,7 +378,7 @@ public class HexGloopClient {
         ItemPropertiesRegistry.register(HexGloopItems.HEX_BLADE_ITEM.get(), ItemHexSword.TOOL_STATUS_PREDICATE, HEX_TOOL_PROVIDER);
         ItemPropertiesRegistry.register(HexGloopItems.HEX_PICKAXE_ITEM.get(), ItemHexSword.TOOL_STATUS_PREDICATE, HEX_TOOL_PROVIDER);
         
-        UnclampedModelPredicateProvider FIDGET_INDEX_PROVIDER = (stack, level, holder, holderID) -> {
+        ClampedModelPredicateProvider FIDGET_INDEX_PROVIDER = (stack, level, holder, holderID) -> {
             if(!(stack.getItem() instanceof ItemFidget fidget)) return 0;
             
             int index = ItemFidget.getPage(stack)-1;
@@ -401,11 +411,11 @@ public class HexGloopClient {
             if(iotaHolder == null) return;
             NbtCompound nbt = iotaHolder.readIotaTag();
             if(nbt == null) return;
-            if(HexIotaTypes.getTypeFromTag(nbt) != HexIotaTypes.PATTERN && state.getBlock() != HexGloopBlocks.MIRROR_PEDESTAL_BLOCK.get()){
+            if(IotaType.getTypeFromTag(nbt) != HexIotaTypes.PATTERN && state.getBlock() != HexGloopBlocks.MIRROR_PEDESTAL_BLOCK.get()){
                 return;
             }
             if(nbt != null){
-                Text iotaDesc = HexIotaTypes.getDisplay(iotaHolder.readIotaTag());
+                Text iotaDesc = IotaType.getDisplay(iotaHolder.readIotaTag());
                 ItemStack slateIcon = new ItemStack(HexItems.SLATE);
                 HexItems.SLATE.writeDatum(slateIcon, new PatternIota(HexPattern.fromAngles("", HexDir.EAST)));
                 lines.add(new Pair<>(slateIcon, iotaDesc));
@@ -441,7 +451,7 @@ public class HexGloopClient {
                 if(stack.isEmpty()) return;
                 NbtCompound tag = HexGloopItems.MULTI_FOCUS_ITEM.get().readIotaTag(stack);
                 if(tag == null) return;
-                Text iotaDesc = HexIotaTypes.getDisplay(tag);
+                Text iotaDesc = IotaType.getDisplay(tag);
                 lines.add(new Pair<>(stack, iotaDesc));
             }
         });

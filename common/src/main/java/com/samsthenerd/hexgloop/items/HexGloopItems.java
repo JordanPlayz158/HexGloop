@@ -23,13 +23,14 @@ import net.minecraft.item.BannerPatternItem;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import net.minecraft.util.registry.Registry;
 
 public class HexGloopItems{
-    public static DeferredRegister<Item> items = DeferredRegister.create(HexGloop.MOD_ID, Registry.ITEM_KEY);
+    public static DeferredRegister<Item> items = DeferredRegister.create(HexGloop.MOD_ID, RegistryKeys.ITEM);
 
     public static final RegistrySupplier<Item> GLOOP_ITEM = item("gloop", 
         () -> new ItemSimpleMediaProvider(defaultSettings(), MediaConstants.CRYSTAL_UNIT * 2, 950));
@@ -84,7 +85,7 @@ public class HexGloopItems{
 
 
     public static final RegistrySupplier<ItemHexSword> HEX_BLADE_ITEM = item("hex_blade", 
-        () -> new ItemHexSword(defaultSettings().maxCount(1).fireproof())); 
+        () -> new ItemHexSword(defaultSettings().maxCount(1).fireproof()));
     public static final RegistrySupplier<ItemHexMiningTool> HEX_PICKAXE_ITEM = item("hex_pickaxe", 
         () -> new ItemHexMiningTool(defaultSettings().maxCount(1).fireproof(), 2.0F, -2.4f, Set.of(BlockTags.PICKAXE_MINEABLE), false)); 
 

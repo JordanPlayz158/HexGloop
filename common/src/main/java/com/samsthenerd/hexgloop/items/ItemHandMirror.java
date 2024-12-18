@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,12 +13,11 @@ import com.samsthenerd.hexgloop.items.tooltips.MirrorTooltipData;
 import com.samsthenerd.hexgloop.misc.HexGloopTags;
 
 import at.petrak.hexcasting.api.item.IotaHolderItem;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import at.petrak.hexcasting.api.casting.iota.EntityIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.items.storage.ItemFocus;
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.entity.Entity;
@@ -27,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtDouble;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Style;
@@ -35,8 +36,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class ItemHandMirror extends ItemAbstractPassThrough implements IotaHolderItem {
@@ -71,7 +71,7 @@ public class ItemHandMirror extends ItemAbstractPassThrough implements IotaHolde
     public ItemStack getStoredItem(ItemStack stack, LivingEntity ent, World world, Hand hand){
         ItemStack storedStack = null;
         if(world instanceof ServerWorld sWorld){
-            storedStack = SyncedItemHandling.getAlternateHandStack(ent, hand, (CastingContext)null);
+            storedStack = SyncedItemHandling.getAlternateHandStack(ent, hand, (CastingEnvironment) null);
         } else {
             // client side - should just be visual-ish ?
             if(!isMirrorActivated(stack)) return null;
@@ -88,7 +88,7 @@ public class ItemHandMirror extends ItemAbstractPassThrough implements IotaHolde
         if(world instanceof ServerWorld sWorld && !(ent.getWorld().isClient())){
             ItemStack tempStack = ent.getStackInHand(hand); 
             ent.setStackInHand(hand, stack);
-            ItemEntity itemEnt = SyncedItemHandling.getAlternateEntity(ent, hand, (CastingContext)null);
+            ItemEntity itemEnt = SyncedItemHandling.getAlternateEntity(ent, hand, (CastingEnvironment) null);
             // HexGloop.logPrint("on server trying to set stored item");
             if(itemEnt != null){
                 // HexGloop.logPrint("on server found item entity");
@@ -116,7 +116,7 @@ public class ItemHandMirror extends ItemAbstractPassThrough implements IotaHolde
             stack.getOrCreateNbt().putBoolean(MIRROR_ACTIVATED_TAG, false);
         }
         if(iota instanceof EntityIota entityIota && entityIota.getEntity() instanceof ItemEntity itemEnt){
-            NBTHelper.put(stack, ItemFocus.TAG_DATA, HexIotaTypes.serialize(iota));
+            NBTHelper.put(stack, ItemFocus.TAG_DATA, IotaType.serialize(iota));
             NBTHelper.putUUID(stack, ITEM_UUID_TAG, itemEnt.getUuid());
             NBTHelper.putString(stack, ITEM_DIM_TAG, itemEnt.getEntityWorld().getRegistryKey().getValue().toString());
             if(itemEnt.getStack() != null){
@@ -145,7 +145,7 @@ public class ItemHandMirror extends ItemAbstractPassThrough implements IotaHolde
     // where it's stored
     public RegistryKey<World> getMirroredItemDimension(ItemStack stack){
         if(stack.getNbt() != null && stack.getNbt().contains(ITEM_DIM_TAG, NbtElement.STRING_TYPE)){
-            return RegistryKey.of(Registry.WORLD_KEY, new Identifier(stack.getNbt().getString(ITEM_DIM_TAG)));
+            return RegistryKey.of(RegistryKeys.WORLD, new Identifier(stack.getNbt().getString(ITEM_DIM_TAG)));
         }
         return null;
     }

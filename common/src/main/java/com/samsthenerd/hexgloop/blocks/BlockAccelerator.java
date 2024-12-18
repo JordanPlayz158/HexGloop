@@ -14,7 +14,7 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.LociUtils;
 import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.ISpeedLocus;
 
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.block.Block;

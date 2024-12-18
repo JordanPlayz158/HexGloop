@@ -11,12 +11,12 @@ import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.block.SculkSensorBlock;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.event.GameEvent;
 
 public class HexGloopGameEvents {
     // use non deferred so that we can get them to register before the sculk sensor block
-    public static final DeferredRegister<GameEvent> gameEvents = DeferredRegister.create(HexGloop.MOD_ID, Registry.GAME_EVENT_KEY);
+    public static final DeferredRegister<GameEvent> gameEvents = DeferredRegister.create(HexGloop.MOD_ID, RegistryKeys.GAME_EVENT);
     // public static final Registrar<GameEvent> gameEvents = HexGloop.REGISTRIES.get().get(Registry.GAME_EVENT_KEY);
     
     public static final Object2IntMap<Supplier<GameEvent>> ourFreqs = new Object2IntOpenHashMap<Supplier<GameEvent>>();

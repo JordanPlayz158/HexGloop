@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting.truenameclassaction;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.env.StaffCastEnv;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,6 @@ import com.samsthenerd.hexgloop.misc.worldData.AgreeTruenameEULAState;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingContext.CastSource;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -45,9 +45,10 @@ public class OpAgreeTruenameEULA implements ConstMediaAction {
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
-        CastSource source = context.getSource();
-        if(source != CastSource.STAFF){ // if it's not a staff need to do special handling
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
+
+
+        if(!(context instanceof StaffCastEnv)){ // if it's not a staff need to do special handling
             MishapThrowerWrapper.throwMishap(new MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh(expectedSources));
         }
         ServerPlayerEntity player = context.getCaster();
@@ -59,7 +60,7 @@ public class OpAgreeTruenameEULA implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

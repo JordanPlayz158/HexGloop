@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting.mishapprotection;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 
 import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
@@ -37,7 +37,7 @@ public class OpHahaFunnyAssertQEDGetItLikeTheMathProofLol implements Action {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         if(stack.size() < 1){
             // need to mishap about not enough args
             MishapThrowerWrapper.throwMishap(new MishapNotEnoughArgs(1, 0));

@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
@@ -38,6 +42,7 @@ public class ItemHexSword extends ItemHexTool implements IExtendedEnchantable.IW
 			return 15.0F;
 		} else {
 			Material material = state.getMaterial();
+
 			return material != Material.PLANT && material != Material.REPLACEABLE_PLANT && !state.isIn(BlockTags.LEAVES) && material != Material.GOURD ? 1.0F : 1.5F;
 		}
 	}
@@ -60,11 +65,11 @@ public class ItemHexSword extends ItemHexTool implements IExtendedEnchantable.IW
                 return false;
             }
             if(!(attacker instanceof ServerPlayerEntity sPlayer)) return false;
-            var ctx = new CastingContext(sPlayer, attacker.getStackInHand(Hand.MAIN_HAND) == stack ? Hand.MAIN_HAND : Hand.OFF_HAND, CastingContext.CastSource.PACKAGED_HEX);
+            var ctx = new CastingEnvironment(sPlayer, attacker.getStackInHand(Hand.MAIN_HAND) == stack ? Hand.MAIN_HAND : Hand.OFF_HAND, CastingContext.CastSource.PACKAGED_HEX);
             if(((Object)ctx) instanceof IContextHelper ctxHelper){
                 ctxHelper.setCastingItem(stack);
             }
-            var harness = new CastingHarness(ctx);
+            var harness = new CastingVM(ctx);
             harness.setStack(new ArrayList<Iota>(List.of(new EntityIota(target))));
             
             ((ICADHarnessStorage)(Object)sPlayer).addHarness(harness);

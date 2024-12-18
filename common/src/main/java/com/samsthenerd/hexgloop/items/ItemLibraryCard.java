@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -11,7 +12,6 @@ import com.samsthenerd.hexgloop.utils.GloopUtils;
 import at.petrak.hexcasting.api.item.IotaHolderItem;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.blocks.akashic.BlockAkashicRecord;
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import dev.architectury.platform.Platform;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.item.TooltipContext;
@@ -20,12 +20,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class ItemLibraryCard extends Item implements IotaHolderItem{
@@ -50,7 +50,7 @@ public class ItemLibraryCard extends Item implements IotaHolderItem{
         NbtCompound nbt = stack.getNbt();
         if(nbt == null || !nbt.contains(TAG_DIMENSION, NbtElement.STRING_TYPE))
             return null;
-        return RegistryKey.of(Registry.WORLD_KEY, new Identifier(nbt.getString(TAG_DIMENSION)));
+        return RegistryKey.of(RegistryKeys.WORLD, new Identifier(nbt.getString(TAG_DIMENSION)));
     }
 
     public static final List<Identifier> DIMENSIONS = List.of(
@@ -89,7 +89,7 @@ public class ItemLibraryCard extends Item implements IotaHolderItem{
         RegistryKey<World> dim = getDimension(stack);
         if(Platform.isModLoaded("moreiotas") && dim != null){
             Iota maybeString = MoreIotasMaybeIotas.makeStringIota(dim.getValue().toString());
-            return HexIotaTypes.serialize(maybeString);
+            return IotaType.serialize(maybeString);
         }
         return null;
     }

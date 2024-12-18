@@ -33,7 +33,7 @@ public class MixinChangeListDisplay {
         // we know that i < list.size() - 1 from the original code
         NbtCompound thisElem = HexUtils.downcast(list.get(index), NbtCompound.TYPE);
         NbtCompound nextElem = HexUtils.downcast(list.get(index+1), NbtCompound.TYPE);
-        if(HexIotaTypes.getTypeFromTag(thisElem) == HexIotaTypes.PATTERN && HexIotaTypes.getTypeFromTag(nextElem) == HexIotaTypes.PATTERN) {
+        if(IotaType.getTypeFromTag(thisElem) == HexIotaTypes.PATTERN && IotaType.getTypeFromTag(nextElem) == HexIotaTypes.PATTERN) {
             text.append(" ");
         } else {
             originalOp.call(text, comma);
@@ -72,7 +72,7 @@ public class MixinChangeListDisplay {
             copyText += "]";
         } else { // handle not list
             NbtCompound csub = HexUtils.downcast(element, NbtCompound.TYPE);
-            IotaType<?> type = HexIotaTypes.getTypeFromTag(csub);
+            IotaType<?> type = IotaType.getTypeFromTag(csub);
             if(type == PatternIota.TYPE){
                 // handle pattern:
                 NbtCompound tagData = csub.getCompound(HexIotaTypes.KEY_DATA);
@@ -85,7 +85,7 @@ public class MixinChangeListDisplay {
                 var data = csub.get(HexIotaTypes.KEY_DATA);
                 return getCopyText(data);
             } else {
-                copyText += HexIotaTypes.getDisplay(csub).getString();
+                copyText += IotaType.getDisplay(csub).getString();
             }
         }
         

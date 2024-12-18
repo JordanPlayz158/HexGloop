@@ -1,12 +1,12 @@
 package com.samsthenerd.hexgloop.casting.inventorty;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import com.samsthenerd.hexgloop.casting.inventorty.InventortyUtils.GrabbableStack;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.DoubleIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -43,7 +43,7 @@ public class OpSlotCount implements ConstMediaAction{
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
         InventortyUtils.assertKittyCasting(context);
         GrabbableStack grabStack = InventortyUtils.getStackFromGrabbable(args.get(0), context, 0, getArgc());
         int maxCount = grabStack.getMaxCount();
@@ -53,7 +53,7 @@ public class OpSlotCount implements ConstMediaAction{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
     

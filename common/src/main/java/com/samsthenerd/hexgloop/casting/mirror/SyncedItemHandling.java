@@ -4,16 +4,16 @@ import javax.annotation.Nullable;
 
 import com.samsthenerd.hexgloop.items.ItemHandMirror;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import at.petrak.hexcasting.api.casting.iota.EntityIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Pair;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 
 public class SyncedItemHandling {
@@ -22,7 +22,7 @@ public class SyncedItemHandling {
 
     // null if no alternate
     @Nullable
-    public static ItemStack getAlternateHandStack(LivingEntity livEnt, Hand hand, @Nullable CastingContext context){
+    public static ItemStack getAlternateHandStack(LivingEntity livEnt, Hand hand, @Nullable CastingEnvironment context){
         ItemEntity itemEnt = getAlternateEntity(livEnt, hand, context);
         if(itemEnt != null){
             return itemEnt.getStack();
@@ -32,7 +32,7 @@ public class SyncedItemHandling {
 
     // if context is null then we just don't check ambit - important for getting it for arbitrary rendering stuff
     @Nullable
-    public static ItemEntity getAlternateEntity(LivingEntity livEnt, Hand hand, @Nullable CastingContext context){
+    public static ItemEntity getAlternateEntity(LivingEntity livEnt, Hand hand, @Nullable CastingEnvironment context){
         ItemStack originalStack = livEnt.getStackInHand(hand);
         if(originalStack.getItem() instanceof ItemHandMirror mirrorItem && livEnt.getWorld() instanceof ServerWorld sWorld){
             RegistryKey<World> itemDim = mirrorItem.getMirroredItemDimension(originalStack);

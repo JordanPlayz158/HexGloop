@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,7 +12,6 @@ import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
 import at.petrak.hexcasting.api.casting.ParticleSpray;
 import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.casting.castables.SpellAction;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
@@ -28,10 +28,10 @@ public class OpGayLittleHearts implements SpellAction{
     public int getArgc(){ return 2;}
 
     @Override
-    public boolean hasCastingSound(CastingContext context){ return true;}
+    public boolean hasCastingSound(CastingEnvironment context){ return true;}
 
     @Override
-    public boolean awardsCastingStat(CastingContext context){ return true;}
+    public boolean awardsCastingStat(CastingEnvironment context){ return true;}
 
     @Override
     public boolean isGreat(){ return false;}
@@ -48,7 +48,7 @@ public class OpGayLittleHearts implements SpellAction{
     }
 
     @Override
-    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingContext context){
+    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingEnvironment context){
         BlockPos pos = OperatorUtils.getBlockPos(args, 0, getArgc());
         context.assertVecInRange(pos);
         
@@ -69,19 +69,19 @@ public class OpGayLittleHearts implements SpellAction{
         }
 
         @Override
-        public void cast(CastingContext context) {
+        public void cast(CastingEnvironment context) {
             if (!context.canEditBlockAt(pos))
                 return;
 
             FrozenPigment colorizer = IXplatAbstractions.INSTANCE.getColorizer(context.getCaster());
-            // context.getWorld().spawnParticles(ParticleTypes.SNEEZE, 
+            // context.getWorld().spawnParticles(ParticleTypes.SNEEZE,
             //             waterPos.getX() + 0.5 + rand.nextDouble()*0.5, waterPos.getY() + 0.3 + rand.nextDouble()*0.5, waterPos.getZ()+0.5 + rand.nextDouble()*0.5, 1, 0, 0.3, 0, 0.01);
             
         }
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return SpellAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
     

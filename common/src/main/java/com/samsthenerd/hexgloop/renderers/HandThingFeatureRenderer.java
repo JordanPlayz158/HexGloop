@@ -32,8 +32,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
+import org.joml.Matrix4f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3i;
 
 // vscode just dies if we put <T, M> at the end of this,, i have absolutely no idea why !!!
@@ -130,7 +130,8 @@ public class HandThingFeatureRenderer<T extends LivingEntity, M extends EntityMo
         }
 
         // RenderSystem.setShader(GameRenderer::getRenderTypeEntityTranslucentShader);
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        // Looks like Yarn renamed it to getPositionColorProgram - https://vitri-mappings.pyke.io/1.20.1/net/minecraft/client/renderer/GameRenderer.html
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         RenderSystem.enableDepthTest();
         RenderSystem.disableCull();
@@ -220,11 +221,11 @@ public class HandThingFeatureRenderer<T extends LivingEntity, M extends EntityMo
 		if (player.isInSneakingPose() && !model.riding && !player.isSwimming() && !firstPerson) {
 			matrices.translate(0.0F, 0.2F, 0.0F);
 		}
-		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(model.body.yaw));
+		matrices.multiply(RotationAxis.POSITIVE_Y.rotation(model.body.yaw));
 		matrices.translate(-0.3125F, 0.15625F, 0.0F);
-		matrices.multiply(Vec3f.POSITIVE_Z.getRadialQuaternion(model.rightArm.roll));
-		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(model.rightArm.yaw));
-		matrices.multiply(Vec3f.POSITIVE_X.getRadialQuaternion(model.rightArm.pitch));
+		matrices.multiply(RotationAxis.POSITIVE_Z.rotation(model.rightArm.roll));
+		matrices.multiply(RotationAxis.POSITIVE_Y.rotation(model.rightArm.yaw));
+		matrices.multiply(RotationAxis.POSITIVE_X.rotation(model.rightArm.pitch));
 		matrices.translate(-0.0625F, 0.625F, 0.0F);
 	}
 
@@ -239,11 +240,11 @@ public class HandThingFeatureRenderer<T extends LivingEntity, M extends EntityMo
 		if (player.isInSneakingPose() && !model.riding && !player.isSwimming() && !firstPerson) {
 			matrices.translate(0.0F, 0.2F, 0.0F);
 		}
-		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(model.body.yaw));
+		matrices.multiply(RotationAxis.POSITIVE_Y.rotation(model.body.yaw));
 		matrices.translate(0.3125F, 0.15625F, 0.0F);
-		matrices.multiply(Vec3f.POSITIVE_Z.getRadialQuaternion(model.leftArm.roll));
-		matrices.multiply(Vec3f.POSITIVE_Y.getRadialQuaternion(model.leftArm.yaw));
-		matrices.multiply(Vec3f.POSITIVE_X.getRadialQuaternion(model.leftArm.pitch));
+		matrices.multiply(RotationAxis.POSITIVE_Z.rotation(model.leftArm.roll));
+		matrices.multiply(RotationAxis.POSITIVE_Y.rotation(model.leftArm.yaw));
+		matrices.multiply(RotationAxis.POSITIVE_X.rotation(model.leftArm.pitch));
 		matrices.translate(0.0625F, 0.625F, 0.0F);
 	}
 
@@ -269,7 +270,8 @@ public class HandThingFeatureRenderer<T extends LivingEntity, M extends EntityMo
 
 			if (entityModel instanceof BipedEntityModel) {
 				BipedEntityModel<LivingEntity> bipedModel = (BipedEntityModel<LivingEntity>) entityModel;
-				bipedModel.setAttributes(model);
+        // Yarn renamed to copyBipedStateTo - https://vitri-mappings.pyke.io/1.19.4/net/minecraft/client/model/HumanoidModel.html
+				bipedModel.copyBipedStateTo(model);
 			}
 		}
 	}

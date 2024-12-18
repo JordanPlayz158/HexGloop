@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting.gloopifact;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,8 +9,6 @@ import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 
 import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -40,11 +40,11 @@ public class OpSyncRavenmindGloopifact implements Action {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext context){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment context){
         ItemStack castHandStack = GloopifactUtils.assertGloopcasting(context).getLeft();
         Iota newRavenmind = ravenmind;
         // make sure we're actually casting from the gloopifact
-        CastingHarness staffHarness = IXplatAbstractions.INSTANCE.getHarness(context.getCaster(), context.getOtherHand());
+        CastingVM staffHarness = IXplatAbstractions.INSTANCE.getHarness(context.getCaster(), context.getOtherHand());
         if(toOrFromStaff){ // to staff
             PlayerEntity foundTruename = null;
             if(ravenmind != null) foundTruename = MishapOthersName.getTrueNameFromDatum(ravenmind, context.getCaster());

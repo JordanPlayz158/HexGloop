@@ -11,7 +11,7 @@ import com.samsthenerd.hexgloop.casting.truenameclassaction.ISetImpetusKey;
 import com.samsthenerd.hexgloop.casting.truenameclassaction.MishapClearedTruename;
 import com.samsthenerd.hexgloop.misc.worldData.TruenameLockState;
 
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import at.petrak.hexcasting.common.blocks.entity.BlockEntityStoredPlayerImpetus;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;

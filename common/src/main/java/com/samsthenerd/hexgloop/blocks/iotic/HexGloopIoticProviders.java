@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.blocks.iotic;
 
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -18,7 +19,6 @@ import at.petrak.hexcasting.common.blocks.akashic.AkashicFloodfiller;
 import at.petrak.hexcasting.common.blocks.akashic.BlockEntityAkashicBookshelf;
 import at.petrak.hexcasting.common.blocks.circles.BlockEntitySlate;
 import at.petrak.hexcasting.common.lib.HexBlocks;
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.nbt.NbtCompound;
 
 public class HexGloopIoticProviders {
@@ -79,7 +79,7 @@ public class HexGloopIoticProviders {
 
         @Nullable
         public NbtCompound readIotaTag(){
-            return HexIotaTypes.serialize(iotaProvider.get());
+            return IotaType.serialize(iotaProvider.get());
         }
 
         /**
@@ -104,7 +104,7 @@ public class HexGloopIoticProviders {
 
         @Nullable
         public NbtCompound readIotaTag(){
-            return HexIotaTypes.serialize(iota);
+            return IotaType.serialize(iota);
         }
 
         /**

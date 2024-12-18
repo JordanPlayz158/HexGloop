@@ -1,5 +1,11 @@
 package com.samsthenerd.hexgloop.casting.mishapprotection;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.SpellList;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.ContinuationFrame;
+import at.petrak.hexcasting.api.casting.eval.vm.FrameEvaluate;
+import at.petrak.hexcasting.api.casting.eval.vm.FrameFinishEval;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -11,12 +17,6 @@ import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 
 import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
-import at.petrak.hexcasting.api.spell.SpellList;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.eval.ContinuationFrame;
-import at.petrak.hexcasting.api.spell.casting.eval.FrameEvaluate;
-import at.petrak.hexcasting.api.spell.casting.eval.FrameFinishEval;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.PatternIota;
@@ -37,7 +37,7 @@ public class OpEvalCatchMishap implements Action {
    }
 
    // mostly yoinked from OpEval
-   public OperationResult operate(@NotNull SpellContinuation continuation, @NotNull List<Iota> stack, @Nullable Iota ravenmind, @NotNull CastingContext ctx) {
+   public OperationResult operate(@NotNull SpellContinuation continuation, @NotNull List<Iota> stack, @Nullable Iota ravenmind, @NotNull CastingEnvironment ctx) {
         Intrinsics.checkNotNullParameter(continuation, "continuation");
         Intrinsics.checkNotNullParameter(stack, "stack");
         Intrinsics.checkNotNullParameter(ctx, "ctx");

@@ -6,11 +6,11 @@ import com.samsthenerd.hexgloop.blocks.HexGloopBlocks;
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class HexGloopBEs {
-    public static DeferredRegister<BlockEntityType<?>> blockEntities = DeferredRegister.create(HexGloop.MOD_ID, Registry.BLOCK_ENTITY_TYPE_KEY);
+    public static DeferredRegister<BlockEntityType<?>> blockEntities = DeferredRegister.create(HexGloop.MOD_ID, RegistryKeys.BLOCK_ENTITY_TYPE);
 
     public static RegistrySupplier<BlockEntityType<BlockEntityGloopEnergizer>> GLOOP_ENERGIZER_BE 
         = blockEntities.register(new Identifier(HexGloop.MOD_ID, "gloop_energizer_tile"), 

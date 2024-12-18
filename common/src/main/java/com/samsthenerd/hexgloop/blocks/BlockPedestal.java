@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.blocks;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,8 +15,6 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.ILociAtHome;
 import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.IIotaProviderLocus;
 
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.minecraft.block.Block;
@@ -190,7 +190,7 @@ public class BlockPedestal extends BlockCircleComponent implements BlockEntityPr
         return null;
     }
 
-    public Iota provideIota(BlockPos pos, BlockState bs, World world, CastingHarness harness){
+    public Iota provideIota(BlockPos pos, BlockState bs, World world, CastingVM harness){
         BlockEntityPedestal be = world.getBlockEntity(pos, HexGloopBEs.PEDESTAL_BE.get()).orElse(null);
         if(be != null && isMirror) return be.getIota();
         return null;
@@ -204,14 +204,14 @@ public class BlockPedestal extends BlockCircleComponent implements BlockEntityPr
         return (float)BlockEntityPedestal.HEIGHT;
     }
 
-    public void absorbVillagerMind(VillagerEntity sacrifice, BlockPos flayPos, CastingContext ctx){
+    public void absorbVillagerMind(VillagerEntity sacrifice, BlockPos flayPos, CastingEnvironment ctx){
         ctx.getWorld().getBlockEntity(flayPos, HexGloopBEs.PEDESTAL_BE.get()).ifPresent((be) -> {
             ((BlockEntityPedestal)be).absorbVillagerMind(sacrifice, flayPos, ctx);
         });
     }
     
     // return true if it can be accepted
-    public boolean canAcceptMind(VillagerEntity sacrifice, BlockPos flayPos, CastingContext ctx){
+    public boolean canAcceptMind(VillagerEntity sacrifice, BlockPos flayPos, CastingEnvironment ctx){
         return ctx.getWorld().getBlockEntity(flayPos, HexGloopBEs.PEDESTAL_BE.get()).map((be) -> {
             return ((BlockEntityPedestal)be).canAcceptMind(sacrifice, flayPos, ctx);
         }).orElse(false);

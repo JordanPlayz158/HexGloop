@@ -1,12 +1,12 @@
 package com.samsthenerd.hexgloop.casting.trinketyfocii;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.Arrays;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.mishaps.Mishap;
 import at.petrak.hexcasting.api.utils.HexUtils;
@@ -44,25 +44,25 @@ public final class MishapBadTrinketyItem extends Mishap {
    }
 
    @NotNull
-   public FrozenPigment accentColor(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx) {
+   public FrozenPigment accentColor(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx) {
       Intrinsics.checkNotNullParameter(ctx, "ctx");
       Intrinsics.checkNotNullParameter(errorCtx, "errorCtx");
       return this.dyeColor(DyeColor.BROWN);
    }
 
-   public void execute(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx, @NotNull List<Iota> stack) {
+   public void execute(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx, @NotNull List<Iota> stack) {
       
    }
 
    @NotNull
-   public Text errorMessage(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx) {
+   public Text errorMessage(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx) {
       Text errorText;
       Object[] errorArgs;
       if (this.item.isEmpty()) {
-         errorArgs = new Object[]{this.actionName(errorCtx.getAction()), this.wanted, Text.translatable("hexgloop.slotname."+this.slot)};
+         errorArgs = new Object[]{this.actionName(errorCtx.getName()), this.wanted, Text.translatable("hexgloop.slotname."+this.slot)};
          errorText = this.error("no_item.slot", errorArgs);
       } else {
-         errorArgs = new Object[]{this.actionName(errorCtx.getAction()), this.wanted, Text.translatable("hexgloop.slotname."+this.slot), this.item.getCount(), this.item.toHoverableText()};
+         errorArgs = new Object[]{this.actionName(errorCtx.getName()), this.wanted, Text.translatable("hexgloop.slotname."+this.slot), this.item.getCount(), this.item.toHoverableText()};
          errorText = this.error("bad_item.slot", errorArgs);
       }
 

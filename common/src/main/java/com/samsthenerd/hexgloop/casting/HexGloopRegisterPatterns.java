@@ -1,12 +1,14 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.common.lib.hex.HexActions;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 
-import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.blocks.HexGloopBlocks;
 import com.samsthenerd.hexgloop.casting.canvas.OpGetBlockColor;
 import com.samsthenerd.hexgloop.casting.canvas.OpPutColor;
@@ -36,9 +38,7 @@ import com.samsthenerd.hexgloop.casting.truenameclassaction.OpGetCoinBinder;
 import com.samsthenerd.hexgloop.casting.truenameclassaction.OpRefreshTruename;
 import com.samsthenerd.hexgloop.items.HexGloopItems;
 
-import at.petrak.hexcasting.api.PatternRegistry;
 import at.petrak.hexcasting.api.misc.MediaConstants;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.common.casting.actions.spells.OpMakePackagedSpell;
@@ -46,7 +46,6 @@ import dev.architectury.platform.Platform;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.item.Item;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class HexGloopRegisterPatterns {
@@ -60,165 +59,166 @@ public class HexGloopRegisterPatterns {
         // non item dependent stuff: 
         try{
             // orchard patterns
-            PatternRegistry.mapPattern(HexPattern.fromAngles("dqqqqq", HexDir.SOUTH_EAST), 
-                new Identifier(HexGloop.MOD_ID, "read_orchard"),
-                new OpReadOrchard(false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("dqqqqqdeeeqdqeee", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "read_orchard_list"),
-                new OpReadOrchard(true));
+            HexActions.make("read_orchard", new ActionRegistryEntry(
+                HexPattern.fromAngles("dqqqqq", HexDir.SOUTH_EAST),
+                new OpReadOrchard(false)));
+
+            HexActions.make("read_orchard_list", new ActionRegistryEntry(
+                HexPattern.fromAngles("dqqqqqdeeeqdqeee", HexDir.SOUTH_EAST),
+                new OpReadOrchard(true)));
             
             // dimension checks
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqawqadaqdeeweweweew", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "in_overworld"),
-                new OpIsInDimension(World.OVERWORLD));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("eaqawqadaqdeewewewe", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "in_nether"),
-                new OpIsInDimension(World.NETHER));
+            HexActions.make("in_overworld", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqawqadaqdeeweweweew", HexDir.SOUTH_EAST),
+                new OpIsInDimension(World.OVERWORLD)));
+            HexActions.make("in_nether", new ActionRegistryEntry(
+                HexPattern.fromAngles("eaqawqadaqdeewewewe", HexDir.EAST),
+                new OpIsInDimension(World.NETHER)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("ddeaqq", HexDir.NORTH_EAST), 
-                new Identifier(HexGloop.MOD_ID, "opnop_useless"), 
-                new OpNop());
+            HexActions.make("opnop_useless", new ActionRegistryEntry(
+                HexPattern.fromAngles("ddeaqq", HexDir.NORTH_EAST),
+                new OpNop()));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wawaw", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "check_ambit"),
-                new OpCheckAmbit());
+            HexActions.make("check_ambit", new ActionRegistryEntry(
+                HexPattern.fromAngles("wawaw", HexDir.EAST),
+                new OpCheckAmbit()));
 
             // catchy eval
-            PatternRegistry.mapPattern(HexPattern.fromAngles("dweaqqw", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "catchy_eval"),
-                OpEvalCatchMishap.INSTANCE);
-            PatternRegistry.mapPattern(HexPattern.fromAngles("dweaqqqqa", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "reveal_mishap"),
-                new OpRevealLastMishap(true));
+            HexActions.make("catchy_eval", new ActionRegistryEntry(
+                HexPattern.fromAngles("dweaqqw", HexDir.SOUTH_EAST),
+                OpEvalCatchMishap.INSTANCE));
+            HexActions.make("reveal_mishap", new ActionRegistryEntry(
+                HexPattern.fromAngles("dweaqqqqa", HexDir.SOUTH_EAST),
+                new OpRevealLastMishap(true)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qed", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "assert"),
-                new OpHahaFunnyAssertQEDGetItLikeTheMathProofLol());
+            HexActions.make("assert", new ActionRegistryEntry(
+                HexPattern.fromAngles("qed", HexDir.NORTH_EAST),
+                new OpHahaFunnyAssertQEDGetItLikeTheMathProofLol()));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qewdweeddw", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "gloopimind_upload"),
-                new OpSyncRavenmindGloopifact(true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qedadewdde", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "gloopimind_download"),
-                new OpSyncRavenmindGloopifact(false));
+            HexActions.make("gloopimind_upload", new ActionRegistryEntry(
+                HexPattern.fromAngles("qewdweeddw", HexDir.NORTH_EAST),
+                new OpSyncRavenmindGloopifact(true)));
+            HexActions.make("gloopimind_download", new ActionRegistryEntry(
+                HexPattern.fromAngles("qedadewdde", HexDir.NORTH_EAST),
+                new OpSyncRavenmindGloopifact(false)));
             
             // bound mirror pedestal stuff:
             // normal bind: deeeedwwdwdw, north east
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deeeedwwdwdw", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "bind_mirror"),
-                new OpBindMirror(false));
+            HexActions.make("bind_mirror", new ActionRegistryEntry(
+                HexPattern.fromAngles("deeeedwwdwdw", HexDir.NORTH_EAST),
+                new OpBindMirror(false)));
             // temp bind  : aqqqqawwawaw, north west
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqqqawwawaw", HexDir.NORTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "temp_bind_mirror"),
-                new OpBindMirror(true));
+            HexActions.make("temp_bind_mirror", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqqqawwawaw", HexDir.NORTH_WEST),
+                new OpBindMirror(true)));
 
             // hotbar patterns
-            PatternRegistry.mapPattern(HexPattern.fromAngles("dwewdwe", HexDir.WEST), 
-                new Identifier(HexGloop.MOD_ID, "set_hotbar_slot"),
-                new OpHotbar(false, false));
+            HexActions.make("set_hotbar_slot", new ActionRegistryEntry(
+                HexPattern.fromAngles("dwewdwe", HexDir.WEST),
+                new OpHotbar(false, false)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qwawqwa", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "get_hotbar_slot"),
-                new OpHotbar(false, true));
+            HexActions.make("get_hotbar_slot", new ActionRegistryEntry(
+                HexPattern.fromAngles("qwawqwa", HexDir.EAST),
+                new OpHotbar(false, true)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qwawqwadawqwa", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "swap_hotbar_slot"),
-                new OpHotbar(true, false));
+            HexActions.make("swap_hotbar_slot", new ActionRegistryEntry(
+                HexPattern.fromAngles("qwawqwadawqwa", HexDir.EAST),
+                new OpHotbar(true, false)));
             
             // inventorty patterns
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wawqwaqewdwwdade", HexDir.SOUTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "torty_transfer"),
-                new OpStackTransfer());
-            PatternRegistry.mapPattern(HexPattern.fromAngles("awewdqdwewaaw", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "torty_count"),
-                new OpSlotCount(true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("ewdqdwewaqae", HexDir.NORTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "torty_max_count"),
-                new OpSlotCount(false));
+            HexActions.make("torty_transfer", new ActionRegistryEntry(
+                HexPattern.fromAngles("wawqwaqewdwwdade", HexDir.SOUTH_WEST),
+                new OpStackTransfer()));
+            HexActions.make("torty_count", new ActionRegistryEntry(
+                HexPattern.fromAngles("awewdqdwewaaw", HexDir.EAST),
+                new OpSlotCount(true)));
+            HexActions.make("torty_max_count", new ActionRegistryEntry(
+                HexPattern.fromAngles("ewdqdwewaqae", HexDir.NORTH_WEST),
+                new OpSlotCount(false)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qaeaqeaq", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "torty_inv_sizes"),
-                new OpGetInventoryLore(true));
+            HexActions.make("torty_inv_sizes", new ActionRegistryEntry(
+                HexPattern.fromAngles("qaeaqeaq", HexDir.EAST),
+                new OpGetInventoryLore(true)));
 
             // gloopifact patterns
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqqqqeqadaqw", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "gloopifact_read"),
-                new OpReadGloopifact(false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deeeeeqqadaqw", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "gloopifact_write"),
-                new OpWriteGloopifact(false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwqadaqwwaqqqqq", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "gloopifact_check_read"),
-                new OpReadGloopifact(true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwqadaqwwdeeeee", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "gloopifact_check_write"),
-                new OpWriteGloopifact(true));
+            HexActions.make("gloopifact_read", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqqqqeqadaqw", HexDir.NORTH_EAST),
+                new OpReadGloopifact(false)));
+            HexActions.make("gloopifact_write", new ActionRegistryEntry(
+                HexPattern.fromAngles("deeeeeqqadaqw", HexDir.NORTH_EAST),
+                new OpWriteGloopifact(false)));
+            HexActions.make("gloopifact_check_read", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwqadaqwwaqqqqq", HexDir.NORTH_EAST),
+                new OpReadGloopifact(true)));
+            HexActions.make("gloopifact_check_write", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwqadaqwwdeeeee", HexDir.NORTH_EAST),
+                new OpWriteGloopifact(true)));
             
 
             // qwawqwadawqwqwqwqwqw <- simpler sign write with hexagon
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwedwewdweqawqwqwqwqwqw", HexDir.SOUTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "set_label"),
-                new OpSetLabel());
+            HexActions.make("set_label", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwedwewdweqawqwqwqwqwqw", HexDir.SOUTH_WEST),
+                new OpSetLabel()));
 
             // snack
-            PatternRegistry.mapPattern(HexPattern.fromAngles("eeewdw", HexDir.SOUTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "conjure_tasty_treat"),
-                new OpConjureTastyTreat());
+            HexActions.make("conjure_tasty_treat", new ActionRegistryEntry(
+                HexPattern.fromAngles("eeewdw", HexDir.SOUTH_WEST),
+                new OpConjureTastyTreat()));
             
             // for coins really, i mean i guess could be expanded to other stuff later though ?
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qaqqaqqqqq", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "get_item_bound_caster"),
-                new OpGetCoinBinder(false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qaqqaqqqqqead", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "compare_item_bound_caster"),
-                new OpGetCoinBinder(true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qaqqwawqwqwqwqwqw", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "cooler_get_item_bound_caster"),
-                new OpGetCoinBinder(false, true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qaqqwawqwqwqwqwqwead", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "cooler_compare_item_bound_caster"),
-                new OpGetCoinBinder(true, true));
+            HexActions.make("get_item_bound_caster", new ActionRegistryEntry(
+                HexPattern.fromAngles("qaqqaqqqqq", HexDir.NORTH_EAST),
+                new OpGetCoinBinder(false)));
+            HexActions.make("compare_item_bound_caster", new ActionRegistryEntry(
+                HexPattern.fromAngles("qaqqaqqqqqead", HexDir.NORTH_EAST),
+                new OpGetCoinBinder(true)));
+            HexActions.make("cooler_get_item_bound_caster", new ActionRegistryEntry(
+                HexPattern.fromAngles("qaqqwawqwqwqwqwqw", HexDir.NORTH_EAST),
+                new OpGetCoinBinder(false, true)));
+            HexActions.make("cooler_compare_item_bound_caster", new ActionRegistryEntry(
+                HexPattern.fromAngles("qaqqwawqwqwqwqwqwead", HexDir.NORTH_EAST),
+                new OpGetCoinBinder(true, true)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("awwqaq", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "truename_agree_eula"),
-                new OpAgreeTruenameEULA());
+            HexActions.make("truename_agree_eula", new ActionRegistryEntry(
+                HexPattern.fromAngles("awwqaq", HexDir.SOUTH_EAST),
+                new OpAgreeTruenameEULA()));
 
             // op dispense
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wqwaeqqqeddqeqd", HexDir.SOUTH_WEST), 
-                new Identifier(HexGloop.MOD_ID, "dispense"), 
-                new OpDispense());
+            HexActions.make("dispense", new ActionRegistryEntry(
+                HexPattern.fromAngles("wqwaeqqqeddqeqd", HexDir.SOUTH_WEST),
+                new OpDispense()));
                 
             // op frog eat
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wawadawaewqaw", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "frog_eat"), 
-                new OpFrogEat());
+            HexActions.make("frog_eat", new ActionRegistryEntry(
+                HexPattern.fromAngles("wawadawaewqaw", HexDir.EAST),
+                new OpFrogEat()));
 
             // iotic block read and writes
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqqqqeawqwaw", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "block_read"), 
-                new OpReadBlock(false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deeeeeqdwewewewdw", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "block_write"), 
-                new OpWriteBlock(false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqqqqeawqwawe", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "can_block_read"), 
-                new OpReadBlock(true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deeeeeqdwewewewdwe", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "can_block_write"), 
-                new OpWriteBlock(true));
+            HexActions.make("block_read", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqqqqeawqwaw", HexDir.EAST),
+                new OpReadBlock(false)));
+            HexActions.make("block_write", new ActionRegistryEntry(
+                HexPattern.fromAngles("deeeeeqdwewewewdw", HexDir.EAST),
+                new OpWriteBlock(false)));
+            HexActions.make("can_block_read", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqqqqeawqwawe", HexDir.EAST),
+                new OpReadBlock(true)));
+            HexActions.make("can_block_write", new ActionRegistryEntry(
+                HexPattern.fromAngles("deeeeeqdwewewewdwe", HexDir.EAST),
+                new OpWriteBlock(true)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("edwdqeeeeaaeaeaeaea", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "stonecut"), 
-                new OpStoneCut());
+            HexActions.make("stonecut", new ActionRegistryEntry(
+                HexPattern.fromAngles("edwdqeeeeaaeaeaeaea", HexDir.EAST),
+                new OpStoneCut()));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("edeaeeeweee", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "put_canvas_color"),
-                new OpPutColor());
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qqqqeqwawqwa", HexDir.NORTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "get_block_color"),
-                new OpGetBlockColor());
+            HexActions.make("put_canvas_color", new ActionRegistryEntry(
+                HexPattern.fromAngles("edeaeeeweee", HexDir.SOUTH_EAST),
+                new OpPutColor()));
+            HexActions.make("get_block_color", new ActionRegistryEntry(
+                HexPattern.fromAngles("qqqqeqwawqwa", HexDir.NORTH_WEST),
+                new OpGetBlockColor()));
 
-        } catch (PatternRegistry.RegisterPatternException exn) {
+        } catch (IllegalArgumentException exn) {
             exn.printStackTrace();
         }
     }
@@ -227,39 +227,45 @@ public class HexGloopRegisterPatterns {
 
     static {
         itemDependentPatternRegisterers.put(HexGloopItems.CASTING_POTION_ITEM, () -> {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wawwedewwqqq", HexDir.EAST), 
-                new Identifier(HexGloop.MOD_ID, "craft/potion"),
-                new OpMakePackagedSpell<>(HexGloopItems.CASTING_POTION_ITEM.get(), MediaConstants.SHARD_UNIT));
+            HexActions.make("craft/potion", new ActionRegistryEntry(
+                HexPattern.fromAngles("wawwedewwqqq", HexDir.EAST),
+                new OpMakePackagedSpell<>(HexGloopItems.CASTING_POTION_ITEM.get(),
+                    MediaConstants.SHARD_UNIT)));
         });
 
         itemDependentPatternRegisterers.put(HexGloopItems.GLOOPIFACT_ITEM, () -> {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwaadaqwaweqqwaweewawqwwwwadeeeeeqww", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "craft/gloopifact"),
-                new OpMakePackagedSpell<>(HexGloopItems.GLOOPIFACT_ITEM.get(), MediaConstants.CRYSTAL_UNIT * 16));
+            HexActions.make("craft/gloopifact", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwaadaqwaweqqwaweewawqwwwwadeeeeeqww", HexDir.EAST),
+                new OpMakePackagedSpell<>(HexGloopItems.GLOOPIFACT_ITEM.get(),
+                    MediaConstants.CRYSTAL_UNIT * 16)));
         });
 
         itemDependentPatternRegisterers.put(HexGloopItems.INVENTORTY_ITEM, () -> {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("waqqqqqwqawqedeqwaq", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "craft/inventorty"),
-                new OpMakePackagedSpell<>(HexGloopItems.INVENTORTY_ITEM.get(), MediaConstants.CRYSTAL_UNIT * 4));
+            HexActions.make("craft/inventorty", new ActionRegistryEntry(
+                HexPattern.fromAngles("waqqqqqwqawqedeqwaq", HexDir.EAST),
+                new OpMakePackagedSpell<>(HexGloopItems.INVENTORTY_ITEM.get(),
+                    MediaConstants.CRYSTAL_UNIT * 4)));
         });
 
         itemDependentPatternRegisterers.put(HexGloopItems.HEX_BLADE_ITEM, () -> {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("waqqqqqwwwaqwwwwaq", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "craft/hex_blade"),
-                new OpMakePackagedSpell<>(HexGloopItems.HEX_BLADE_ITEM.get(), MediaConstants.CRYSTAL_UNIT * 4));
+            HexActions.make("craft/hex_blade", new ActionRegistryEntry(
+                HexPattern.fromAngles("waqqqqqwwwaqwwwwaq", HexDir.EAST),
+                new OpMakePackagedSpell<>(HexGloopItems.HEX_BLADE_ITEM.get(),
+                    MediaConstants.CRYSTAL_UNIT * 4)));
         });
 
         itemDependentPatternRegisterers.put(HexGloopItems.HEX_PICKAXE_ITEM, () -> {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwaqqqqqeaqdewaqweaewqawedqqqeaeq", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "craft/hex_pickaxe"),
-                new OpMakePackagedSpell<>(HexGloopItems.HEX_PICKAXE_ITEM.get(), MediaConstants.CRYSTAL_UNIT * 4));
+            HexActions.make("craft/hex_pickaxe", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwaqqqqqeaqdewaqweaewqawedqqqeaeq", HexDir.EAST),
+                new OpMakePackagedSpell<>(HexGloopItems.HEX_PICKAXE_ITEM.get(),
+                    MediaConstants.CRYSTAL_UNIT * 4)));
         });
 
         itemDependentPatternRegisterers.put(HexGloopItems.CASTING_FROG_ITEM, () -> {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwaqqqqqeaqdqaqedeqaqdqqeaqwdwqae", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "craft/casting_frog"),
-                new OpMakePackagedSpell<>(HexGloopItems.CASTING_FROG_ITEM.get(), MediaConstants.CRYSTAL_UNIT * 4));
+            HexActions.make("craft/casting_frog", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwaqqqqqeaqdqaqedeqaqdqqeaqwdwqae", HexDir.EAST),
+                new OpMakePackagedSpell<>(HexGloopItems.CASTING_FROG_ITEM.get(),
+                    MediaConstants.CRYSTAL_UNIT * 4)));
         });
 
         // craft shoe things: waqqqqqwwaqwdwqaw        
@@ -270,7 +276,7 @@ public class HexGloopRegisterPatterns {
             entry.getKey().listen(item -> {
                 try{
                     entry.getValue().register();
-                } catch (PatternRegistry.RegisterPatternException exn) {
+                } catch (IllegalArgumentException exn) {
                     exn.printStackTrace();
                 }
             });
@@ -280,17 +286,17 @@ public class HexGloopRegisterPatterns {
     private static void registerRedstonePatterns(){
         try {
             // redstone stuff
-            PatternRegistry.mapPattern(HexPattern.fromAngles("ddwwdwwdd", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "read_comparator"),
-                new OpGetComparator(false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aawwawwaa", HexDir.SOUTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "read_redstone"),
-                new OpGetComparator(true));
+            HexActions.make("read_comparator", new ActionRegistryEntry(
+                HexPattern.fromAngles("ddwwdwwdd", HexDir.SOUTH_EAST),
+                new OpGetComparator(false)));
+            HexActions.make("read_redstone", new ActionRegistryEntry(
+                HexPattern.fromAngles("aawwawwaa", HexDir.SOUTH_WEST),
+                new OpGetComparator(true)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qqadd", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "conjure_redstone"),
-                new OpConjureRedstone());
-        } catch (PatternRegistry.RegisterPatternException exn) {
+            HexActions.make("conjure_redstone", new ActionRegistryEntry(
+                HexPattern.fromAngles("qqadd", HexDir.NORTH_EAST),
+                new OpConjureRedstone()));
+        } catch (IllegalArgumentException exn) {
             exn.printStackTrace();
         }
     }
@@ -298,62 +304,62 @@ public class HexGloopRegisterPatterns {
     private static void registerTrinketyFociiPatterns(){
         try {
             // pendant read/write
-            PatternRegistry.mapPattern(HexPattern.fromAngles("waaqqqqqe", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "read_pendant"),
-                new OpTrinketyReadIota((ctx) -> List.of("necklace"), false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wadeeeeeq", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "write_pendant"),
-                new OpTrinketyWriteIota((ctx) -> List.of("necklace"), false));
+            HexActions.make("read_pendant", new ActionRegistryEntry(
+                HexPattern.fromAngles("waaqqqqqe", HexDir.SOUTH_EAST),
+                new OpTrinketyReadIota((ctx) -> List.of("necklace"), false)));
+            HexActions.make("write_pendant", new ActionRegistryEntry(
+                HexPattern.fromAngles("wadeeeeeq", HexDir.SOUTH_EAST),
+                new OpTrinketyWriteIota((ctx) -> List.of("necklace"), false)));
             // pendant checks
-            PatternRegistry.mapPattern(HexPattern.fromAngles("waaqqqqqee", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "check_read_pendant"),
-                new OpTrinketyReadIota((ctx) -> List.of("necklace"), true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wadeeeeeqe", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "check_write_pendant"),
-                new OpTrinketyWriteIota((ctx) -> List.of("necklace"), true));
+            HexActions.make("check_read_pendant", new ActionRegistryEntry(
+                HexPattern.fromAngles("waaqqqqqee", HexDir.SOUTH_EAST),
+                new OpTrinketyReadIota((ctx) -> List.of("necklace"), true)));
+            HexActions.make("check_write_pendant", new ActionRegistryEntry(
+                HexPattern.fromAngles("wadeeeeeqe", HexDir.SOUTH_EAST),
+                new OpTrinketyWriteIota((ctx) -> List.of("necklace"), true)));
 
             // ring basics
-            Function<CastingContext, List<String>> standardRingFunc = (ctx) -> {
+            Function<CastingEnvironment, List<String>> standardRingFunc = (ctx) -> {
                 if(ctx.getCastingHand() == Hand.MAIN_HAND) {
                     return List.of("offhandring", "mainhandring");
                 }
                 return List.of("mainhandring", "offhandring");
             };
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqqqqeawqwqwqwqwqw", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "read_ring"),
-                new OpTrinketyReadIota(standardRingFunc, false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deeeeeqdwewewewewew", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "write_ring"),
-                new OpTrinketyWriteIota(standardRingFunc, false));
+            HexActions.make("read_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqqqqeawqwqwqwqwqw", HexDir.EAST),
+                new OpTrinketyReadIota(standardRingFunc, false)));
+            HexActions.make("write_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("deeeeeqdwewewewewew", HexDir.EAST),
+                new OpTrinketyWriteIota(standardRingFunc, false)));
             
             // left hand ring
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqweeeeewqq", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "read_left_ring"),
-                new OpTrinketyReadIota((ctx) -> List.of("offhandring", "mainhandring"), false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deewqqqqqwee", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "write_left_ring"),
-                new OpTrinketyWriteIota((ctx) -> List.of("offhandring", "mainhandring"), false));
+            HexActions.make("read_left_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqweeeeewqq", HexDir.EAST),
+                new OpTrinketyReadIota((ctx) -> List.of("offhandring", "mainhandring"), false)));
+            HexActions.make("write_left_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("deewqqqqqwee", HexDir.EAST),
+                new OpTrinketyWriteIota((ctx) -> List.of("offhandring", "mainhandring"), false)));
             
             // right hand ring
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqqqqweeeee", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "read_right_ring"),
-                new OpTrinketyReadIota((ctx) -> List.of("mainhandring", "offhandring"), false));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deeeeewqqqqq", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "write_right_ring"),
-                new OpTrinketyWriteIota((ctx) -> List.of("mainhandring", "offhandring"), false));
+            HexActions.make("read_right_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqqqqweeeee", HexDir.EAST),
+                new OpTrinketyReadIota((ctx) -> List.of("mainhandring", "offhandring"), false)));
+            HexActions.make("write_right_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("deeeeewqqqqq", HexDir.EAST),
+                new OpTrinketyWriteIota((ctx) -> List.of("mainhandring", "offhandring"), false)));
             
             // ring checks
-            PatternRegistry.mapPattern(HexPattern.fromAngles("aqqqqqeawqwqwqwqwqwe", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "check_read_ring"),
-                new OpTrinketyReadIota(standardRingFunc, true));
-            PatternRegistry.mapPattern(HexPattern.fromAngles("deeeeeqdwewewewewewq", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "check_write_ring"),
-                new OpTrinketyWriteIota(standardRingFunc, true));
+            HexActions.make("check_read_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("aqqqqqeawqwqwqwqwqwe", HexDir.EAST),
+                new OpTrinketyReadIota(standardRingFunc, true)));
+            HexActions.make("check_write_ring", new ActionRegistryEntry(
+                HexPattern.fromAngles("deeeeeqdwewewewewewq", HexDir.EAST),
+                new OpTrinketyWriteIota(standardRingFunc, true)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwwdwwwdwqqaqwedeewawwwawww", HexDir.SOUTH_WEST),
-                new Identifier(HexGloop.MOD_ID, "clear_truename"),
-                new OpRefreshTruename());
-        } catch (PatternRegistry.RegisterPatternException exn) {
+            HexActions.make("clear_truename", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwwdwwwdwqqaqwedeewawwwawww", HexDir.SOUTH_WEST),
+                new OpRefreshTruename()));
+        } catch (IllegalArgumentException exn) {
             exn.printStackTrace();
         }
     }
@@ -361,11 +367,11 @@ public class HexGloopRegisterPatterns {
     private static void maybeRegisterHexal(){
         if(!Platform.isModLoaded("hexal")) return;
         try {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("qwaeawqaqded", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "torty_get_type"),
-                new OpGetTypeInSlot());
+            HexActions.make("torty_get_type", new ActionRegistryEntry(
+                HexPattern.fromAngles("qwaeawqaqded", HexDir.NORTH_EAST),
+                new OpGetTypeInSlot()));
             
-        } catch (PatternRegistry.RegisterPatternException exn) {
+        } catch (IllegalArgumentException exn) {
             exn.printStackTrace();
         }
     }
@@ -373,28 +379,28 @@ public class HexGloopRegisterPatterns {
     private static void maybeRegisterMoreIotas(){
         if(!Platform.isModLoaded("moreiotas")) return;
         try {
-            PatternRegistry.mapPattern(HexPattern.fromAngles("dweaqqqqd", HexDir.SOUTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "stringify_mishap"),
-                new OpRevealLastMishap(false));
+            HexActions.make("stringify_mishap", new ActionRegistryEntry(
+                HexPattern.fromAngles("dweaqqqqd", HexDir.SOUTH_EAST),
+                new OpRevealLastMishap(false)));
 
-            PatternRegistry.mapPattern(HexPattern.fromAngles("waeaeaeawa", HexDir.EAST),
-                new Identifier(HexGloop.MOD_ID, "torty_inv_names"),
-                new OpGetInventoryLore(false));
+            HexActions.make("torty_inv_names", new ActionRegistryEntry(
+                HexPattern.fromAngles("waeaeaeawa", HexDir.EAST),
+                new OpGetInventoryLore(false)));
             // tag stuff
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwedwe", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "get_tags"),
-                new OpGetTags());
-            PatternRegistry.mapPattern(HexPattern.fromAngles("wwedwew", HexDir.NORTH_EAST),
-                new Identifier(HexGloop.MOD_ID, "check_tag"),
-                new OpCheckTag());
+            HexActions.make("get_tags", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwedwe", HexDir.NORTH_EAST),
+                new OpGetTags()));
+            HexActions.make("check_tag", new ActionRegistryEntry(
+                HexPattern.fromAngles("wwedwew", HexDir.NORTH_EAST),
+                new OpCheckTag()));
             
-        } catch (PatternRegistry.RegisterPatternException exn) {
+        } catch (IllegalArgumentException exn) {
             exn.printStackTrace();
         }
     }
 
     @FunctionalInterface
     public static interface UncheckedPatternRegister{
-        public void register() throws PatternRegistry.RegisterPatternException;
+        public void register() throws IllegalArgumentException;
     }
 }

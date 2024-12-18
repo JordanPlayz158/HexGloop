@@ -31,12 +31,12 @@ public class IotaSpokeRenderer extends SpokeRenderer{
         if(!isInner){
             NbtCompound iotaNbt = iotaProvider.getIotaNBT(iotaIndex);
             if(iotaNbt == null) return Argb.getArgb(150, 200, 200, 200);
-            int color = HexIotaTypes.getColor(iotaNbt);
+            int color = IotaType.getColor(iotaNbt);
             return Argb.getArgb(150, Argb.getRed(color), Argb.getGreen(color), Argb.getBlue(color));
         } else if(iotaProvider.currentSlot() == iotaIndex+1){
             NbtCompound iotaNbt = iotaProvider.getIotaNBT(iotaIndex);
             if(iotaNbt == null) return Argb.getArgb(150, 200, 200, 200);
-            int color = HexIotaTypes.getColor(iotaNbt);
+            int color = IotaType.getColor(iotaNbt);
             return Argb.getArgb(200, Argb.getRed(color), Argb.getGreen(color), Argb.getBlue(color));
         }
         return Argb.getArgb(96, 200, 200, 200);

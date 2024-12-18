@@ -1,5 +1,8 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +11,6 @@ import com.samsthenerd.hexgloop.casting.IContextHelper;
 import com.samsthenerd.hexgloop.casting.inventorty.InventortyUtils.KittyContext;
 import com.samsthenerd.hexgloop.mixins.misc.MixinExposeCursorStackRef;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
 import at.petrak.hexcasting.api.casting.iota.DoubleIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -96,7 +97,7 @@ public class ItemInventorty extends ItemPackagedHex{
             return;
         }
         var sPlayer = (ServerPlayerEntity) player;
-        var ctx = new CastingContext(sPlayer, Hand.MAIN_HAND, CastingContext.CastSource.PACKAGED_HEX);
+        var ctx = new CastingEnvironment(sPlayer, Hand.MAIN_HAND, CastingEnvironment.CastSource.PACKAGED_HEX);
         ((IContextHelper)(Object)ctx).setCursorRef(stackRef);
         ((IContextHelper)(Object)ctx).setKitty(tortyStack);
         KittyContext kCtx = new KittyContext(player.getInventory());
@@ -108,7 +109,7 @@ public class ItemInventorty extends ItemPackagedHex{
             HexGloop.logPrint("\t" + (kCtx.getInventory(i) instanceof Nameable nameableInv ? nameableInv.getName() : kCtx.getInventory(i) + ": " + kCtx.getSlots(i).size() + " slots"));
         }
         ((IContextHelper)(Object)ctx).setKittyContext(kCtx);
-        var harness = new CastingHarness(ctx);
+        var harness = new CastingVM(ctx);
         harness.setStack(new ArrayList<Iota>(List.of(new BooleanIota(tortyInHand), new DoubleIota(kCtx.getFullSlotIndex(slot)))));
 
         sWorld.playSound(sPlayer, sPlayer.getBlockPos(), 

@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +10,6 @@ import javax.annotation.Nullable;
 import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.casting.IContextHelper;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.items.magic.ItemPackagedHex;
 import net.minecraft.entity.Entity;
@@ -18,16 +18,16 @@ import net.minecraft.entity.passive.FrogVariant;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.BiomeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
-import net.minecraft.tag.BiomeTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
@@ -83,13 +83,13 @@ public class ItemCastingFrog extends ItemPackagedHex {
     public FrogVariant getFrogVariant(ItemStack stack){
         if(stack.hasNbt() && stack.getNbt().contains(FROG_VARIANT_KEY, NbtElement.STRING_TYPE)){
             Identifier frogId = new Identifier(stack.getNbt().getString(FROG_VARIANT_KEY));
-            return Registry.FROG_VARIANT.get(frogId);
+            return Registries.FROG_VARIANT.get(frogId);
         }
         return null;
     }
 
     public void setFrogVariant(ItemStack stack, FrogVariant frogVariant){
-        Identifier frogId = Registry.FROG_VARIANT.getId(frogVariant);
+        Identifier frogId = Registries.FROG_VARIANT.getId(frogVariant);
         stack.getOrCreateNbt().putString(FROG_VARIANT_KEY, frogId.toString());
     }
 
@@ -131,11 +131,11 @@ public class ItemCastingFrog extends ItemPackagedHex {
             return;
         }
         HexGloop.logPrint("has instrs");
-        var ctx = new CastingContext(sPlayer, Hand.MAIN_HAND, CastingContext.CastSource.PACKAGED_HEX);
+        var ctx = new CastingEnvironment(sPlayer, Hand.MAIN_HAND, CastingEnvironment.CastSource.PACKAGED_HEX);
         if((Object)ctx instanceof IContextHelper ctxHelper){
             ctxHelper.setFrog(stack);
         }
-        var harness = new CastingHarness(ctx);
+        var harness = new CastingVM(ctx);
 
         // sWorld.playSound(sPlayer, sPlayer.getBlockPos(), 
         //     POSSIBLE_CAT_NOISES.get((int)(sPlayer.getRandom().nextBetween(0, POSSIBLE_CAT_NOISES.size()-1))), 

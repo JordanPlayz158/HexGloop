@@ -12,7 +12,7 @@ import com.samsthenerd.wnboi.utils.KeybindUtils.KeybindHandler;
 
 import at.petrak.hexcasting.client.gui.GuiSpellcasting;
 import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
-import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
+import at.petrak.hexcasting.common.msgs.MsgShiftScrollC2S;
 import at.petrak.hexcasting.xplat.IClientXplatAbstractions;
 import dev.architectury.event.events.client.ClientTickEvent;
 import dev.architectury.platform.Platform;
@@ -85,7 +85,7 @@ public class HexGloopKeybinds {
         }
         int dir = goUp ? -1 : 1;
         IClientXplatAbstractions.INSTANCE.sendPacketToServer(
-                    new MsgShiftScrollSyn(mainHand ? dir : 0, !mainHand ? dir : 0, Screen.hasControlDown(),
+                    new MsgShiftScrollC2S(mainHand ? dir : 0, !mainHand ? dir : 0, Screen.hasControlDown(),
                         false, false));
     }
 

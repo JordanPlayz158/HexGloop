@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting.canvas;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,6 @@ import com.samsthenerd.hexgloop.items.ItemSlateCanvas;
 
 import at.petrak.hexcasting.api.casting.castables.Action;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -46,7 +46,7 @@ public class OpPutColor implements Action{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext context){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment context){
         // potentially get an entity first -- deal with that later
         ItemStack mapStack = context.getHeldItemToOperateOn(itemstack -> itemstack.isOf(HexGloopItems.SLATE_CANVAS_ITEM.get())).component1();
 

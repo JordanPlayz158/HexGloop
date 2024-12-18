@@ -1,11 +1,11 @@
 package com.samsthenerd.hexgloop.casting.redstone;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.DoubleIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -44,7 +44,7 @@ public class OpGetComparator implements ConstMediaAction {
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
         BlockPos pos = OperatorUtils.getBlockPos(args, 0, getArgc());
         context.assertVecInRange(pos);
         int power = context.getWorld().getReceivedRedstonePower(pos);
@@ -58,7 +58,7 @@ public class OpGetComparator implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

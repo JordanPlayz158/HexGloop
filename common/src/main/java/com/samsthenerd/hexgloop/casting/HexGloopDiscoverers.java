@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,11 +11,9 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.ILociHandler;
 import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.IItemProviderLocus;
 
 import at.petrak.hexcasting.api.addldata.ADMediaHolder;
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import at.petrak.hexcasting.api.misc.DiscoveryHandlers;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.casting.SpellCircleContext;
+import at.petrak.hexcasting.api.casting.eval.SpellCircleContext;
 import at.petrak.hexcasting.common.items.ItemLens;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.entity.player.PlayerEntity;
@@ -40,7 +40,7 @@ public class HexGloopDiscoverers {
         });
     }
 
-    public static List<ItemStack> getItemLoci(CastingContext ctx){
+    public static List<ItemStack> getItemLoci(CastingEnvironment ctx){
         List<ItemStack> items = new ArrayList<ItemStack>();
         SpellCircleContext circleCtx = ctx.getSpellCircle();
         if(circleCtx != null){
@@ -91,11 +91,11 @@ public class HexGloopDiscoverers {
 
     
     // I guess it'll get bound reflected holder no matter what
-    public static List<ADMediaHolder> getReflectedMediaHolder(CastingHarness harness){
-        CastingContext ctx = harness.getCtx();
-        ItemStack mainAlt = SyncedItemHandling.getAlternateHandStack(ctx.getCaster(), Hand.MAIN_HAND, ctx);
+    public static List<ADMediaHolder> getReflectedMediaHolder(CastingVM harness){
+        CastingEnvironment ctx = harness.getEnv();
+        ItemStack mainAlt = SyncedItemHandling.getAlternateHandStack(ctx.getCastingEntity(), Hand.MAIN_HAND, ctx);
         mainAlt = mainAlt == null ? ItemStack.EMPTY : mainAlt;
-        ItemStack offAlt = SyncedItemHandling.getAlternateHandStack(ctx.getCaster(), Hand.OFF_HAND, ctx);
+        ItemStack offAlt = SyncedItemHandling.getAlternateHandStack(ctx.getCastingEntity(), Hand.OFF_HAND, ctx);
         offAlt = offAlt == null ? ItemStack.EMPTY : offAlt;
         List<ADMediaHolder> holders = new ArrayList<ADMediaHolder>();
         ADMediaHolder mainHolder = IXplatAbstractions.INSTANCE.findMediaHolder(mainAlt);

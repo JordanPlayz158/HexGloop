@@ -47,7 +47,7 @@ public class GloopUtils {
             return HexUtils.ERROR_COLOR;
         }
 
-        return HexIotaTypes.getColor(tag);
+        return IotaType.getColor(tag);
     }
 
     private static Supplier<ItemConvertible>[] CACHED_STAFFS = null;

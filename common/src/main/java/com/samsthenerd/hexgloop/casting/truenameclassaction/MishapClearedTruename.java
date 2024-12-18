@@ -1,11 +1,11 @@
 package com.samsthenerd.hexgloop.casting.truenameclassaction;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.mishaps.Mishap;
 import kotlin.jvm.internal.Intrinsics;
@@ -23,13 +23,13 @@ public class MishapClearedTruename extends Mishap {
     }
 
     @NotNull
-    public FrozenPigment accentColor(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx) {
+    public FrozenPigment accentColor(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx) {
         Intrinsics.checkNotNullParameter(ctx, "ctx");
         Intrinsics.checkNotNullParameter(errorCtx, "errorCtx");
         return this.dyeColor(DyeColor.BROWN);
     }
 
-    public void execute(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx, @NotNull List<Iota> stack) {
+    public void execute(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx, @NotNull List<Iota> stack) {
         
     }
 
@@ -40,7 +40,7 @@ public class MishapClearedTruename extends Mishap {
     }
 
     @NotNull
-    public Text errorMessage(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx) {
+    public Text errorMessage(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx) {
         return this.makeError(this.actionName(errorCtx.getAction()), refdPlayer);
     }
 

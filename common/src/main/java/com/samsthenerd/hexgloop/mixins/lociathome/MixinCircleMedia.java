@@ -9,7 +9,7 @@ import com.llamalad7.mixinextras.sugar.Share;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.samsthenerd.hexgloop.casting.wehavelociathome.LociUtils;
 
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 
 @Mixin(CastingHarness.class)

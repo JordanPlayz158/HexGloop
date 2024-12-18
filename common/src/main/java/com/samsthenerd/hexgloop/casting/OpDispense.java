@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -8,11 +9,9 @@ import com.samsthenerd.hexgloop.mixins.misc.MixinDispenserBehaviorAccessor;
 
 import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
 import at.petrak.hexcasting.api.casting.ParticleSpray;
 import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.casting.castables.SpellAction;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import kotlin.Triple;
@@ -41,11 +40,11 @@ public class OpDispense implements SpellAction {
     @Override
     public int getArgc(){ return 3;}
 
-    public boolean hasCastingSound(@NotNull CastingContext ctx){
+    public boolean hasCastingSound(@NotNull CastingEnvironment ctx){
         return false;
     }
 
-    public boolean awardsCastingStat(@NotNull CastingContext ctx){
+    public boolean awardsCastingStat(@NotNull CastingEnvironment ctx){
         return true;
     }
 
@@ -64,7 +63,7 @@ public class OpDispense implements SpellAction {
     }
 
     @Override
-    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingContext context){
+    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingEnvironment context){
         // position to dispense from
         BlockPos pos = OperatorUtils.getBlockPos(args, 0, getArgc());
         context.assertVecInRange(pos);
@@ -104,7 +103,7 @@ public class OpDispense implements SpellAction {
             this.dir = dir;
         }
 
-        public void cast(CastingContext ctx){
+        public void cast(CastingEnvironment ctx){
             ItemStack stackToDispense = dispenseEnt.getStack();
 
             DispenserBehavior behavior = ((MixinDispenserBehaviorAccessor)Blocks.DISPENSER).callGetBehaviorForItem(stackToDispense);
@@ -140,7 +139,7 @@ public class OpDispense implements SpellAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

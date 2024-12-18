@@ -1,6 +1,6 @@
 package com.samsthenerd.hexgloop.casting.wehavelociathome.modules;
 
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;

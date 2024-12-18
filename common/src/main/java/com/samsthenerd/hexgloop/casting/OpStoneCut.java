@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +13,6 @@ import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
 import at.petrak.hexcasting.api.casting.ParticleSpray;
 import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.casting.castables.SpellAction;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadItem;
@@ -36,11 +36,11 @@ public class OpStoneCut implements SpellAction {
     @Override
     public int getArgc(){ return 2;}
 
-    public boolean hasCastingSound(@NotNull CastingContext ctx){
+    public boolean hasCastingSound(@NotNull CastingEnvironment ctx){
         return false;
     }
 
-    public boolean awardsCastingStat(@NotNull CastingContext ctx){
+    public boolean awardsCastingStat(@NotNull CastingEnvironment ctx){
         return true;
     }
 
@@ -59,7 +59,7 @@ public class OpStoneCut implements SpellAction {
     }
 
     @Override
-    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingContext context){
+    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingEnvironment context){
         ItemEntity itemEnt = OperatorUtils.getItemEntity(args, 0, getArgc());
         context.assertEntityInRange(itemEnt);
         Inventory inv = new SimpleInventory(itemEnt.getStack());
@@ -103,7 +103,7 @@ public class OpStoneCut implements SpellAction {
             this.recipe = recipe;
         }
 
-        public void cast(CastingContext ctx){
+        public void cast(CastingEnvironment ctx){
             ItemStack stack = itemEnt.getStack();
             ItemStack result = recipe.craft(new SimpleInventory(stack));
             result.setCount(stack.getCount()); // craft the whole thing ! 
@@ -114,7 +114,7 @@ public class OpStoneCut implements SpellAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

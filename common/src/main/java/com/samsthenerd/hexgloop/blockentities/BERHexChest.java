@@ -35,10 +35,10 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Matrix4f;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import org.joml.Matrix4f;
 
 // code just yoinked from ChestBlockEntityRenderer
 public class BERHexChest<T extends BlockEntity & LidOpenable> implements BlockEntityRenderer<T> {
@@ -113,7 +113,8 @@ public class BERHexChest<T extends BlockEntity & LidOpenable> implements BlockEn
          matrices.push();
          float f = ((Direction)blockState.get(ChestBlock.FACING)).asRotation();
          matrices.translate(0.5, 0.5, 0.5);
-         matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-f));
+
+         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(-f));
          matrices.translate(-0.5, -0.5, -0.5);
          DoubleBlockProperties.PropertySource propertySource;
          if (bl) {
@@ -201,7 +202,7 @@ public class BERHexChest<T extends BlockEntity & LidOpenable> implements BlockEn
                 return getChestTextureId("slate_chest");
             }
         }
-        return TexturedRenderLayers.getChestTexture(cbe, type, false);
+        return TexturedRenderLayers.getChestTextureId(cbe, type, false);
     }
 
     public SpriteIdentifier getChestTextureId(String variant){

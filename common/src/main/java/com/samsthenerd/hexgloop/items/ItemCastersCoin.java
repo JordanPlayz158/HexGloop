@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.iota.IotaType;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,7 +11,6 @@ import at.petrak.hexcasting.api.item.IotaHolderItem;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.NullIota;
 import at.petrak.hexcasting.api.utils.NBTHelper;
-import at.petrak.hexcasting.common.lib.hex.HexIotaTypes;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -103,7 +103,7 @@ public class ItemCastersCoin extends Item implements IotaHolderItem {
             stack.removeSubNbt(TAG_CASTER);
             stack.removeSubNbt(TAG_CASTER_DISPLAY);
         } else {
-            NBTHelper.put(stack, TAG_DATA, HexIotaTypes.serialize(datum));
+            NBTHelper.put(stack, TAG_DATA, IotaType.serialize(datum));
         }
     }
 

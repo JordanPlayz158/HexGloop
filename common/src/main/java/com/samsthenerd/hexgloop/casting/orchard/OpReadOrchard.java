@@ -1,12 +1,12 @@
 package com.samsthenerd.hexgloop.casting.orchard;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.DoubleIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -14,7 +14,7 @@ import at.petrak.hexcasting.api.casting.iota.ListIota;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
-public class OpReadOrchard implements ConstMediaAction{
+public class OpReadOrchard implements ConstMediaAction {
     private boolean asList;
 
     public OpReadOrchard(boolean asList){
@@ -44,8 +44,8 @@ public class OpReadOrchard implements ConstMediaAction{
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
-        ServerPlayerEntity player = context.getCaster();
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
+        ServerPlayerEntity player = (ServerPlayerEntity) context.getCastingEntity();
         if(player == null) return new ArrayList<Iota>();
         if(asList){
             List<Double> orchardList = ((IOrchard)player).getOrchardList();
@@ -58,7 +58,7 @@ public class OpReadOrchard implements ConstMediaAction{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
     

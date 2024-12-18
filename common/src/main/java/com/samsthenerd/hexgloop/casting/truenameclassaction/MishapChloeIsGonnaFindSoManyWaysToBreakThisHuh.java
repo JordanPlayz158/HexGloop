@@ -1,5 +1,9 @@
 package com.samsthenerd.hexgloop.casting.truenameclassaction;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.env.CircleCastEnv;
+import at.petrak.hexcasting.api.casting.eval.env.PackagedItemCastEnv;
+import at.petrak.hexcasting.api.casting.eval.env.StaffCastEnv;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -8,8 +12,6 @@ import com.samsthenerd.hexgloop.casting.IContextHelper;
 import com.samsthenerd.hexgloop.items.ItemGloopifact;
 
 import at.petrak.hexcasting.api.pigment.FrozenPigment;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
-import at.petrak.hexcasting.api.spell.casting.CastingContext.CastSource;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.mishaps.Mishap;
 import dev.architectury.platform.Platform;
@@ -30,32 +32,32 @@ public class MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh extends Mishap {
     }
 
     @NotNull
-    public FrozenPigment accentColor(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx) {
+    public FrozenPigment accentColor(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx) {
         Intrinsics.checkNotNullParameter(ctx, "ctx");
         Intrinsics.checkNotNullParameter(errorCtx, "errorCtx");
         return this.dyeColor(DyeColor.BROWN);
     }
 
-    public void execute(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx, @NotNull List<Iota> stack) {
+    public void execute(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx, @NotNull List<Iota> stack) {
         
     }
 
-    public static String sourceFromCtx(CastingContext ctx){
-        CastSource source = ctx.getSource();
+    public static String sourceFromCtx(CastingEnvironment ctx){
         if(((IContextHelper)(Object)ctx).isKitty()){
             return "inventorty";
         }
-        if(source == CastSource.STAFF){
+        if(ctx instanceof StaffCastEnv){
             return "staff";
-        } else if(source == CastSource.SPELL_CIRCLE){
+        } else if(ctx instanceof CircleCastEnv){
             return "circle";
-        } else if(source == CastSource.PACKAGED_HEX){
+        } else if(ctx instanceof PackagedItemCastEnv){
             if(Platform.isModLoaded("hexal")){
                 if(HexalWispWrapper.isWisp(ctx)){
                     return "wisp";
                 }
             }
-            ItemStack castHandStack = ctx.getCaster().getStackInHand(ctx.getCastingHand());
+            // TODO: May be able to replace with CastingEnvironment#getCastingItem
+            ItemStack castHandStack = ctx.getCastingEntity().getStackInHand(ctx.getCastingHand());
             if(castHandStack.getItem() instanceof ItemGloopifact gloopifactItem){
                 return "gloopifact";
             }
@@ -78,10 +80,10 @@ public class MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh extends Mishap {
     }
 
     @NotNull
-    public Text errorMessage(@NotNull CastingContext ctx, @NotNull Mishap.Context errorCtx) {
+    public Text errorMessage(@NotNull CastingEnvironment ctx, @NotNull Mishap.Context errorCtx) {
         Text errorText;
         Object[] errorArgs;
-            errorArgs = new Object[]{this.actionName(errorCtx.getAction()), expectedSourcesList(), Text.translatable("hexgloop.source_type."+sourceFromCtx(ctx))};
+            errorArgs = new Object[]{this.actionName(errorCtx.getName()), expectedSourcesList(), Text.translatable("hexgloop.source_type."+sourceFromCtx(ctx))};
             errorText = this.error("wrong_casting_source" + (acceptedSources.size() > 1 ? "s" : "" ), errorArgs);
         return errorText;
     }

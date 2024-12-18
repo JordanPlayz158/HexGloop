@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop;
 
+import dev.architectury.registry.registries.RegistrarManager;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -24,7 +25,6 @@ import com.samsthenerd.hexgloop.utils.GloopXPlat;
 import com.samsthenerd.hexgloop.utils.StringsToDirMap;
 
 import dev.architectury.platform.Platform;
-import dev.architectury.registry.registries.Registries;
 import dev.architectury.registry.registries.RegistrySupplier;
 import net.minecraft.item.Item;
 
@@ -35,7 +35,7 @@ public class HexGloop {
     public static ITrinkety TRINKETY_INSTANCE;
     public static GloopXPlat GLOOPXPLAT;
 
-    public static final Supplier<Registries> REGISTRIES = Suppliers.memoize(() -> Registries.get(MOD_ID));
+    public static final Supplier<RegistrarManager> REGISTRIES = Suppliers.memoize(() -> RegistrarManager.get(MOD_ID));
 
 	public static final void logPrint(String message){
         if(Platform.isDevelopmentEnvironment()){

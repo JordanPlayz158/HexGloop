@@ -1,10 +1,10 @@
 package com.samsthenerd.hexgloop.casting.tags;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -42,7 +42,7 @@ public class OpCheckTag implements ConstMediaAction{
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
         Iota inputIota = args.get(0);
         String tag = OperatorUtilsKt.getString(args, 1, getArgc());
         boolean hasTag = TagUtils.getTagChecker(inputIota, context).hasTag(tag);
@@ -50,7 +50,7 @@ public class OpCheckTag implements ConstMediaAction{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
     

@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +16,6 @@ import at.petrak.hexcasting.api.casting.ParticleSpray;
 import at.petrak.hexcasting.api.casting.RenderedSpell;
 import at.petrak.hexcasting.api.casting.castables.SpellAction;
 import at.petrak.hexcasting.api.casting.castables.SpellAction.DefaultImpls;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.mishaps.MishapBadEntity;
@@ -37,11 +37,11 @@ public class OpFrogEat implements SpellAction {
     @Override
     public int getArgc(){ return 1;}
 
-    public boolean hasCastingSound(@NotNull CastingContext ctx){
+    public boolean hasCastingSound(@NotNull CastingEnvironment ctx){
         return false;
     }
 
-    public boolean awardsCastingStat(@NotNull CastingContext ctx){
+    public boolean awardsCastingStat(@NotNull CastingEnvironment ctx){
         return true;
     }
 
@@ -60,7 +60,7 @@ public class OpFrogEat implements SpellAction {
     }
 
     @Override
-    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingContext context){
+    public Triple<RenderedSpell, Integer, List<ParticleSpray>> execute(List<? extends Iota> args, CastingEnvironment context){
         IContextHelper contextHelper = (IContextHelper)(Object)context;
         if(!contextHelper.isFrogCasting()){
             MishapThrowerWrapper.throwMishap(new MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh(List.of("frog_casting")));
@@ -89,7 +89,7 @@ public class OpFrogEat implements SpellAction {
             this.frogStack = frogStack;
         }
 
-        public void cast(CastingContext ctx){
+        public void cast(CastingEnvironment ctx){
             if(target == null || frogStack == null) return;
             FrogEntity fakeFrog = EntityType.FROG.create(ctx.getWorld());
             fakeFrog.setVariant(HexGloopItems.CASTING_FROG_ITEM.get().getFrogVariant(frogStack));
@@ -103,7 +103,7 @@ public class OpFrogEat implements SpellAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

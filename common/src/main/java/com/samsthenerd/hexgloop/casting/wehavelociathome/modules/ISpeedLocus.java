@@ -2,7 +2,7 @@ package com.samsthenerd.hexgloop.casting.wehavelociathome.modules;
 
 import java.util.List;
 
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 

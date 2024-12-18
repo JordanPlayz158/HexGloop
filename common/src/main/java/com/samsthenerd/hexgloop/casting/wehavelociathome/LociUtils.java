@@ -1,5 +1,8 @@
 package com.samsthenerd.hexgloop.casting.wehavelociathome;
 
+import at.petrak.hexcasting.api.casting.eval.ResolvedPatternType;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
+import at.petrak.hexcasting.api.casting.eval.vm.FunctionalData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +10,7 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.IMediaProviderL
 import com.samsthenerd.hexgloop.mixins.lociathome.MixinExposeHarnessStuff;
 
 import at.petrak.hexcasting.api.addldata.ADMediaHolder;
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.casting.ResolvedPatternType;
-import at.petrak.hexcasting.api.spell.casting.eval.FunctionalData;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.PatternIota;
 import net.minecraft.util.Pair;
@@ -43,7 +43,7 @@ public class LociUtils {
                 amountRemaining += mediaHolder.getMedia();
                 continue;
             }
-            int amtToTake = Math.min(amountRemaining, mediaHolder.getMedia());
+            long amtToTake = Math.min(amountRemaining, mediaHolder.getMedia());
             amountRemaining -= amtToTake;
             if(!simulate)
                 mediaHolder.setMedia(mediaHolder.getMedia() - amtToTake);
@@ -52,7 +52,7 @@ public class LociUtils {
             if(amount == -1){
                 amountRemaining += impetus.getMedia();
             } else {
-                int amtToTake = Math.min(amountRemaining, impetus.getMedia());
+                long amtToTake = Math.min(amountRemaining, impetus.getMedia());
                 amountRemaining -= amtToTake;
                 if(!simulate)
                     impetus.setMedia(impetus.getMedia() - amtToTake);
@@ -61,7 +61,7 @@ public class LociUtils {
         return amountRemaining;
     }
 
-    public static boolean addOrEmbedIota(CastingHarness harness, Iota iota){
+    public static boolean addOrEmbedIota(CastingVM harness, Iota iota){
         // so we want to either embed the iota in a new paren or add it to existing or add it to the stack?
         if(iota instanceof PatternIota patternIota){
             // if it's a pattern iota deal with it elsewhere maybe ?

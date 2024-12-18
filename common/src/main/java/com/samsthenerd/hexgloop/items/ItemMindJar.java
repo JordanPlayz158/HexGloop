@@ -1,12 +1,12 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -29,7 +29,7 @@ public class ItemMindJar extends Item implements IFlayableItem{
     }
 
     @Override
-    public VillagerEntity getFlayableVillager(ItemStack stack, @Nullable ItemEntity itemEnt, CastingContext ctx){
+    public VillagerEntity getFlayableVillager(ItemStack stack, @Nullable ItemEntity itemEnt, CastingEnvironment ctx){
         NbtCompound entNbt = stack.getSubNbt(IMindTargetItem.STORED_MIND_TAG);
         Optional<Entity> maybeEnt = EntityType.getEntityFromNbt(entNbt, ctx.getWorld());
         if(maybeEnt.orElse(null) instanceof VillagerEntity villager){
@@ -54,7 +54,7 @@ public class ItemMindJar extends Item implements IFlayableItem{
     }
 
     @Override
-    public void handleBrainsweep(ItemStack stack, @Nullable ItemEntity itemEnt, CastingContext ctx, Consumer<ItemStack> resultConsumer){
+    public void handleBrainsweep(ItemStack stack, @Nullable ItemEntity itemEnt, CastingEnvironment ctx, Consumer<ItemStack> resultConsumer){
         stack.decrement(1);
         resultConsumer.accept(new ItemStack(HexGloopItems.EMPTY_JAR_ITEM.get()));
     }

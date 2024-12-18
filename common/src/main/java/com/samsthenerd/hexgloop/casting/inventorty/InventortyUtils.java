@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting.inventorty;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,6 @@ import com.samsthenerd.hexgloop.casting.IContextHelper;
 import com.samsthenerd.hexgloop.casting.MishapThrowerWrapper;
 import com.samsthenerd.hexgloop.casting.truenameclassaction.MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.iota.DoubleIota;
 import at.petrak.hexcasting.api.casting.iota.EntityIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -33,17 +33,18 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.inventory.StackReference;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Nameable;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
 import net.minecraft.village.MerchantInventory;
 
 public class InventortyUtils {
-    public static KittyContext assertKittyCasting(CastingContext ctx){
+    public static KittyContext assertKittyCasting(CastingEnvironment ctx){
         if(!((IContextHelper)(Object)ctx).isKitty()){
             MishapThrowerWrapper.throwMishap(new MishapChloeIsGonnaFindSoManyWaysToBreakThisHuh(List.of("inventorty")));
             return null;
@@ -55,7 +56,7 @@ public class InventortyUtils {
 
     // idx and argc just so we can throw proper mishaps
     @Nullable
-    public static GrabbableStack getStackFromGrabbable(Iota grabbable, CastingContext ctx, int idx, int argc){
+    public static GrabbableStack getStackFromGrabbable(Iota grabbable, CastingEnvironment ctx, int idx, int argc){
         KittyContext kCtx = ((IContextHelper)(Object)ctx).getKittyContext();
         if(grabbable instanceof DoubleIota dIota){
             int grabSlot = (int)Math.floor(dIota.getDouble());
@@ -273,7 +274,7 @@ public class InventortyUtils {
 
         // call this to set the slot to something actually useable
         // return whether or not it actually found a valid slot
-        public boolean findSlot(ItemStack stackWith, CastingContext ctx){
+        public boolean findSlot(ItemStack stackWith, CastingEnvironment ctx){
             KittyContext kCtx = ((IContextHelper)(Object)ctx).getKittyContext();
             Slot lastSlot = null;
             for(Slot maybeSlot : kCtx.getSlots(inventoryIndex)){
@@ -329,7 +330,7 @@ public class InventortyUtils {
                 ScreenHandler handler = kCtx.playerInv.player.currentScreenHandler;
                 Identifier handlerID = null;
                 try {
-                    handlerID = Registry.SCREEN_HANDLER.getId(handler.getType());
+                    handlerID = Registries.SCREEN_HANDLER.getId(handler.getType());
                 } catch(Exception e){} // ignore it, it's fine
                 if(handlerID != null){
                     // try to get the name of the screen handler -- who knows if it'll actually translate ! should work fine for vanilla handlers atleast
@@ -357,12 +358,12 @@ public class InventortyUtils {
         if(hardToMapIDs.containsKey(handlerID)){
             return hardToMapIDs.get(handlerID);
         }
-        Block maybeBlock = Registry.BLOCK.get(handlerID);
+        Block maybeBlock = Registries.BLOCK.get(handlerID);
         if(maybeBlock != null && maybeBlock != Blocks.AIR){
             return maybeBlock.getTranslationKey();
         }
         // for things like crafting_table or smithing_table - really only 2 vanilla cases but who knows, maybe catch some modded ones?
-        Block maybeTableBlock = Registry.BLOCK.get(new Identifier(handlerID.getNamespace(), handlerID.getPath() + "_table"));
+        Block maybeTableBlock = Registries.BLOCK.get(new Identifier(handlerID.getNamespace(), handlerID.getPath() + "_table"));
         if(maybeTableBlock != null && maybeTableBlock != Blocks.AIR){
             return maybeTableBlock.getTranslationKey();
         }

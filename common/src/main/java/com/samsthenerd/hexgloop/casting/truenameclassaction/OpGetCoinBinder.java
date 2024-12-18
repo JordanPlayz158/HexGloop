@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting.truenameclassaction;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,8 +11,6 @@ import com.samsthenerd.hexgloop.items.HexGloopItems;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
@@ -67,8 +67,8 @@ public class OpGetCoinBinder implements ConstMediaAction {
     }
 
     @Override
-    public List<Iota> execute(List<? extends Iota> args, CastingContext context){
-        ServerPlayerEntity player = context.getCaster();
+    public List<Iota> execute(List<? extends Iota> args, CastingEnvironment context){
+        ServerPlayerEntity player = (ServerPlayerEntity) context.getCastingEntity();
         ItemStack maybeCoinStack;
         if(!isCooler){
             kotlin.Pair<ItemStack, Hand> result = context.getHeldItemToOperateOn(stack -> {
@@ -100,7 +100,7 @@ public class OpGetCoinBinder implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
         return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
     }
 }

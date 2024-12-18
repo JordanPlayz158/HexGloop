@@ -1,7 +1,7 @@
 package com.samsthenerd.hexgloop.casting.wehavelociathome;
 
-import at.petrak.hexcasting.api.block.circle.BlockEntityAbstractImpetus;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
+import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import net.minecraft.block.BlockState;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +22,7 @@ public interface ILociAtHome {
     }
 
     // try not to break stuff + try to be aware of consideration-type stuff i guess
-    default public void rawLociCall(BlockPos pos, BlockState bs, World world, CastingHarness harness){}
+    default public void rawLociCall(BlockPos pos, BlockState bs, World world, CastingVM harness){}
 
     default public void waveEnter(BlockPos pos, BlockState bs, World world, BlockEntityAbstractImpetus impetus){}
 

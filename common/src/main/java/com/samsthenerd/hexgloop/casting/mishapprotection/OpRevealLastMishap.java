@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.casting.mishapprotection;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,6 @@ import com.samsthenerd.hexgloop.compat.moreIotas.MoreIotasMaybeIotas;
 
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction;
 import at.petrak.hexcasting.api.casting.eval.OperationResult;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import dev.architectury.platform.Platform;
@@ -23,7 +24,7 @@ public class OpRevealLastMishap implements ConstMediaAction {
    }
 
    @Override
-   public List<Iota> execute(List<? extends Iota> args, CastingContext ctx){
+   public List<Iota> execute(List<? extends Iota> args, CastingEnvironment ctx){
       Text mishapText = ((IMishapStorage)(Object)ctx).getLastMishap();
       Text wrapperText = Text.translatable("hexgloop.mishap.catch_wrapper" + (mishapText == null ? ".none" : ""), mishapText);
       List<Iota> result = new ArrayList<>();
@@ -36,8 +37,8 @@ public class OpRevealLastMishap implements ConstMediaAction {
    }
 
    @Override
-   public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingContext castingContext){
-      return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
+   public OperationResult operate(CastingEnvironment env, CastingImage image, SpellContinuation continuation){
+      return ConstMediaAction.DefaultImpls.operate(this, env, image, continuation);
    }
 
    public int getMediaCost(){
