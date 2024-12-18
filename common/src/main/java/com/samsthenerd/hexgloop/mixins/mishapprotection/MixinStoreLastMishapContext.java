@@ -1,13 +1,13 @@
 package com.samsthenerd.hexgloop.mixins.mishapprotection;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import org.spongepowered.asm.mixin.Mixin;
 
 import com.samsthenerd.hexgloop.casting.mishapprotection.IMishapStorage;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import net.minecraft.text.Text;
 
-@Mixin(CastingContext.class)
+@Mixin(CastingEnvironment.class)
 public class MixinStoreLastMishapContext implements IMishapStorage{
     private Text lastMishap = null;
 

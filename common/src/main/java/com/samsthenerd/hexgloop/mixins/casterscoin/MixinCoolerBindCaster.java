@@ -13,7 +13,7 @@ import com.samsthenerd.hexgloop.items.ItemCastersCoin;
 import at.petrak.hexcasting.api.casting.OperatorUtils;
 import at.petrak.hexcasting.api.casting.ParticleSpray;
 import at.petrak.hexcasting.api.casting.RenderedSpell;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.casting.actions.rw.OpTheCoolerWrite;
 import kotlin.Triple;
@@ -26,7 +26,7 @@ import net.minecraft.item.ItemStack;
 public class MixinCoolerBindCaster {
     @Inject(method ="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;",
     at = @At("RETURN"), remap=false)
-    private void bindCoinToCaster(@NotNull List<? extends Iota> args, @NotNull CastingContext ctx, CallbackInfoReturnable<Triple<RenderedSpell, Integer, List<ParticleSpray>>> cir){
+    private void bindCoinToCaster(@NotNull List<? extends Iota> args, @NotNull CastingEnvironment ctx, CallbackInfoReturnable<Triple<RenderedSpell, Integer, List<ParticleSpray>>> cir){
         Entity ent = OperatorUtils.getEntity(args, 0, ((OpTheCoolerWrite)(Object)(this)).getArgc());
         // we know it passed all the checks already since we're at return ?
         if(cir.getReturnValue() == null) return; // gonna add this just in case it tries to call here from a mishap?

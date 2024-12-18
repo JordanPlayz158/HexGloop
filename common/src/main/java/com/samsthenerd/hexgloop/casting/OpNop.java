@@ -43,8 +43,8 @@ public class OpNop implements ConstMediaAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
-        return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment CastingEnvironment){
+        return ConstMediaAction.DefaultImpls.operate(this, continuation, stack, ravenmind, CastingEnvironment);
     }
 }
 

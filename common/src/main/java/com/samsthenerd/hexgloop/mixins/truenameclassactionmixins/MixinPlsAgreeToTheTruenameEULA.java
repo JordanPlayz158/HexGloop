@@ -17,7 +17,7 @@ import net.minecraft.text.Text;
 
 @Mixin(OpWrite.class)
 public class MixinPlsAgreeToTheTruenameEULA {
-    @WrapOperation(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;",
+    @WrapOperation(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Lkotlin/Triple;",
     at=@At(value="INVOKE", target="at/petrak/hexcasting/api/spell/mishaps/MishapOthersName$Companion.getTrueNameFromDatum (Lat/petrak/hexcasting/api/spell/iota/Iota;Lnet/minecraft/entity/player/PlayerEntity;)Lnet/minecraft/entity/player/PlayerEntity;"))
     public PlayerEntity wrapTruenameCheckerForEULA(MishapOthersName.Companion staticCompanion, Iota iota, PlayerEntity thisPlayer, Operation<PlayerEntity> original){
         // probably want to add a check for if the player has agreed already or not

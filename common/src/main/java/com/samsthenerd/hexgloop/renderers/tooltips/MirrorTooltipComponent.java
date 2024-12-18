@@ -7,7 +7,6 @@ import com.samsthenerd.hexgloop.renderers.HUDOverlay;
 import com.samsthenerd.hexgloop.utils.GloopyRenderUtils;
 
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -43,7 +42,7 @@ public class MirrorTooltipComponent implements TooltipComponent {
         // renderText happens *before* renderImage for some asinine reason
 //                RenderSystem.disableBlend();
 
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
         RenderSystem.disableCull();
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA,
             GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);

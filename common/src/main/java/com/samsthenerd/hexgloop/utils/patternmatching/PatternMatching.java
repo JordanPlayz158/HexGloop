@@ -2,6 +2,7 @@ package com.samsthenerd.hexgloop.utils.patternmatching;
 
 
 
+import at.petrak.hexcasting.api.casting.eval.SpecialPatterns;
 import javax.annotation.Nullable;
 
 import com.mojang.datafixers.util.Pair;
@@ -9,7 +10,6 @@ import com.mojang.datafixers.util.Pair;
 import at.petrak.hexcasting.api.HexAPI;
 import at.petrak.hexcasting.api.PatternRegistry;
 import at.petrak.hexcasting.api.casting.castables.Action;
-import at.petrak.hexcasting.api.spell.casting.SpecialPatterns;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.api.utils.PatternNameHelper;
 import net.minecraft.text.Text;

@@ -8,7 +8,7 @@ import com.samsthenerd.hexgloop.network.HexGloopNetwork;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.api.utils.NBTHelper;
 import at.petrak.hexcasting.common.entities.EntityWallScroll;
-import at.petrak.hexcasting.common.items.ItemScroll;
+import at.petrak.hexcasting.common.items.storage.ItemScroll;
 import dev.architectury.networking.NetworkManager;
 import dev.architectury.networking.NetworkManager.PacketContext;
 import io.netty.buffer.Unpooled;
@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 
 public class BookScrollHandlers {
     public static void handleReplaceScroll(PacketByteBuf buf, PacketContext context){
@@ -37,7 +38,7 @@ public class BookScrollHandlers {
                 return;
             }
             if(pattern == null) return;
-            Entity maybeWallScroll = serverPlayer.getWorld().getEntity(scrollUUID);
+            Entity maybeWallScroll = ((ServerWorld)serverPlayer.getWorld()).getEntity(scrollUUID);
             HexGloop.logPrint("got down to a maybe scroll");
             if(maybeWallScroll == null){
                 HexGloop.logPrint("maybe scroll is null");
@@ -57,7 +58,7 @@ public class BookScrollHandlers {
                 newWallScroll.setUuid(wallScroll.getUuid()); // keep the same uuid so we don't break hexes that rely on it
                 NBTHelper.putCompound(newScroll, ItemScroll.TAG_PATTERN, pattern.serializeToNBT());
                 wallScroll.discard();
-                serverPlayer.world.spawnEntity(newWallScroll);
+                serverPlayer.getWorld().spawnEntity(newWallScroll);
                 // wallScroll.scroll = newScroll;
                 // IXplatAbstractions.INSTANCE.sendPacketNear(wallScroll.getPos(), 32.0, serverPlayer.getWorld(),
                 //     new MsgRecalcWallScrollDisplayAck(wallScroll.getId(), wallScroll.getShowsStrokeOrder()));

@@ -9,7 +9,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.samsthenerd.hexgloop.items.tooltips.ScriptTooltipData;
 
 import at.petrak.hexcasting.api.casting.math.HexPattern;
-import at.petrak.hexcasting.client.RenderLib;
+import at.petrak.hexcasting.client.render.RenderLib;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
@@ -116,7 +116,7 @@ public class ScriptTooltipComponent implements TooltipComponent {
             ps.push();
             ps.translate(x, y, 100);
 
-            RenderSystem.setShader(GameRenderer::getPositionColorShader);
+            RenderSystem.setShader(GameRenderer::getPositionColorProgram);
             RenderSystem.disableCull();
             RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA,
                 GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);

@@ -13,7 +13,7 @@ import com.samsthenerd.hexgloop.items.ItemCastersCoin;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
 import at.petrak.hexcasting.common.casting.arithmetic.operator.OperatorUtilsKt;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.casting.actions.rw.OpTheCoolerRead;
 import net.minecraft.entity.Entity;
@@ -26,7 +26,7 @@ import net.minecraft.server.world.ServerWorld;
 public class MixinCoolerReadCoinOnce {
     @WrapOperation(method ="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Ljava/util/List;",
     at = @At(value="INVOKE", target="at/petrak/hexcasting/api/addldata/ADIotaHolder.readIota (Lnet/minecraft/server/world/ServerWorld;)Lat/petrak/hexcasting/api/spell/iota/Iota;", ordinal=0))
-    private Iota readCoinOnce(ADIotaHolder holder, ServerWorld world, Operation<Iota> original, @NotNull List<? extends Iota> args, @NotNull CastingContext ctx){
+    private Iota readCoinOnce(ADIotaHolder holder, ServerWorld world, Operation<Iota> original, @NotNull List<? extends Iota> args, @NotNull CastingEnvironment ctx){
         Iota iota = original.call(holder, world);
         Entity ent = OperatorUtils.getEntity(args, 0, ((OpTheCoolerRead)(Object)(this)).getArgc());
         ItemStack heldStack = ItemStack.EMPTY;

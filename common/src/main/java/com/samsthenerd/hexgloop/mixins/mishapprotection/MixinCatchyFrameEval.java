@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.mishapprotection;
 
+import at.petrak.hexcasting.api.casting.eval.vm.FrameFinishEval;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,6 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.samsthenerd.hexgloop.casting.mishapprotection.ICatchyFrameEval;
 
-import at.petrak.hexcasting.api.spell.casting.eval.FrameFinishEval;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import kotlin.Pair;
@@ -48,7 +48,7 @@ public class MixinCatchyFrameEval implements ICatchyFrameEval {
     }
 
     // add false to the stack
-    @WrapOperation(method="evaluate(Lat/petrak/hexcasting/api/spell/casting/eval/SpellContinuation;Lnet/minecraft/server/world/ServerWorld;Lat/petrak/hexcasting/api/spell/casting/CastingHarness;)Lat/petrak/hexcasting/api/spell/casting/CastingHarness$CastResult;",
+    @WrapOperation(method="evaluate(Lat/petrak/hexcasting/api/spell/casting/eval/SpellContinuation;Lnet/minecraft/server/world/ServerWorld;Lat/petrak/hexcasting/api/spell/casting/CastingVM;)Lat/petrak/hexcasting/api/spell/casting/CastingVM$CastResult;",
     at=@At(value="INVOKE", target="kotlin/collections/CollectionsKt.toList (Ljava/lang/Iterable;)Ljava/util/List;"))
     public List<Object> addFalseToStack(Iterable<Object> originalStack, Operation<List<Object>> original){
         List<Object> newStack = original.call(originalStack);

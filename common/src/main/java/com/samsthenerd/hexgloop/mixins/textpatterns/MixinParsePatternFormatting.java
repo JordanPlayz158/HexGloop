@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.text.TextVisitFactory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -17,7 +18,6 @@ import com.samsthenerd.hexgloop.utils.StringsToDirMap;
 
 import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
-import net.minecraft.client.font.TextVisitFactory;
 import net.minecraft.text.CharacterVisitor;
 import net.minecraft.text.Style;
 

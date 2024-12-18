@@ -28,7 +28,7 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
     public void walkParticle(Entity pEntity) {
         if (getCachedState().getBlock() instanceof BlockConjured conjured && !(conjured instanceof BlockConjuredLight)) {
             for (int i = 0; i < 3; ++i) {
-                int color = this.colorizer.getColor(pEntity.age, pEntity.getPos()
+                int color = this.colorizer.getColorProvider().getColor(pEntity.age, pEntity.getPos()
                     .add(new Vec3d(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat()).multiply(
                         RANDOM.nextFloat() * 3)));
                 assert world != null;
@@ -45,7 +45,7 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
 
     public void particleEffect() {
         if (getCachedState().getBlock() instanceof BlockConjured) {
-            int color = this.colorizer.getColor(RANDOM.nextFloat() * 16384,
+            int color = this.colorizer.getColorProvider().getColor(RANDOM.nextFloat() * 16384,
                 new Vec3d(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat()).multiply(
                     RANDOM.nextFloat() * 3));
             assert world != null;
@@ -75,7 +75,7 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
 
     public void landParticle(Entity entity, int number) {
         for (int i = 0; i < number * 2; i++) {
-            int color = this.colorizer.getColor(entity.age, entity.getPos()
+            int color = this.colorizer.getColorProvider().getColor(entity.age, entity.getPos()
                 .add(new Vec3d(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat()).multiply(
                     RANDOM.nextFloat() * 3)));
             assert world != null;

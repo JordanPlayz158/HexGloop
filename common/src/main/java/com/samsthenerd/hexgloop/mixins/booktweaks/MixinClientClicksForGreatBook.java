@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.booktweaks;
 
+import at.petrak.hexcasting.common.items.storage.ItemScroll;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -16,7 +17,6 @@ import com.samsthenerd.hexgloop.misc.clientgreatbook.PatternPageLookup;
 import com.samsthenerd.hexgloop.utils.patternmatching.PatternMatching;
 
 import at.petrak.hexcasting.api.casting.iota.PatternIota;
-import at.petrak.hexcasting.common.items.ItemScroll;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;

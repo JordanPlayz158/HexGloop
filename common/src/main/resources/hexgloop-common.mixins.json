@@ -62,7 +62,7 @@
       "booktweaks.MixinCopyPatternToScrolls",
       "misc.MixinExposeCursorStackRef",
       "misc.MixinShowMediaWorth",
-      "castingmodifiers.MixinCastingContextModifiers",
+      "castingmodifiers.MixinCastingEnvironmentModifiers",
       "misc.MixinItemFlaying",
       "misc.MixinItemFlaying$MixinBrainsweepSpell",
       "misc.MixinHonorLibraryCardReads",

@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.textpatterns;
 
+import at.petrak.hexcasting.client.render.RenderLib;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +24,6 @@ import com.samsthenerd.hexgloop.screens.PatternStyle;
 import at.petrak.hexcasting.api.casting.iota.PatternIota;
 import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
-import at.petrak.hexcasting.client.RenderLib;
 import at.petrak.hexcasting.common.lib.HexItems;
 import kotlin.Pair;
 import net.minecraft.item.ItemStack;

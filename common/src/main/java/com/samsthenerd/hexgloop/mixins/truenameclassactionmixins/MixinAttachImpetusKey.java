@@ -13,7 +13,7 @@ import com.samsthenerd.hexgloop.items.ItemCastersCoin;
 
 import at.petrak.hexcasting.api.addldata.ADIotaHolder;
 import at.petrak.hexcasting.api.casting.iota.Iota;
-import at.petrak.hexcasting.common.blocks.circles.impetuses.BlockStoredPlayerImpetus;
+import at.petrak.hexcasting.common.blocks.circles.impetuses.BlockEntityRedstoneImpetus;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
@@ -26,7 +26,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-@Mixin(BlockStoredPlayerImpetus.class)
+@Mixin(BlockEntityRedstoneImpetus.class)
 public class MixinAttachImpetusKey {
     @Inject(method="onUse(Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/util/hit/BlockHitResult;)Lnet/minecraft/util/ActionResult;", 
         at=@At(value="INVOKE", target="at/petrak/hexcasting/common/blocks/entity/BlockEntityStoredPlayerImpetus.setPlayer (Lcom/mojang/authlib/GameProfile;Ljava/util/UUID;)V"),

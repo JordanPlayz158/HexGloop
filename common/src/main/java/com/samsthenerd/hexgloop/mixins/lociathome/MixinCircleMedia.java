@@ -10,9 +10,9 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.samsthenerd.hexgloop.casting.wehavelociathome.LociUtils;
 
 import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 
-@Mixin(CastingHarness.class)
+@Mixin(CastingVM.class)
 public class MixinCircleMedia {
     // tell it about the media we can use from any components
     @WrapOperation(method="withdrawMedia(IZ)I",

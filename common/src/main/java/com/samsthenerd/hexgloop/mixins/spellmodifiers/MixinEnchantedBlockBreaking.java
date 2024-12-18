@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.spellmodifiers;
 
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import java.util.Set;
 
 import javax.annotation.Nullable;
@@ -11,7 +12,6 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.samsthenerd.hexgloop.casting.IContextHelper;
 import com.samsthenerd.hexgloop.casting.gloopifact.ICADHarnessStorage;
 
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -26,10 +26,10 @@ public class MixinEnchantedBlockBreaking {
     )
     private ItemStack modifyBreakingBlock(ItemStack original, BlockPos pos, boolean drop, @Nullable Entity breakingEntity, int maxUpdateDepth){
         if(breakingEntity instanceof ServerPlayerEntity sPlayer){
-            Set<CastingHarness> harnesses = ((ICADHarnessStorage)(Object)sPlayer).getHarnesses();
+            Set<CastingVM> harnesses = ((ICADHarnessStorage)(Object)sPlayer).getHarnesses();
             if(!harnesses.iterator().hasNext()) return original;
-            CastingHarness harness = harnesses.iterator().next();
-            ItemStack maybeStack = ((IContextHelper)(Object)(harness.getCtx())).getCastingItem();
+            CastingVM harness = harnesses.iterator().next();
+            ItemStack maybeStack = ((IContextHelper)(Object)(harness.getEnv())).getCastingItem();
             if(maybeStack != null){
                 return maybeStack;
             }

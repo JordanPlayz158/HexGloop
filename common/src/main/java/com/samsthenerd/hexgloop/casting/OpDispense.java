@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.casting;
 
+import at.petrak.hexcasting.api.casting.OperatorUtils;
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 
@@ -139,8 +140,8 @@ public class OpDispense implements SpellAction {
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
-        return DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment CastingEnvironment){
+        return DefaultImpls.operate(this, continuation, stack, ravenmind, CastingEnvironment);
     }
 }
 

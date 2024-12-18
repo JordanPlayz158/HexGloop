@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.wnboi;
 
+import at.petrak.hexcasting.common.msgs.MsgShiftScrollC2S;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,7 +13,6 @@ import com.samsthenerd.hexgloop.items.ItemFidget;
 import com.samsthenerd.hexgloop.items.ItemMultiFocus;
 
 import at.petrak.hexcasting.common.items.storage.ItemSpellbook;
-import at.petrak.hexcasting.common.network.MsgShiftScrollSyn;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
@@ -20,7 +20,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 
-@Mixin(MsgShiftScrollSyn.class)
+@Mixin(MsgShiftScrollC2S.class)
 public class MixinHandleScrolling{
     @Shadow
     protected boolean invertSpellbook;

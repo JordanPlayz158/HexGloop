@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.network;
 
+import at.petrak.hexcasting.api.casting.eval.ResolvedPattern;
 import java.util.List;
 
 import com.samsthenerd.hexgloop.HexGloop;
@@ -9,11 +10,10 @@ import com.samsthenerd.hexgloop.mixins.orchard.MixinServerPlayerOrchard;
 import com.samsthenerd.hexgloop.network.booktweaks.BookScrollHandlers;
 import com.samsthenerd.hexgloop.network.booktweaks.BookScrollHandlersClient;
 
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.casting.ResolvedPattern;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import at.petrak.hexcasting.api.casting.math.HexDir;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
-import at.petrak.hexcasting.common.network.MsgOpenSpellGuiAck;
+import at.petrak.hexcasting.common.msgs.MsgOpenSpellGuiS2C;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import dev.architectury.event.events.common.PlayerEvent;
 import dev.architectury.networking.NetworkManager;
@@ -53,13 +53,13 @@ public class HexGloopNetwork {
             boolean clear = buf.readBoolean();
             if(clear) IXplatAbstractions.INSTANCE.clearCastingData((ServerPlayerEntity) player);
             
-            CastingHarness harness = IXplatAbstractions.INSTANCE.getHarness(serverPlayer, Hand.MAIN_HAND);
-            List<ResolvedPattern> patterns = IXplatAbstractions.INSTANCE.getPatterns(serverPlayer);
+            CastingVM harness = IXplatAbstractions.INSTANCE.getStaffcastVM(serverPlayer, Hand.MAIN_HAND);
+            List<ResolvedPattern> patterns = IXplatAbstractions.INSTANCE.getPatternsSavedInUi(serverPlayer);
             var descs = harness.generateDescs(); 
 
             IXplatAbstractions.INSTANCE.sendPacketToPlayer(serverPlayer,
-                new MsgOpenSpellGuiAck(Hand.MAIN_HAND, patterns, descs.getFirst(), descs.getSecond(), descs.getThird(),
-                    harness.getParenCount()));
+                new MsgOpenSpellGuiS2C(Hand.MAIN_HAND, patterns, descs.getFirst(), descs.getSecond(),
+                    harness.getImage().getParenCount()));
         });
 
         NetworkManager.registerReceiver(NetworkManager.Side.C2S, C2S_UPDATE_ORCHARD_ID, (buf, context) -> {

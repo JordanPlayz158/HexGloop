@@ -1,5 +1,8 @@
 package com.samsthenerd.hexgloop.items;
 
+import at.petrak.hexcasting.common.casting.PatternRegistryManifest;
+import at.petrak.hexcasting.common.lib.hex.HexActions;
+import at.petrak.hexcasting.server.ScrungledPatternsSave;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -61,8 +64,10 @@ public class ItemDyeableSpellbook extends ItemSpellbook implements DyeableItem{
         if(!(stack.getItem() instanceof LabelyItem lItem)) return super.use(world, user, hand);
         if(world instanceof ServerWorld sWorld && stack.getNbt() != null 
         && stack.getNbt().contains(GREAT_HOLDER_TAG) && stack.getNbt().getBoolean(GREAT_HOLDER_TAG)){
-            // want to update it 
-            Map<String, Pair<Identifier, HexDir>> allGreatSpells = PatternRegistry.getPerWorldPatterns(sWorld);
+            // want to update it
+            // TODO: I think this is the new way of accessing per world spells/patterns although
+            //   probably gonna need to make a mixin to expose the map directly
+            Map<String, Pair<Identifier, HexDir>> allGreatSpells = ScrungledPatternsSave.open(sWorld);
             for(Entry<String, Pair<Identifier, HexDir>> greatSpell : allGreatSpells.entrySet()){
                 HexPattern thisPattern = HexPattern.fromAngles(greatSpell.getKey(), greatSpell.getValue().getSecond());
                 PatternIota thisIotaPattern = new PatternIota(thisPattern);

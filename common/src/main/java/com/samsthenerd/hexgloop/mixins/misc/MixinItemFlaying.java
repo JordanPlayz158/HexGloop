@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.misc;
 
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -25,7 +26,6 @@ import at.petrak.hexcasting.api.misc.MediaConstants;
 import at.petrak.hexcasting.api.mod.HexConfig;
 import at.petrak.hexcasting.api.casting.ParticleSpray;
 import at.petrak.hexcasting.api.casting.RenderedSpell;
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
 import at.petrak.hexcasting.api.casting.iota.EntityIota;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.common.casting.actions.spells.great.OpBrainsweep;
@@ -48,10 +48,10 @@ import net.minecraft.util.math.Vec3d;
 @Mixin(OpBrainsweep.class)
 public class MixinItemFlaying {
 
-    @WrapOperation(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;",
+    @WrapOperation(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Lkotlin/Triple;",
     at=@At(value="INVOKE", target="at/petrak/hexcasting/api/spell/OperatorUtils.getVillager (Ljava/util/List;II)Lnet/minecraft/entity/passive/VillagerEntity;"))
     public VillagerEntity findDifferentSacrifice(List<? extends Iota> args, int index, int argc, Operation<VillagerEntity> original, 
-        List<? extends Iota> methodArgsIgnore, CastingContext ctx, @Share("itement") LocalRef<ItemEntity> itemEntRef){
+        List<? extends Iota> methodArgsIgnore, CastingEnvironment ctx, @Share("itement") LocalRef<ItemEntity> itemEntRef){
         // i mean it should always be zero but still
         itemEntRef.set(null); // just reset it in case it still has anything from the last call
         if(index >= 0 && index < args.size()){
@@ -70,9 +70,9 @@ public class MixinItemFlaying {
         return original.call(args, index, argc);
     }
 
-    // @Inject(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;",
+    // @Inject(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Lkotlin/Triple;",
     // at=@At("RETURN"))
-    // public void brainsweepItem(@NotNull List<? extends Iota> args, @NotNull CastingContext ctx, 
+    // public void brainsweepItem(@NotNull List<? extends Iota> args, @NotNull CastingEnvironment ctx,
     //     CallbackInfo ci, @Share("itement") LocalRef<ItemEntity> itemEntRef){
     //     ItemEntity itemEnt = itemEntRef.get();
     //     if(itemEnt == null) return;
@@ -83,7 +83,7 @@ public class MixinItemFlaying {
     //     }
     // }
 
-    // @WrapOperation(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;",
+    // @WrapOperation(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Lkotlin/Triple;",
     // at=@At(value="INVOKE", target="kotlin/Triple.<init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V"), remap=false)
     // public void addSacrificeProviderToSpell(Triple<Object, Object, Object> originalTriple, Object spell, Object cost, Object particleSprays, 
     //     Operation<Void> original, @Share("itement") LocalRef<ItemEntity> itemEntRef){
@@ -95,7 +95,7 @@ public class MixinItemFlaying {
     //     original.call(originalTriple, spell, cost, particleSprays);
     // }
 
-    @ModifyArg(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;",
+    @ModifyArg(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Lkotlin/Triple;",
     at=@At(value="INVOKE", target="kotlin/Triple.<init> (Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V"), remap=false, index=0)
     public Object addSacrificeProviderToSpell(Object spell, @Share("itement") LocalRef<ItemEntity> itemEntRef){
         ItemEntity itemEnt = itemEntRef.get();
@@ -106,12 +106,12 @@ public class MixinItemFlaying {
     }
 
 
-    @Inject(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;", cancellable=true,
+    @Inject(method="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Lkotlin/Triple;", cancellable=true,
     at=@At(value="INVOKE", target="net/minecraft/server/world/ServerWorld.getBlockState (Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;"))
-    public void tryFlayIntoDynamicBlockTarget(@NotNull List<? extends Iota> args, @NotNull CastingContext ctx, 
+    public void tryFlayIntoDynamicBlockTarget(@NotNull List<? extends Iota> args, @NotNull CastingEnvironment ctx,
         CallbackInfoReturnable< Triple<RenderedSpell, Integer, List<ParticleSpray>> > cir, 
         @Local(ordinal = 0) BlockPos pos, @Local(ordinal=0) VillagerEntity sacrifice, @Share("itement") LocalRef<ItemEntity> itemEntRef){
-        
+
         BlockState state = ctx.getWorld().getBlockState(pos);
         if(!(state.getBlock() instanceof IDynamicFlayTarget target)) return;
         // maybe move this into a spell ?
@@ -135,7 +135,7 @@ public class MixinItemFlaying {
             this.pos = pos;
             this.sacrificeProvider = sacrificeProvider;
         }
-        public void cast(CastingContext ctx) {
+        public void cast(CastingEnvironment ctx) {
             // ctx.getWorld().setBlockAndUpdate(pos, BrainsweepRecipe.copyProperties(state, recipe.result))
             BlockState state = ctx.getWorld().getBlockState(pos);
             if(!(state.getBlock() instanceof IDynamicFlayTarget target)) return;
@@ -172,9 +172,9 @@ public class MixinItemFlaying {
             sacrificeProvider = provider;
         }
 
-        @WrapOperation(method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingContext;)V", 
+        @WrapOperation(method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)V",
         at=@At(value="INVOKE", target="at/petrak/hexcasting/common/misc/Brainsweeping.brainsweep (Lnet/minecraft/entity/mob/MobEntity;)V"))
-        public void wrapBrainsweep(MobEntity sacrifice, Operation<Void> original, CastingContext ctx){
+        public void wrapBrainsweep(MobEntity sacrifice, Operation<Void> original, CastingEnvironment ctx){
             if(sacrificeProvider == null){
                 original.call(sacrifice);
             } else {
@@ -189,9 +189,9 @@ public class MixinItemFlaying {
             }
         }
 
-        @WrapOperation(method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingContext;)V", 
+        @WrapOperation(method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)V",
         at=@At(value="INVOKE", target="at/petrak/hexcasting/ktxt/AccessorWrappers.tellWitnessesThatIWasMurdered (Lnet/minecraft/entity/passive/VillagerEntity;Lnet/minecraft/entity/Entity;)V"))
-        public void maybeCancelNotifyDeath(VillagerEntity sacrifice, Entity murderer, Operation<Void> original, CastingContext ctx){
+        public void maybeCancelNotifyDeath(VillagerEntity sacrifice, Entity murderer, Operation<Void> original, CastingEnvironment ctx){
             if(sacrificeProvider != null){
                 ItemStack providerStack = sacrificeProvider.getStack();
                 if(providerStack.getItem() instanceof IFlayableItem flayableItem){
@@ -202,9 +202,9 @@ public class MixinItemFlaying {
         }
 
 
-        @WrapOperation(method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingContext;)V", 
+        @WrapOperation(method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)V",
         at=@At(value="INVOKE", target="net/minecraft/server/world/ServerWorld.playSoundFromEntity (Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/entity/Entity;Lnet/minecraft/sound/SoundEvent;Lnet/minecraft/sound/SoundCategory;FF)V"))
-        public void maybeDontMakeVillagerDeathNoise(ServerWorld world, PlayerEntity player, Entity entity, SoundEvent soundEvent, SoundCategory soundCategory, float probablyVolume, float probablyPitch, Operation<Void> original, CastingContext ctx){
+        public void maybeDontMakeVillagerDeathNoise(ServerWorld world, PlayerEntity player, Entity entity, SoundEvent soundEvent, SoundCategory soundCategory, float probablyVolume, float probablyPitch, Operation<Void> original, CastingEnvironment ctx){
             if(sacrificeProvider != null && soundEvent.equals(SoundEvents.ENTITY_VILLAGER_DEATH)){
                 ItemStack providerStack = sacrificeProvider.getStack();
                 if(providerStack.getItem() instanceof IFlayableItem flayableItem){

@@ -1,5 +1,7 @@
 package com.samsthenerd.hexgloop.misc.clientgreatbook;
 
+import at.petrak.hexcasting.common.lib.hex.HexActions;
+import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -50,8 +52,9 @@ public class GreatBook {
 
     public void clearPattern(Identifier id){
         if(storedPatterns.remove(id) != null){
-            Text patternName = PatternRegistry.lookupPattern(id).action().getDisplayName();
-            MinecraftClient.getInstance().player.sendMessage(Text.translatable("hexgloop.greatbook.removed", patternName));
+            //Text patternName = PatternRegistry.lookupPattern(id).action().getDisplayName();
+            //MinecraftClient.getInstance().player.sendMessage(Text.translatable("hexgloop.greatbook.removed", patternName));
+            MinecraftClient.getInstance().player.sendMessage(Text.translatable("hexgloop.greatbook.removed", id));
             save();
         }
     }

@@ -19,7 +19,7 @@ public class MixinSplitCastingCost {
 
 
     @WrapOperation(
-        method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingContext;)V",
+        method="cast(Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)V",
         at=@At(value="INVOKE", target="at/petrak/hexcasting/api/utils/MediaHelper.extractMedia$default (Lnet/minecraft/item/ItemStack;IZZILjava/lang/Object;)I")
     )
     private int splitMediaCost(ItemStack mediaStack, int cost, boolean drainForBatteries, 

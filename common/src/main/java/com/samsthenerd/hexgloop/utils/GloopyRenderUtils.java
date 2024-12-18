@@ -9,7 +9,7 @@ import com.samsthenerd.hexgloop.HexGloopClient;
 import com.samsthenerd.hexgloop.mixins.textpatterns.MixinSetTessBuffer;
 
 import at.petrak.hexcasting.api.casting.math.HexPattern;
-import at.petrak.hexcasting.client.RenderLib;
+import at.petrak.hexcasting.client.render.RenderLib;
 import kotlin.Pair;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.DiffuseLighting;
@@ -20,11 +20,12 @@ import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.texture.SpriteAtlasTexture;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.ColorHelper.Argb;
-import net.minecraft.util.math.Matrix4f;
+import org.joml.Matrix4f;
 import net.minecraft.util.math.Vec2f;
 
 public class GloopyRenderUtils {
@@ -52,7 +53,7 @@ public class GloopyRenderUtils {
         if (bl) {
             DiffuseLighting.disableGuiDepthLighting();
         }
-        MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformation.Mode.GUI, false, matrixStack2, immediate, LightmapTextureManager.MAX_LIGHT_COORDINATE, OverlayTexture.DEFAULT_UV, model);
+        MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformationMode.GUI, false, matrixStack2, immediate, LightmapTextureManager.MAX_LIGHT_COORDINATE, OverlayTexture.DEFAULT_UV, model);
         immediate.draw();
         RenderSystem.enableDepthTest();
         if (bl) {
@@ -134,7 +135,7 @@ public class GloopyRenderUtils {
         // yoinked and adapted from pattern tooltip
         RenderSystem.enableBlend();
         RenderSystem.enableDepthTest();
-        RenderSystem.setShader(GameRenderer::getPositionColorShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorProgram);
         RenderSystem.disableCull();
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA,
             GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
@@ -163,7 +164,7 @@ public class GloopyRenderUtils {
             // style.isStrikethrough() && style.getColor() != null ? innerColorLight : innerLight);
             innerColorMain, innerColorAccent);
 
-        Matrix4f dotMat = mat.copy();
+        Matrix4f dotMat = new Matrix4f(mat);
         dotMat.multiplyByTranslation(0f, 0f, -(+1f-0.02f)); // dot renders 1F forward for some reason, push it back a bit so it doesn't poke out on signs
 
         RenderLib.drawSpot(dotMat, zappyPoints.get(0), startingDotWidth*lineScale, Argb.getRed(dotColor)/255f, Argb.getGreen(dotColor)/255f, Argb.getBlue(dotColor)/255f, hasStartingDot ? 0.7f : 0f);

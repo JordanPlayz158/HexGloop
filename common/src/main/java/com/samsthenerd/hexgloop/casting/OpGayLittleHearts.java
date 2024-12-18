@@ -81,8 +81,8 @@ public class OpGayLittleHearts implements SpellAction{
     }
 
     @Override
-    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment castingContext){
-        return SpellAction.DefaultImpls.operate(this, continuation, stack, ravenmind, castingContext);
+    public OperationResult operate(SpellContinuation continuation, List<Iota> stack, Iota ravenmind, CastingEnvironment CastingEnvironment){
+        return SpellAction.DefaultImpls.operate(this, continuation, stack, ravenmind, CastingEnvironment);
     }
     
 }

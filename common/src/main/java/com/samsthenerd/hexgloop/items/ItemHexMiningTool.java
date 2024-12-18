@@ -68,7 +68,7 @@ public class ItemHexMiningTool extends ItemHexTool implements IExtendedEnchantab
                 if (instrs == null) {
                     return false;
                 }
-                var ctx = new CastingEnvironment(sPlayer, attacker.getStackInHand(Hand.MAIN_HAND) == stack ? Hand.MAIN_HAND : Hand.OFF_HAND, CastingContext.CastSource.PACKAGED_HEX);
+                var ctx = new CastingEnvironment(sPlayer, attacker.getStackInHand(Hand.MAIN_HAND) == stack ? Hand.MAIN_HAND : Hand.OFF_HAND, CastingEnvironment.CastSource.PACKAGED_HEX);
                 if(((Object)ctx) instanceof IContextHelper ctxHelper){
                     ctxHelper.setCastingItem(stack);
                 }
@@ -96,7 +96,7 @@ public class ItemHexMiningTool extends ItemHexTool implements IExtendedEnchantab
             if (instrs == null) {
                 return false;
             }
-            var ctx = new CastingEnvironment(sPlayer, miner.getStackInHand(Hand.MAIN_HAND) == stack ? Hand.MAIN_HAND : Hand.OFF_HAND, CastingContext.CastSource.PACKAGED_HEX);
+            var ctx = new CastingEnvironment(sPlayer, miner.getStackInHand(Hand.MAIN_HAND) == stack ? Hand.MAIN_HAND : Hand.OFF_HAND, CastingEnvironment.CastSource.PACKAGED_HEX);
             if(((Object)ctx) instanceof IContextHelper ctxHelper){
                 ctxHelper.setCastingItem(stack);
             }

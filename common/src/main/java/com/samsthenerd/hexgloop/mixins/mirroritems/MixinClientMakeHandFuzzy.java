@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.mirroritems;
 
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -53,7 +54,7 @@ public class MixinClientMakeHandFuzzy {
 
     @WrapOperation(method="renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V",
     at=@At(value="INVOKE", target="net/minecraft/client/render/item/BuiltinModelItemRenderer.render (Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformation$Mode;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;II)V"))
-    public void gaslightBuiltInRenderer(BuiltinModelItemRenderer modelItemRenderer, ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Operation<Void> original){
+    public void gaslightBuiltInRenderer(BuiltinModelItemRenderer modelItemRenderer, ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, Operation<Void> original){
         NbtCompound nbt = stack.getNbt();
         VertexConsumerProvider newProvider = vertexConsumers;
         if(nbt != null && nbt.contains(SyncedItemHandling.IS_REFLECTED_TAG, NbtElement.DOUBLE_TYPE)){

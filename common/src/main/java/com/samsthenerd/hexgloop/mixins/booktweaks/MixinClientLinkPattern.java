@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.booktweaks;
 
+import at.petrak.hexcasting.common.items.storage.ItemScroll;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,7 +14,6 @@ import com.samsthenerd.hexgloop.misc.clientgreatbook.PatternPageLookup;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.PatternIota;
-import at.petrak.hexcasting.common.items.ItemScroll;
 import net.minecraft.item.ItemStack;
 import vazkii.patchouli.client.book.BookContents;
 import vazkii.patchouli.client.book.BookEntry;

@@ -35,7 +35,7 @@ import com.samsthenerd.hexgloop.casting.wehavelociathome.modules.ISpeedLocus;
 
 import at.petrak.hexcasting.api.block.circle.BlockCircleComponent;
 import at.petrak.hexcasting.api.casting.circles.BlockEntityAbstractImpetus;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import at.petrak.hexcasting.api.casting.iota.PatternIota;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
@@ -136,7 +136,7 @@ public class MixinLociAtHome implements ILociHandler{
     @WrapOperation(method = "castSpell()V",
     at=@At(value="INVOKE", target="at/petrak/hexcasting/api/block/circle/BlockCircleComponent.getPattern (Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/world/World;)Lat/petrak/hexcasting/api/spell/math/HexPattern;"))
     private HexPattern bigFakeGloopyLociWrap(BlockCircleComponent block, BlockPos pos, BlockState bs, World world, Operation<HexPattern> original, 
-        @Local(ordinal=0) CastingHarness harness, @Local(ordinal = 0) LocalRef<BlockPos> erroredPos){
+        @Local(ordinal=0) CastingVM harness, @Local(ordinal = 0) LocalRef<BlockPos> erroredPos){
         if(shouldExit) return null; // unideal but it'll just skip every new slate
         ILociAtHome locusBlock = LociRegistration.getLocus(bs, pos, world);
         if(locusBlock != null){

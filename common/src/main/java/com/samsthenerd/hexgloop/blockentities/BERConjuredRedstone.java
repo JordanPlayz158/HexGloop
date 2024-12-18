@@ -64,7 +64,7 @@ public class BERConjuredRedstone implements BlockEntityRenderer<BlockEntityConju
             Vec3d baseWorldVec = new Vec3d(be.getPos().getX(), be.getPos().getY(), be.getPos().getZ());
             for(int i = 0; i < 4; i++){
                 Vec3d worldVec = baseWorldVec.add(new Vec3d((nextVec.getX()+1)/2, (nextVec.getY()+1)/2, (nextVec.getZ()+1)/2));
-                int color = colorizer.getColor(time+tickDelta, worldVec);
+                int color = colorizer.getColorProvider().getColor(time+tickDelta, worldVec);
                 buffer.vertex(stack.peek().getPositionMatrix(), (nextVec.getX()+1)/2, (nextVec.getY()+1)/2, (nextVec.getZ()+1)/2)
                     .color((color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF, transPower)
                     // .texture((((i >> 1) & 1) ^ (i & 1)) == 0 ? sprite.getMinU() : sprite.getMaxU(), ((i >> 1) & 1) == 0 ? sprite.getMinV() : sprite.getMaxV())
@@ -75,7 +75,7 @@ public class BERConjuredRedstone implements BlockEntityRenderer<BlockEntityConju
             }
         }
         // RenderSystem.setShaderTexture(0, new Identifier(HexGloop.MOD_ID, "textures/block/conjured_redstone.png"));
-        RenderSystem.setShader(GameRenderer::getPositionColorTexLightmapShader);
+        RenderSystem.setShader(GameRenderer::getPositionColorTexLightmapProgram);
         RenderSystem.setShaderTexture(0, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         BlockPos camPos = MinecraftClient.getInstance().getCameraEntity().getBlockPos();

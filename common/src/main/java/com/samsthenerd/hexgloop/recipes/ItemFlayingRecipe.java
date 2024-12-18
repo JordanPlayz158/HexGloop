@@ -1,20 +1,21 @@
 package com.samsthenerd.hexgloop.recipes;
 
+import at.petrak.hexcasting.common.recipe.ingredient.brainsweep.VillagerIngredient;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.registry.Registries;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.gson.JsonObject;
 import com.samsthenerd.hexgloop.HexGloop;
 import com.samsthenerd.hexgloop.items.IMindTargetItem;
 
-import at.petrak.hexcasting.api.spell.casting.CastingContext;
+import at.petrak.hexcasting.api.casting.eval.CastingEnvironment;
 import at.petrak.hexcasting.common.recipe.BrainsweepRecipe;
 import at.petrak.hexcasting.common.recipe.HexRecipeStuffRegistry;
-import at.petrak.hexcasting.common.recipe.ingredient.VillagerIngredient;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.inventory.Inventory;
@@ -32,7 +33,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.Pair;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.registry.Registry;
 import net.minecraft.world.World;
 
 public class ItemFlayingRecipe implements Recipe<Inventory> {
@@ -193,7 +194,7 @@ public class ItemFlayingRecipe implements Recipe<Inventory> {
             recipe.ingredient.getLeft().write(buf);
             buf.writeVarInt(recipe.ingredient.getRight());
             // result
-            buf.writeIdentifier(Registry.ITEM.getId(recipe.result));
+            buf.writeIdentifier(Registries.ITEM.getId(recipe.result));
             buf.writeVarInt(recipe.resultCount);
             // nbt stuff
             buf.writeBoolean(recipe.preserveNbt);
@@ -209,7 +210,7 @@ public class ItemFlayingRecipe implements Recipe<Inventory> {
             Ingredient ingredient = Ingredient.fromPacket(buf);
             int inCount = buf.readVarInt();
             // result
-            Item result = Registry.ITEM.get(buf.readIdentifier());
+            Item result = Registries.ITEM.get(buf.readIdentifier());
             int resultCount = buf.readVarInt();
             // nbt stuff
             boolean preserveNbt = buf.readBoolean();
@@ -227,7 +228,7 @@ public class ItemFlayingRecipe implements Recipe<Inventory> {
             this.recipe = recipe;
         }
 
-        public ItemStack absorbVillagerMind(VillagerEntity sacrifice, ItemStack stack, CastingContext ctx){
+        public ItemStack absorbVillagerMind(VillagerEntity sacrifice, ItemStack stack, CastingEnvironment ctx){
             ItemStack original = stack.copy();
             stack.decrement(recipe.ingredient.getRight());
 
@@ -247,7 +248,7 @@ public class ItemFlayingRecipe implements Recipe<Inventory> {
             return result;
         }
     
-        public boolean canAcceptMind(VillagerEntity sacrifice, ItemStack stack, CastingContext ctx){
+        public boolean canAcceptMind(VillagerEntity sacrifice, ItemStack stack, CastingEnvironment ctx){
             return recipe.matches(stack, sacrifice);
         }
 
@@ -260,7 +261,7 @@ public class ItemFlayingRecipe implements Recipe<Inventory> {
             this.recipe = recipe;
         }
 
-        public ItemStack absorbVillagerMind(VillagerEntity sacrifice, ItemStack stack, CastingContext ctx){
+        public ItemStack absorbVillagerMind(VillagerEntity sacrifice, ItemStack stack, CastingEnvironment ctx){
             ItemStack original = stack.copy();
             stack.decrement(1);
 
@@ -268,7 +269,7 @@ public class ItemFlayingRecipe implements Recipe<Inventory> {
             return result;
         }
     
-        public boolean canAcceptMind(VillagerEntity sacrifice, ItemStack stack, CastingContext ctx){
+        public boolean canAcceptMind(VillagerEntity sacrifice, ItemStack stack, CastingEnvironment ctx){
             if(!(stack.getItem() instanceof BlockItem blockItem)) return false;
             BlockState inState = blockItem.getBlock().getDefaultState();
             return recipe.matches(inState, sacrifice) && recipe.result().getBlock() != blockItem.getBlock();

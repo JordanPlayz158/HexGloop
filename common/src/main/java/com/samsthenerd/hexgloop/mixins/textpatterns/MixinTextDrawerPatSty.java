@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.mixins.textpatterns;
 
+import at.petrak.hexcasting.client.render.RenderLib;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import com.samsthenerd.hexgloop.HexGloopClient;
 import com.samsthenerd.hexgloop.screens.PatternStyle;
 
 import at.petrak.hexcasting.api.casting.math.HexPattern;
-import at.petrak.hexcasting.client.RenderLib;
 import kotlin.Pair;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.render.Tessellator;
@@ -25,7 +25,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.ColorHelper.Argb;
-import net.minecraft.util.math.Matrix4f;
+import org.joml.Matrix4f;
 import net.minecraft.util.math.Vec2f;
 
 // inspired by https://github.com/Snownee/TextAnimator/blob/1.19.2-fabric/src/main/java/snownee/textanimator/mixin/client/StringRenderOutputMixin.java
@@ -142,7 +142,7 @@ public class MixinTextDrawerPatSty {
             // yoinked and adapted from pattern tooltip
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
-            RenderSystem.setShader(GameRenderer::getPositionColorShader);
+            RenderSystem.setShader(GameRenderer::getPositionColorProgram);
             RenderSystem.disableCull();
             RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA,
                 GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
@@ -152,7 +152,7 @@ public class MixinTextDrawerPatSty {
             var outer = 0xff_d2c8c8;
             var innerLight = 0xc8_aba2a2;
             var innerDark = 0xc8_322b33;
-            Matrix4f mat = this.matrix.copy();
+            Matrix4f mat = new Matrix4f(matrix);
 
             mat.multiplyByTranslation(0f,0f,0.011f);
 
@@ -175,7 +175,7 @@ public class MixinTextDrawerPatSty {
                 // style.isStrikethrough() && style.getColor() != null ? innerColorLight : innerLight);
                 innerColorDark, innerColorLight);
 
-            Matrix4f dotMat = mat.copy();
+            Matrix4f dotMat = new Matrix4f(mat);
             dotMat.multiplyByTranslation(0f, 0f, -(+1f-0.02f)); // dot renders 1F forward for some reason, push it back a bit so it doesn't poke out on signs
 
             RenderLib.drawSpot(dotMat, zappyPoints.get(0), startingDotWidth*lineScale, Argb.getRed(color)/255f, Argb.getGreen(color)/255f, Argb.getBlue(color)/255f, style.isBold() ? 0.7f : 0f);

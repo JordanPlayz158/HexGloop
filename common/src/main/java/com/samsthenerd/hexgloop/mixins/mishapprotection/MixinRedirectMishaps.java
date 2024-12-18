@@ -1,5 +1,9 @@
 package com.samsthenerd.hexgloop.mixins.mishapprotection;
 
+import at.petrak.hexcasting.api.casting.eval.CastResult;
+import at.petrak.hexcasting.api.casting.eval.ResolvedPatternType;
+import at.petrak.hexcasting.api.casting.eval.vm.CastingVM;
+import at.petrak.hexcasting.api.casting.eval.vm.ContinuationFrame;
 import java.util.List;
 
 import org.spongepowered.asm.mixin.Final;
@@ -14,10 +18,6 @@ import com.samsthenerd.hexgloop.casting.mishapprotection.ICatchyFrameEval;
 import com.samsthenerd.hexgloop.casting.mishapprotection.IMishapStorage;
 
 import at.petrak.hexcasting.api.casting.castables.Action;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness;
-import at.petrak.hexcasting.api.spell.casting.CastingHarness.CastResult;
-import at.petrak.hexcasting.api.spell.casting.ResolvedPatternType;
-import at.petrak.hexcasting.api.spell.casting.eval.ContinuationFrame;
 import at.petrak.hexcasting.api.casting.eval.vm.SpellContinuation;
 import at.petrak.hexcasting.api.casting.eval.sideeffects.OperatorSideEffect;
 import at.petrak.hexcasting.api.casting.iota.BooleanIota;
@@ -28,7 +28,7 @@ import at.petrak.hexcasting.api.casting.mishaps.Mishap;
 import at.petrak.hexcasting.common.lib.hex.HexEvalSounds;
 import net.minecraft.server.world.ServerWorld;
 
-@Mixin(CastingHarness.class)
+@Mixin(CastingVM.class)
 public class MixinRedirectMishaps {
 
     @Shadow
@@ -44,8 +44,8 @@ public class MixinRedirectMishaps {
     }
 
     @WrapOperation(method = "executeIotas(Ljava/util/List;Lnet/minecraft/server/world/ServerWorld;)Lat/petrak/hexcasting/api/spell/casting/ControllerInfo;",
-    at = @At(value = "INVOKE", target = "at/petrak/hexcasting/api/spell/casting/eval/ContinuationFrame.evaluate (Lat/petrak/hexcasting/api/spell/casting/eval/SpellContinuation;Lnet/minecraft/server/world/ServerWorld;Lat/petrak/hexcasting/api/spell/casting/CastingHarness;)Lat/petrak/hexcasting/api/spell/casting/CastingHarness$CastResult;"))
-    public CastResult executeIotasWrap(ContinuationFrame frame, SpellContinuation spCont, ServerWorld sWorld, CastingHarness harness, 
+    at = @At(value = "INVOKE", target = "at/petrak/hexcasting/api/spell/casting/eval/ContinuationFrame.evaluate (Lat/petrak/hexcasting/api/spell/casting/eval/SpellContinuation;Lnet/minecraft/server/world/ServerWorld;Lat/petrak/hexcasting/api/spell/casting/CastingVM;)Lat/petrak/hexcasting/api/spell/casting/CastingVM$CastResult;"))
+    public CastResult executeIotasWrap(ContinuationFrame frame, SpellContinuation spCont, ServerWorld sWorld, CastingVM harness,
     Operation<CastResult> original) {
         Mishap caughtMishap = null;
         CastResult result = null;
@@ -76,7 +76,7 @@ public class MixinRedirectMishaps {
         } catch (Throwable e) {
 
         }
-        ((IMishapStorage)(Object)harness.getCtx()).setLastMishap(caughtMishap.errorMessage(harness.getCtx(), new Mishap.Context(pattern != null ? pattern : HexPattern.fromAngles("", HexDir.WEST), operator)));
+        ((IMishapStorage)(Object)harness.getEnv()).setLastMishap(caughtMishap.errorMessage(harness.getEnv(), new Mishap.Context(pattern != null ? pattern : HexPattern.fromAngles("", HexDir.WEST), operator)));
         // want to go back until we can find a catchy frame
         // yoink from OpHalt
         boolean done = false;
@@ -97,7 +97,7 @@ public class MixinRedirectMishaps {
             return new CastResult(
                 newCont,
                 null,
-                ResolvedPatternType.EVALUATED, // uhh actually i have no idea what this should be 
+                ResolvedPatternType.EVALUATED, // uhh actually i have no idea what this should be
                 List.of(), // do we need something here ? idk
                 HexEvalSounds.NOTHING // could maybe try it with the mishap sound and see how it goes
             );
