@@ -32,7 +32,7 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
                     .add(new Vec3d(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat()).multiply(
                         RANDOM.nextFloat() * 3)));
                 assert world != null;
-                world.addParticle(new ConjureParticleOptions(color, false),
+                world.addParticle(new ConjureParticleOptions(color),
                     pEntity.getX() + (RANDOM.nextFloat() * 0.6D) - 0.3D,
                     getPos().getY() + (RANDOM.nextFloat() * 0.05D) + 0.95D,
                     pEntity.getZ() + (RANDOM.nextFloat() * 0.6D) - 0.3D,
@@ -51,7 +51,7 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
             assert world != null;
             if (getCachedState().getBlock() instanceof BlockConjuredLight) {
                 if (RANDOM.nextFloat() < 0.5) {
-                    world.addParticle(new ConjureParticleOptions(color, true),
+                    world.addParticle(new ConjureParticleOptions(color),
                         (double) getPos().getX() + 0.45D + (RANDOM.nextFloat() * 0.1D),
                         (double) getPos().getY() + 0.45D + (RANDOM.nextFloat() * 0.1D),
                         (double) getPos().getZ() + 0.45D + (RANDOM.nextFloat() * 0.1D),
@@ -61,7 +61,7 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
                 }
             } else {
                 if (RANDOM.nextFloat() < 0.2) {
-                    world.addParticle(new ConjureParticleOptions(color, false),
+                    world.addParticle(new ConjureParticleOptions(color),
                         (double) getPos().getX() + RANDOM.nextFloat(),
                         (double) getPos().getY() + RANDOM.nextFloat(),
                         (double) getPos().getZ() + RANDOM.nextFloat(),
@@ -79,7 +79,7 @@ public class BlockEntityConjuredRedstone extends HexBlockEntity{
                 .add(new Vec3d(RANDOM.nextFloat(), RANDOM.nextFloat(), RANDOM.nextFloat()).multiply(
                     RANDOM.nextFloat() * 3)));
             assert world != null;
-            world.addParticle(new ConjureParticleOptions(color, false),
+            world.addParticle(new ConjureParticleOptions(color),
                 entity.getX() + (RANDOM.nextFloat() * 0.8D) - 0.2D,
                 getPos().getY() + (RANDOM.nextFloat() * 0.05D) + 0.95D,
                 entity.getZ() + (RANDOM.nextFloat() * 0.8D) - 0.2D,
