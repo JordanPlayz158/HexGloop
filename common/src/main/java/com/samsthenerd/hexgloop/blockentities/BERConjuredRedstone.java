@@ -1,5 +1,6 @@
 package com.samsthenerd.hexgloop.blockentities;
 
+import com.mojang.blaze3d.systems.VertexSorter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,7 +80,7 @@ public class BERConjuredRedstone implements BlockEntityRenderer<BlockEntityConju
         RenderSystem.setShaderTexture(0, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE);
         RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
         BlockPos camPos = MinecraftClient.getInstance().getCameraEntity().getBlockPos();
-        RenderLayer.getTranslucent().draw(buffer, camPos.getX(), camPos.getY(), camPos.getZ());
+        RenderLayer.getTranslucent().draw(buffer, VertexSorter.byDistance(camPos.getX(), camPos.getY(), camPos.getZ()));
     }
 
 
