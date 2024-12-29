@@ -11,10 +11,9 @@ import com.samsthenerd.hexgloop.items.tooltips.ScriptTooltipData;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.client.render.RenderLib;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec2f;
@@ -45,38 +44,39 @@ public class ScriptTooltipComponent implements TooltipComponent {
     }
 
     @Override
-    public void drawItems(TextRenderer font, int mouseX, int mouseY, MatrixStack ps, ItemRenderer pItemRenderer,
-                            int pBlitOffset) {
+    // TODO: pBlitOffset/z seems to not be passed anymore to TooltipComponent, test if is an issue later
+    //   Also check on MirrorTooltipComponent
+    public void drawItems(TextRenderer font, int mouseX, int mouseY, DrawContext context) {
         var width = this.getWidth(font);
         var height = this.getHeight();
 
         // far as i can tell "mouseX" and "mouseY" are actually the positions of the corner of the tooltip
-        ps.push();
-        ps.translate(mouseX, mouseY, 500);
+        var matrices = context.getMatrices();
+        matrices.push();
+        matrices.translate(mouseX, mouseY, 500);
         RenderSystem.enableBlend();
-        renderBG(ps, this.background, pBlitOffset);
+        renderBG(context, this.background);
 
         // renderText happens *before* renderImage for some asinine reason
 //                RenderSystem.disableBlend();
         float top = (height - (size * rows))/2f;
         float left = (width - (size * cols))/2f;
-        ps.translate(left, top, 0);
+        matrices.translate(left, top, 0);
         for(int i = 0; i < patterns.size(); i++){
             int row = i / cols;
             int col = i % cols;
-            ps.push();
-            renderablePatterns.get(i).render(ps, col*size, row*size, pBlitOffset);
-            ps.pop();
+            matrices.push();
+            renderablePatterns.get(i).render(matrices, col*size, row*size);
+            matrices.pop();
         }
-        ps.pop();
+        matrices.pop();
     }
 
-    private static void renderBG(MatrixStack ps, Identifier background, int blitOffset) {
-        RenderSystem.setShaderColor(1f, 1f, 1f, 1f);
-        RenderSystem.setShaderTexture(0, background);
+    private static void renderBG(DrawContext context, Identifier background) {
+        context.setShaderColor(1f, 1f, 1f, 1f);
         // x y blitoffset sw sh w h ... ?
         // parchment doesn't have this mapped
-        DrawableHelper.drawTexture(ps, 0, 0, blitOffset, 0f, 0f, (int) RENDER_SIZE, (int) RENDER_SIZE, (int) RENDER_SIZE,
+        context.drawTexture(background, 0, 0, 0f, 0f, (int) RENDER_SIZE, (int) RENDER_SIZE, (int) RENDER_SIZE,
             (int) RENDER_SIZE);
     }
 
@@ -112,7 +112,7 @@ public class ScriptTooltipComponent implements TooltipComponent {
         }
 
         // x and y should have offsets baked in
-        public void render(MatrixStack ps, float x, float y, int blitOffset){
+        public void render(MatrixStack ps, float x, float y){
             ps.push();
             ps.translate(x, y, 100);
 
