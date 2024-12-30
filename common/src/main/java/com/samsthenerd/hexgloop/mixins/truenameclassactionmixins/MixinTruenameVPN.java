@@ -21,7 +21,7 @@ import net.minecraft.server.world.ServerWorld;
 @Mixin(targets = "at.petrak.hexcasting.api.casting.iota.EntityIota$1")
 public class MixinTruenameVPN {
     // make the entity iota deserialization return null if the lockUUID is not the same as the keyUUID
-    @Inject(method="deserialize(Lnet/minecraft/nbt/NbtElement;Lnet/minecraft/server/world/ServerWorld;)Lat/petrak/hexcasting/api/spell/iota/EntityIota;"
+    @Inject(method="deserialize(Lnet/minecraft/nbt/NbtElement;Lnet/minecraft/server/world/ServerWorld;)Lat/petrak/hexcasting/api/casting/iota/EntityIota;"
     , at=@At("RETURN"), cancellable = true)
     public void checkUUIDLockOnEntityIotaDeser(NbtElement tag, ServerWorld sWorld, CallbackInfoReturnable<EntityIota> cir){
         // HexGloop.logPrint("in checkUUIDLockOnEntityIotaDeser");
