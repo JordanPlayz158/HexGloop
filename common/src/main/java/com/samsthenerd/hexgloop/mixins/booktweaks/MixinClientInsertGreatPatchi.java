@@ -1,8 +1,10 @@
 package com.samsthenerd.hexgloop.mixins.booktweaks;
 
+import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.gui.DrawContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,14 +16,12 @@ import com.mojang.datafixers.util.Pair;
 import com.samsthenerd.hexgloop.misc.clientgreatbook.GreatBook;
 import com.samsthenerd.hexgloop.misc.clientgreatbook.PatternCompGetter;
 
-import at.petrak.hexcasting.api.PatternRegistry;
 import at.petrak.hexcasting.api.casting.math.HexCoord;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import at.petrak.hexcasting.client.render.RenderLib;
 import at.petrak.hexcasting.interop.patchouli.AbstractPatternComponent;
 import at.petrak.hexcasting.interop.utils.PatternDrawingUtil;
 import at.petrak.hexcasting.interop.utils.PatternEntry;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec2f;
 import vazkii.patchouli.api.IComponentRenderContext;
 
@@ -32,8 +32,6 @@ public abstract class MixinClientInsertGreatPatchi implements PatternCompGetter 
     protected transient float hexSize;
     @Shadow
     private transient List<PatternEntry> patterns;
-    @Shadow
-    private transient List<Vec2f> zappyPoints;
 
     @Shadow
     public boolean showStrokeOrder(){
@@ -43,10 +41,11 @@ public abstract class MixinClientInsertGreatPatchi implements PatternCompGetter 
     private HexPattern savedGreatPattern;
 
     @Inject(
-        method="render(Lnet/minecraft/client/util/math/MatrixStack;Lvazkii/patchouli/api/IComponentRenderContext;FII)V",
+        method = "render",
         at=@At("HEAD")
     )
-    public void checkForPatternUpdate(MatrixStack poseStack, IComponentRenderContext ctx, float partialTicks, int mouseX, int mouseY, CallbackInfo info){
+    public void checkForPatternUpdate(DrawContext graphics, IComponentRenderContext context,
+        float pticks, int mouseX, int mouseY, CallbackInfo ci){
         // make sure it's only a lookup pattern with a great pattern
         if(((Object)this) instanceof MixinClientAccessLookupPatternComp lpComp && !lpComp.getStrokeOrder()){
             HexPattern newPattern = GreatBook.INSTANCE.getPattern(lpComp.getOpName());
@@ -57,23 +56,21 @@ public abstract class MixinClientInsertGreatPatchi implements PatternCompGetter 
                 List.of(new Pair<HexPattern, HexCoord>(newPattern, HexCoord.getOrigin())), RenderLib.DEFAULT_READABILITY_OFFSET, RenderLib.DEFAULT_LAST_SEGMENT_LEN_PROP);
                 this.hexSize = data.hexSize();
                 this.patterns = data.patterns();
-                this.zappyPoints = data.pathfinderDots();
             }
             // restore the original
             if(savedGreatPattern != null && newPattern == null){
                 savedGreatPattern = null;
-                var entry = PatternRegistry.lookupPattern(lpComp.getOpName());
+                var entry = IXplatAbstractions.INSTANCE.getActionRegistry().get(lpComp.getOpName());
                 var data = PatternDrawingUtil.loadPatterns(
                     List.of(new Pair<>(entry.prototype(), HexCoord.getOrigin())), 0f, 1f);
                 this.hexSize = data.hexSize();
                 this.patterns = data.patterns();
-                this.zappyPoints = data.pathfinderDots();
             }
         }
     }
 
     @ModifyExpressionValue(
-        method="render(Lnet/minecraft/client/util/math/MatrixStack;Lvazkii/patchouli/api/IComponentRenderContext;FII)V",
+        method="render",
         at=@At(value="INVOKE", target="at/petrak/hexcasting/interop/patchouli/AbstractPatternComponent.showStrokeOrder ()Z")
     )
     public boolean modifyShowStrokeOrder(boolean original){
