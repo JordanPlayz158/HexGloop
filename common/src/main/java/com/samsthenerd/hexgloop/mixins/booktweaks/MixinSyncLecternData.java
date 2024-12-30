@@ -34,7 +34,7 @@ public abstract class MixinSyncLecternData {
     }
 
     @ModifyReturnValue(
-        method="toUpdatePacket()Lnet/minecraft/network/Packet;",
+        method="toUpdatePacket()Lnet/minecraft/network/packet/Packet;",
         at=@At("RETURN")
     )
     public Packet<ClientPlayPacketListener> lecternUpdatePacket(Packet<ClientPlayPacketListener> packet){
