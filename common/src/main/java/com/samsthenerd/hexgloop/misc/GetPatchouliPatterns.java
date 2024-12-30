@@ -2,23 +2,17 @@ package com.samsthenerd.hexgloop.misc;
 
 
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry;
-import at.petrak.hexcasting.api.mod.HexTags;
 import at.petrak.hexcasting.api.mod.HexTags.Actions;
-import at.petrak.hexcasting.interop.patchouli.LookupPatternComponent;
+import at.petrak.hexcasting.api.utils.HexUtils;
 import at.petrak.hexcasting.xplat.IXplatAbstractions;
 import java.util.List;
 
-import java.util.function.UnaryOperator;
 import javax.annotation.Nullable;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
 import org.jetbrains.annotations.NotNull;
 
 import com.samsthenerd.hexgloop.misc.clientgreatbook.GreatBook;
 
-import at.petrak.hexcasting.api.PatternRegistry;
-import at.petrak.hexcasting.api.PatternRegistry.PatternEntry;
 import at.petrak.hexcasting.api.casting.math.HexPattern;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -26,7 +20,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Pair;
-import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.client.book.BookEntry;
 import vazkii.patchouli.client.book.BookPage;
 import vazkii.patchouli.common.book.Book;
@@ -69,17 +62,16 @@ public class GetPatchouliPatterns {
             String type = page.sourceObject.get("type").getAsString();
             Identifier opId = new Identifier(page.sourceObject.get("op_id").getAsString());
             if(type.equals("hexcasting:pattern")){
-//                new LookupPatternComponent().getPatterns(
-//                    (UnaryOperator<IVariable>) UnaryOperator.identity().apply(IVariable.wrap(opId.toString())));
+                var registry = IXplatAbstractions.INSTANCE.getActionRegistry();
 
                 ActionRegistryEntry entry = null;
                 try{
-                    entry = IXplatAbstractions.INSTANCE.getActionRegistry().get(key);
+                    entry = registry.get(opId);
                 } catch (Exception e){
                     return null;
                 }
 
-                if(IXplatAbstractions.INSTANCE.getActionRegistry().isPerWorld()){
+                if(HexUtils.isOfTag(registry, opId, Actions.PER_WORLD_PATTERN)){
                     return GreatBook.INSTANCE.getPattern(opId);
                 }
                 return entry.prototype();
