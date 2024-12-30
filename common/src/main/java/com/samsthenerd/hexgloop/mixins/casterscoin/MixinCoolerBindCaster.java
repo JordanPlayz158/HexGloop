@@ -24,7 +24,7 @@ import net.minecraft.item.ItemStack;
 
 @Mixin(OpTheCoolerWrite.class)
 public class MixinCoolerBindCaster {
-    @Inject(method ="execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingContext;)Lkotlin/Triple;",
+    @Inject(method ="execute(Ljava/util/List;Lat/petrak/hexcasting/api/casting/eval/CastingEnvironment;)Lat/petrak/hexcasting/api/casting/castables/SpellAction$Result;",
     at = @At("RETURN"), remap=false)
     private void bindCoinToCaster(@NotNull List<? extends Iota> args, @NotNull CastingEnvironment ctx, CallbackInfoReturnable<Triple<RenderedSpell, Integer, List<ParticleSpray>>> cir){
         Entity ent = OperatorUtils.getEntity(args, 0, ((OpTheCoolerWrite)(Object)(this)).getArgc());
