@@ -21,7 +21,7 @@ import net.minecraft.util.Pair;
 @Mixin(CastingEnvironment.class)
 public abstract class MixinCastingEnvironmentModifiers {
 
-    @Shadow @Nullable public abstract @Nullable LivingEntity getCastingEntity();
+    @Shadow @Nullable public abstract LivingEntity getCastingEntity();
 
     @Shadow @Deprecated(since="0.11.1-7-pre-619") public abstract @Nullable ServerPlayerEntity getCaster();
 
@@ -51,19 +51,4 @@ public abstract class MixinCastingEnvironmentModifiers {
         }
         return current;
     }
-
-    @ModifyReturnValue(method="getCanOvercast()Z", at=@At("RETURN"), remap = false)
-    public boolean doOvercastModification(boolean original){
-        boolean current = original;
-        for(Pair<BiFunction<CastingEnvironment, Boolean, Modification>, Integer> pair : ContextModificationHandlers.OVERCAST_MODIFIERS){
-            BiFunction<CastingEnvironment, Boolean, Modification> modifier = pair.getLeft();
-            Modification mod = modifier.apply((CastingEnvironment)(Object)this, current);
-            if(mod != Modification.NONE){
-                current = (mod == Modification.ENABLE);
-            }
-        }
-        return current;
-    }
-
-
 }
