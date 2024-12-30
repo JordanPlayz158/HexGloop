@@ -16,15 +16,15 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.world.World;
 
 @Mixin(targets = {
-    "at/petrak/hexcasting/common/casting/operators/akashic/OpAkashicRead",
-    "ram/talia/hexal/common/casting/actions/everbook/OpEverbookWrite"
+    "at/petrak/hexcasting/common/casting/actions/akashic/OpAkashicRead",
+    //"ram/talia/hexal/common/casting/actions/everbook/OpEverbookWrite"
 })
 public class MixinHonorLibraryCardReads {
     @WrapOperation(method = {
-        "execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Ljava/util/List;",
-        "execute(Ljava/util/List;Lat/petrak/hexcasting/api/spell/casting/CastingEnvironment;)Lkotlin/Triple;"
+        "execute(Ljava/util/List;Lat/petrak/hexcasting/api/casting/eval/CastingEnvironment;)Ljava/util/List;",
+        //"execute(Ljava/util/List;Lat/petrak/hexcasting/api/casting/eval/CastingEnvironment;)Lkotlin/Triple;"
     },
-    at = @At(value = "INVOKE", target="at/petrak/hexcasting/api/spell/casting/CastingEnvironment.getWorld ()Lnet/minecraft/server/world/ServerWorld;"))
+    at = @At(value = "INVOKE", target="at/petrak/hexcasting/api/casting/eval/CastingEnvironment.getWorld ()Lnet/minecraft/server/world/ServerWorld;"))
     public ServerWorld getAlternateLibraryDim(CastingEnvironment ctx, Operation<ServerWorld> original){
         ServerWorld originalWorld = original.call(ctx);
         if(ctx.getCastingEntity() == null) return originalWorld;

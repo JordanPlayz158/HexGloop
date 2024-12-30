@@ -63,6 +63,7 @@
       "misc.MixinExposeCursorStackRef",
       "misc.MixinShowMediaWorth",
       "castingmodifiers.MixinCastingEnvironmentModifiers",
+      "castingmodifiers.MixinPlayerBasedCastEnvModifiers",
       "misc.MixinItemFlaying",
       "misc.MixinItemFlaying$MixinBrainsweepSpell",
       "misc.MixinHonorLibraryCardReads",
