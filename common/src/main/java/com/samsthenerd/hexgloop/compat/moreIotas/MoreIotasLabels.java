@@ -8,7 +8,7 @@ import com.samsthenerd.hexgloop.misc.wnboi.LabelTypes.TextLabel;
 
 import at.petrak.hexcasting.api.casting.iota.Iota;
 import net.minecraft.text.Text;
-import ram.talia.moreiotas.api.spell.iota.StringIota;
+import ram.talia.moreiotas.api.casting.iota.StringIota;
 
 public class MoreIotasLabels {
     public static void register(){

@@ -70,7 +70,7 @@ dependencies {
     // modRuntimeOnly "maven.modrinth:wnboi:${wnboiVersion}-fabric"
 
     modRuntimeOnly "maven.modrinth:hexal:${hexalVersion}"
-    modRuntimeOnly "maven.modrinth:moreiotas:${moreIotasVersion}"
+    modRuntimeOnly "ram.talia.moreiotas:moreiotas-fabric-1.20.1:${moreIotasVersion}"
 
     modImplementation "software.bernie.geckolib:geckolib-fabric-1.19:${geckolibVersion}"
     modRuntimeOnly "software.bernie.geckolib:geckolib-fabric-1.19:${geckolibVersion}"

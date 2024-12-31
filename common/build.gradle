@@ -38,8 +38,8 @@ dependencies {
     // compileOnly "org.jetbrains:annotations:$jetbrainsAnnotationsVersion"
 
     modImplementation "maven.modrinth:hexal:${hexalVersion}"
-	modImplementation "maven.modrinth:moreiotas:${moreIotasVersion}"
-	modImplementation "maven.modrinth:gravity-api:${gravityApiVersion}"
+    modImplementation "ram.talia.moreiotas:moreiotas-common-1.20.1:${moreIotasVersion}"
+    modImplementation "maven.modrinth:gravity-api:${gravityApiVersion}"
 }
 
 publishing {
